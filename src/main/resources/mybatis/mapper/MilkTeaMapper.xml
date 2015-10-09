@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezic.com.repository.MilkTeaMapper">
+	<resultMap id="BaseResultMap" type="MilkTea">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+	</resultMap>
+	<sql id="Base_Table">
+		t_milk_tea
+	</sql>
+	<sql id="Base_Column_List">
+		id, name
+	</sql>
+	<sql id="baseQuery">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Base_Table" />
+		<where>
+			<if test="name!='' and name!=null">and name=#{name}</if>
+		</where>
+	</sql>
+	<select id="getPageModel" resultMap="BaseResultMap" parameterType="MilkTea">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="MilkTea">
+		<include refid="baseQuery" />
+	</select>
+</mapper>
