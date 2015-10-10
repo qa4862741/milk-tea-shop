@@ -1,11 +1,13 @@
 package com.yezic.com.common;
 
+import java.util.List;
+
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 
 public interface BaseMapper<T> {
 	/**
-	 * ²åÈë¼ÇÂ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
 	 * 
 	 * @param record
 	 * @return
@@ -13,23 +15,27 @@ public interface BaseMapper<T> {
 	int insert(T entity);
 	
 	/**
-	 * ¸üÐÂÖ÷¼üÖÐÏàÍ¬µÄ¼ÇÂ¼,ÓÃrecordÖÐËùÓÐ×Ö¶ÎÈ¥¸üÐÂ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½Ä¼ï¿½Â¼,ï¿½ï¿½recordï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½È¥ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param record
 	 * @return
 	 */ 
-	int updateByPrimaryKey(T entity);
+	int update(T entity);
 
 	/**
-	 * ¸ù¾ÝÖ÷¼üÉ¾³ý¼ÇÂ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½Â¼
 	 * 
 	 * @param id
 	 * @return
 	 */
 	int delete(int id);
+	
+	T getById(int id);
+	
+	List<T> getAll(T entity);
 
 	/**
-	 * ·ÖÒ³²éÑ¯
+	 * ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯
 	 * 
 	 * @param messageInfo
 	 * @param pageBounds
