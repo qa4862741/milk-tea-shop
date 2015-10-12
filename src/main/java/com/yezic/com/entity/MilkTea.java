@@ -17,6 +17,8 @@ public class MilkTea {
 
 	private BigDecimal costPrice;
 
+	private BigDecimal points;
+
 	public int getId() {
 		return id;
 	}
@@ -71,6 +73,14 @@ public class MilkTea {
 
 	public void setCostPrice(BigDecimal costPrice) {
 		this.costPrice = costPrice;
+	}
+
+	public BigDecimal getPoints() {
+		return points;
+	}
+
+	public void setPoints(BigDecimal points) {
+		this.points = points;
 	}
 
 }

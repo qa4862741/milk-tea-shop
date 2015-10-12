@@ -21,8 +21,10 @@
 <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/css/style-responsive.css"/>"
 	rel="stylesheet" />
-	
-<link href="<c:url value="/resources/js/bootstrap-fileupload/fileinput.css"/>" media="all" rel="stylesheet" type="text/css" />
+
+<link
+	href="<c:url value="/resources/js/bootstrap-fileupload/fileinput.css"/>"
+	media="all" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -49,10 +51,10 @@
 								<div class="adv-table editable-table ">
 									<div class="clearfix">
 										<div class="btn-group">
-										   <a href="#addMilkTeaModal" data-toggle="modal">
-											<button id="editable-sample_new" class="btn btn-primary">
-												添加 <i class="fa fa-plus"></i>
-											</button>
+											<a href="#addMilkTeaModal" data-toggle="modal">
+												<button id="editable-sample_new" class="btn btn-primary">
+													添加 <i class="fa fa-plus"></i>
+												</button>
 											</a>
 										</div>
 										<div class="btn-group pull-right">
@@ -72,239 +74,37 @@
 										id="editable-sample">
 										<thead>
 											<tr>
-												<th>First Name</th>
-												<th>Last Name</th>
-												<th>Points</th>
-												<th>Status</th>
-												<th>Edit</th>
-												<th>Delete</th>
+												<th>名称</th>
+												<th>产品编号</th>
+												<th>单位</th>
+												<th>大小杯</th>
+												<th>销售价格</th>
+												<th>成本价格</th>
+												<th>积分</th>
+												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="">
-												<td>Jonathan</td>
-												<td>Smith</td>
-												<td>3455</td>
-												<td class="center">Lorem ipsume</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Mojela</td>
-												<td>Firebox</td>
-												<td>567</td>
-												<td class="center">new user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Akuman</td>
-												<td>Dareon</td>
-												<td>987</td>
-												<td class="center">ipsume dolor</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Theme</td>
-												<td>Bucket</td>
-												<td>342</td>
-												<td class="center">Good Org</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Jhone</td>
-												<td>Doe</td>
-												<td>345</td>
-												<td class="center">super user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Margarita</td>
-												<td>Diar</td>
-												<td>456</td>
-												<td class="center">goolsd</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Jhon Doe</td>
-												<td>Jhon Doe</td>
-												<td>1234</td>
-												<td class="center">user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Helena</td>
-												<td>Fox</td>
-												<td>456</td>
-												<td class="center">Admin</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Aishmen</td>
-												<td>Samuel</td>
-												<td>435</td>
-												<td class="center">super Admin</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>dream</td>
-												<td>Land</td>
-												<td>562</td>
-												<td class="center">normal user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>babson</td>
-												<td>milan</td>
-												<td>567</td>
-												<td class="center">nothing</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Waren</td>
-												<td>gufet</td>
-												<td>622</td>
-												<td class="center">author</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Jhone</td>
-												<td>Doe</td>
-												<td>345</td>
-												<td class="center">super user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Margarita</td>
-												<td>Diar</td>
-												<td>456</td>
-												<td class="center">goolsd</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Jhon Doe</td>
-												<td>Jhon Doe</td>
-												<td>1234</td>
-												<td class="center">user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Helena</td>
-												<td>Fox</td>
-												<td>456</td>
-												<td class="center">Admin</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Aishmen</td>
-												<td>Samuel</td>
-												<td>435</td>
-												<td class="center">super Admin</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>dream</td>
-												<td>Land</td>
-												<td>562</td>
-												<td class="center">normal user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>babson</td>
-												<td>milan</td>
-												<td>567</td>
-												<td class="center">nothing</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Waren</td>
-												<td>gufet</td>
-												<td>622</td>
-												<td class="center">author</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Jhone</td>
-												<td>Doe</td>
-												<td>345</td>
-												<td class="center">super user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Margarita</td>
-												<td>Diar</td>
-												<td>456</td>
-												<td class="center">goolsd</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Jhon Doe</td>
-												<td>Jhon Doe</td>
-												<td>1234</td>
-												<td class="center">user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Helena</td>
-												<td>Fox</td>
-												<td>456</td>
-												<td class="center">Admin</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Aishmen</td>
-												<td>Samuel</td>
-												<td>435</td>
-												<td class="center">super Admin</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>dream</td>
-												<td>Land</td>
-												<td>562</td>
-												<td class="center">normal user</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>babson</td>
-												<td>milan</td>
-												<td>567</td>
-												<td class="center">nothing</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
-											<tr class="">
-												<td>Waren</td>
-												<td>gufet</td>
-												<td>622</td>
-												<td class="center">author</td>
-												<td><a class="edit" href="javascript:;">Edit</a></td>
-												<td><a class="delete" href="javascript:;">Delete</a></td>
-											</tr>
+											<c:forEach items="${milkTeaList}" var="item">
+												<tr class="">
+													<td>${item.name}</td>
+													<td>${item.productNumber}</td>
+													<td>${item.unit}</td>
+													<td>${item.capacity}</td>
+                                                    <td>${item.salePrice}</td>
+                                                    <td>${item.costPrice}</td>
+                                                    <td>${item.points}</td>
+													<td><a
+														href="${basePath}/milk/update">
+															<button class="btn btn-success">修改</button>
+													</a> <a
+														href="${basePath}/milk/delete/${item.id}"
+														style="padding-left: 10px">
+															<button class="btn btn btn-primary">删除</button>
+													</a> 
+													</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -554,22 +354,24 @@
 		</div>
 		<!--right sidebar end-->
 
-        <!-- Modal -->
-                        <div class="modal fade" id="addMilkTeaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title">添加产品</h4>
-                                    </div>
+		<!-- Modal -->
+		<div class="modal fade" id="addMilkTeaModal" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">添加产品</h4>
+					</div>
 
-                                    <div class="modal-body row">
+					<div class="modal-body row">
 
-                                        <div class="col-md-6 img-modal"> 
-										   <label class="control-label">选择图片</label>
-                                           <input type="file" id="addMilkImage" name="addMilkImage" class="file-loading"/> 
-										
-                                            <!--<img src="images/gallery/image1.jpg" alt="">
+						<div class="col-md-6 img-modal">
+							<label class="control-label">选择图片</label> <input type="file"
+								id="addMilkImage" name="addMilkImage" class="file-loading" />
+
+							<!--<img src="images/gallery/image1.jpg" alt="">
                                             <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit Image</a>
                                             <a href="#" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View Full Size</a>
 
@@ -577,79 +379,84 @@
                                             <p><strong>File Type:</strong> jpg</p>
                                             <p><strong>Resolution:</strong> 300x200</p>
                                             <p><strong>Uploaded By:</strong> <a href="#">ThemeBucket</a></p>-->
-                                        </div>
-                                        <div class="col-md-5">
-                                             <div class="form-group">
-                                                <label> 名称：</label>
-                                                <input id="name" name="name"  class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label> 产品编号：</label>
-                                                <input id="productNumber" name="productNumber"  class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label> 单位：</label>
-                                                <input id="unit" name="unit"  class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label> 大小杯：</label>
-                                                <input id="capacity" name="capacity"  class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label> 销售价格：</label>
-                                                <input id="salePrice" name="salePrice" class="form-control">
-                                            </div>
-											<div class="form-group">
-                                                <label> 成本价格：</label>
-                                                <input id="costPrice" name="salePrice" class="form-control">
-                                            </div>
-											<div class="form-group">
-                                                <label> 积分：</label>
-                                                <input id="points" name="points" class="form-control">
-                                            </div>
-                                        </div>
+						</div>
+						<div class="col-md-5">
+							<div class="form-group">
+								<label> 名称：</label> <input id="name" name="name"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label> 产品编号：</label> <input id="productNumber"
+									name="productNumber" class="form-control">
+							</div>
+							<div class="form-group">
+								<label> 单位：</label> <input id="unit" name="unit"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label> 大小杯：</label> <input id="capacity" name="capacity"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label> 销售价格：</label> <input id="salePrice" name="salePrice"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label> 成本价格：</label> <input id="costPrice" name="salePrice"
+									class="form-control">
+							</div>
+							<div class="form-group">
+								<label> 积分：</label> <input id="points" name="points"
+									class="form-control">
+							</div>
+						</div>
 
-                                    </div>
-									
-									<div class="modal-footer">                
-									     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
-										 <button type="button" class="btn btn-primary" id="saveChanges">保存</button>    
-								    </div> 
+					</div>
 
-                                </div>
-                            </div>
-                        </div>
-                        <!-- modal -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="saveChanges">保存</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- modal -->
 
 
 	</section>
 	<%@ include file="/WEB-INF/page/common/footer.jsp"%>
 	<script src="<c:url value="/resources/js/table-editable.js"/>"></script>
-	<script src="<c:url value="/resources/js/bootstrap-fileupload/fileinput.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/bootstrap-fileupload/fileinput_locale_zh.js"/>" type="text/javascript"></script>
-	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>" type="text/javascript"></script>
+	<script
+		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput.js"/>"
+		type="text/javascript"></script>
+	<script
+		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput_locale_zh.js"/>"
+		type="text/javascript"></script>
+	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
+		type="text/javascript"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			EditableTable.init();
 		});
-		
+
 		$('#saveChanges').click(function() {
 			var name = $('#name').val();
 			var productNumber = $('#productNumber').val();
-			
+
 			var unit = $('#unit').val();
 			var capacity = $('#capacity').val();
 			var salePrice = $('#salePrice').val();
 			var costPrice = $('#costPrice').val();
 			var points = $('#points').val();
-			
+
 			$.ajaxFileUpload({
 				url : basePath + '/milk/add',
 				fileElementId : 'addMilkImage',
 				dataType : 'text',
 				data : {
 					name : name,
-					productNumber: productNumber,
+					productNumber : productNumber,
 					unit : unit,
 					capacity : capacity,
 					salePrice : salePrice,
@@ -677,25 +484,26 @@
 			});
 			$('#addMilkTeaModal').modal('hide');
 		});
-		
-		$("#addMilkImage").fileinput({
-	        maxFileCount: 1,
-			showUpload: false,
-			initialPreview: [
-	          "<img src='"+basePath+"/resources/images/gallery/image5.jpg' class='file-preview-image' alt='Desert' title='Desert'>",
-	        ],
-			
-			initialPreviewConfig: [
-	        {
-	           caption: 'desert.jpg', 
-	           width: '120px', 
-	           url: '/localhost/avatar/delete', 
-	           key: 100, 
-	           extra: {id: 100}
-	        }
-	       ] 
-		   
-	    });
+
+		$("#addMilkImage")
+				.fileinput(
+						{
+							maxFileCount : 1,
+							showUpload : false,
+							initialPreview : [
+									"<img src='"+basePath+"/resources/images/gallery/image5.jpg' class='file-preview-image' alt='Desert' title='Desert'>", ],
+
+							initialPreviewConfig : [ {
+								caption : 'desert.jpg',
+								width : '120px',
+								url : '/localhost/avatar/delete',
+								key : 100,
+								extra : {
+									id : 100
+								}
+							} ]
+
+						});
 	</script>
 </body>
 </html>

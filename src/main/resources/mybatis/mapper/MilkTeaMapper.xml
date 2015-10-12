@@ -9,6 +9,7 @@
 		<result column="capacity" jdbcType="VARCHAR" property="capacity" />
 		<result column="salePrice" property="salePrice" jdbcType="DECIMAL" />	
 		<result column="costPrice" property="costPrice" jdbcType="DECIMAL" />
+		<result column="points" property="points" jdbcType="DECIMAL" />
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -16,15 +17,21 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, name ,productNumber,unit,capacity,salePrice,costPrice
+		id, name ,productNumber,unit,capacity,salePrice,costPrice,points
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="MilkTea" >
 		insert into <include refid="Base_Table" />
 		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{productNumber,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, 
-        #{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL}
+        #{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL},#{points,jdbcType=DECIMAL}
       )
 	</insert>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		<include refid="Base_Table" />
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
 	
 	<sql id="baseQuery">
 		SELECT
