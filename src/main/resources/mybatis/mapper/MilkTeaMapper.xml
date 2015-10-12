@@ -4,13 +4,28 @@
 	<resultMap id="BaseResultMap" type="MilkTea">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="productNumber" jdbcType="VARCHAR" property="productNumber" />
+		<result column="unit" jdbcType="VARCHAR" property="unit" />
+		<result column="capacity" jdbcType="VARCHAR" property="capacity" />
+		<result column="salePrice" property="salePrice" jdbcType="DECIMAL" />	
+		<result column="costPrice" property="costPrice" jdbcType="DECIMAL" />
 	</resultMap>
+	
 	<sql id="Base_Table">
 		t_milk_tea
 	</sql>
+	
 	<sql id="Base_Column_List">
-		id, name
+		id, name ,productNumber,unit,capacity,salePrice,costPrice
 	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="MilkTea" >
+		insert into <include refid="Base_Table" />
+		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{productNumber,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, 
+        #{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL}
+      )
+	</insert>
+	
 	<sql id="baseQuery">
 		SELECT
 		<include refid="Base_Column_List" />
@@ -20,6 +35,7 @@
 			<if test="name!='' and name!=null">and name=#{name}</if>
 		</where>
 	</sql>
+	
 	<select id="getPageModel" resultMap="BaseResultMap" parameterType="MilkTea">
 		<include refid="baseQuery" />
 	</select>

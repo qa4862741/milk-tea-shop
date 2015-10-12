@@ -49,7 +49,7 @@
 								<div class="adv-table editable-table ">
 									<div class="clearfix">
 										<div class="btn-group">
-										   <a href="#myModal" data-toggle="modal">
+										   <a href="#addMilkTeaModal" data-toggle="modal">
 											<button id="editable-sample_new" class="btn btn-primary">
 												添加 <i class="fa fa-plus"></i>
 											</button>
@@ -555,7 +555,7 @@
 		<!--right sidebar end-->
 
         <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="addMilkTeaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -566,8 +566,8 @@
                                     <div class="modal-body row">
 
                                         <div class="col-md-6 img-modal"> 
-										    <label class="control-label">选择图片</label>
-                                            <input id="input-42" type="file" multiple=true class="file-loading">
+										   <label class="control-label">选择图片</label>
+                                           <input type="file" id="addMilkImage" name="addMilkImage" class="file-loading"/> 
 										
                                             <!--<img src="images/gallery/image1.jpg" alt="">
                                             <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit Image</a>
@@ -579,29 +579,33 @@
                                             <p><strong>Uploaded By:</strong> <a href="#">ThemeBucket</a></p>-->
                                         </div>
                                         <div class="col-md-5">
+                                             <div class="form-group">
+                                                <label> 名称：</label>
+                                                <input id="name" name="name"  class="form-control">
+                                            </div>
                                             <div class="form-group">
                                                 <label> 产品编号：</label>
-                                                <input id="name" value="img01.jpg" class="form-control">
+                                                <input id="productNumber" name="productNumber"  class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label> 单位：</label>
-                                                <input id="title" value="awesome image" class="form-control">
+                                                <input id="unit" name="unit"  class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label> 大小杯：</label>
-                                                <textarea rows="2" class="form-control"></textarea>
+                                                <input id="capacity" name="capacity"  class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label> 销售价格：</label>
-                                                <input id="link" value="images/gallery/img01.jpg" class="form-control">
+                                                <input id="salePrice" name="salePrice" class="form-control">
                                             </div>
 											<div class="form-group">
                                                 <label> 成本价格：</label>
-                                                <input id="link" value="images/gallery/img01.jpg" class="form-control">
+                                                <input id="costPrice" name="salePrice" class="form-control">
                                             </div>
 											<div class="form-group">
                                                 <label> 积分：</label>
-                                                <input id="link" value="images/gallery/img01.jpg" class="form-control">
+                                                <input id="points" name="points" class="form-control">
                                             </div>
                                         </div>
 
@@ -609,7 +613,7 @@
 									
 									<div class="modal-footer">                
 									     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
-										 <button type="button" class="btn btn-primary">保存</button>    
+										 <button type="button" class="btn btn-primary" id="saveChanges">保存</button>    
 								    </div> 
 
                                 </div>
@@ -623,12 +627,58 @@
 	<script src="<c:url value="/resources/js/table-editable.js"/>"></script>
 	<script src="<c:url value="/resources/js/bootstrap-fileupload/fileinput.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap-fileupload/fileinput_locale_zh.js"/>" type="text/javascript"></script>
+	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>" type="text/javascript"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			EditableTable.init();
 		});
 		
-		$("#input-42").fileinput({
+		$('#saveChanges').click(function() {
+			var name = $('#name').val();
+			var productNumber = $('#productNumber').val();
+			
+			var unit = $('#unit').val();
+			var capacity = $('#capacity').val();
+			var salePrice = $('#salePrice').val();
+			var costPrice = $('#costPrice').val();
+			var points = $('#points').val();
+			
+			$.ajaxFileUpload({
+				url : basePath + '/milk/add',
+				fileElementId : 'addMilkImage',
+				dataType : 'text',
+				data : {
+					name : name,
+					productNumber: productNumber,
+					unit : unit,
+					capacity : capacity,
+					salePrice : salePrice,
+					costPrice : costPrice,
+					points : points
+				},
+
+				success : function(returnValue, textStatus) {
+					alert(returnValue);
+				},
+
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(textStatus);
+					/* var obj = eval('(' + textStatus + ')');
+					showSuc(obj.responseMsg);
+					submitDialog.dialog('destroy');
+					submitPayRequestDialog.dialog('destroy');
+					$('#tbPayRequestList').datagrid('reload');
+					$('#tbPayRequestList').datagrid('clearSelections'); */
+				},
+
+				complete : function(XMLHttpRequest, textStatus) {
+				}
+
+			});
+			$('#addMilkTeaModal').modal('hide');
+		});
+		
+		$("#addMilkImage").fileinput({
 	        maxFileCount: 1,
 			showUpload: false,
 			initialPreview: [
