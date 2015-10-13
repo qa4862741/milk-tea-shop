@@ -64,13 +64,12 @@ public class MilkController extends BaseController {
 	}
 
 	@RequestMapping("delete")
-	public Object delete(int id) {
+	public String delete(int id) {
 		try {
 			milkTeaService.delete(id);
 		} catch (Exception e) {
 			logger.error("删除出现异常！" + e.getMessage(), e);
-			return new SimpleReturnVo(ResponseCode.FAIL, "删除出现异常！");
 		}
-		return new SimpleReturnVo(ResponseCode.SUCCESS, "删除成功！");
+		return "milk/list";
 	}
 }

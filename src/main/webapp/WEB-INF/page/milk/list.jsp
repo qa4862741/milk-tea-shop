@@ -94,12 +94,9 @@
                                                     <td>${item.salePrice}</td>
                                                     <td>${item.costPrice}</td>
                                                     <td>${item.points}</td>
-													<td><a
-														href="${basePath}/milk/update">
+													<td><a href="${basePath}/milk/update?id=${item.id}">
 															<button class="btn btn-success">修改</button>
-													</a> <a
-														href="${basePath}/milk/delete/${item.id}"
-														style="padding-left: 10px">
+													</a> <a href="${basePath}/milk/delete?id=${item.id}" style="padding-left: 10px">
 															<button class="btn btn btn-primary">删除</button>
 													</a> 
 													</td>
