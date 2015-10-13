@@ -191,8 +191,8 @@
 				    </a>
 					<ul class="sub">
 						<li><a href="${basePath}/milk/list">奶茶产品管理</a></li>
-						<li><a href="horizontal_menu.html">奶茶分类管理</a></li>
-						<li><a href="language_switch.html">奶茶容量管理</a></li>
+						<li><a href="${basePath}/milkclassification/list">奶茶分类管理</a></li>
+						<li><a href="language_switch.html">奶茶单位管理</a></li>
 						<li><a href="language_switch.html">奶茶口味管理</a></li>
 					</ul>
 				</li>

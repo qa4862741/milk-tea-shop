@@ -30,7 +30,7 @@ public interface BaseMapper<T> {
 	 */
 	int delete(int id);
 	
-	T getById(int id);
+	T getOneById(int id);
 	
 	List<T> getAll(T entity);
 

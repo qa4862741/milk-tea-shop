@@ -24,8 +24,8 @@ import com.yezic.com.util.ServletContextUtil;
 
 @Controller
 @RequestMapping("milk")
-public class MilkController extends BaseController {
-	private Logger logger = LoggerFactory.getLogger(MilkController.class);
+public class MilkTeaController extends BaseController {
+	private Logger logger = LoggerFactory.getLogger(MilkTeaController.class);
 
 	@Resource
 	private MilkTeaService milkTeaService;
@@ -70,6 +70,6 @@ public class MilkController extends BaseController {
 		} catch (Exception e) {
 			logger.error("删除出现异常！" + e.getMessage(), e);
 		}
-		return "milk/list";
+		return "redirect:/milk/list";
 	}
 }

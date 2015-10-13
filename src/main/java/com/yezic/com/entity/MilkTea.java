@@ -12,12 +12,16 @@ public class MilkTea {
 	private String unit;
 
 	private String capacity;
+	
+	private String classification;
 
 	private BigDecimal salePrice;
 
 	private BigDecimal costPrice;
 
 	private BigDecimal points;
+
+	private int enabled;
 
 	public int getId() {
 		return id;
@@ -83,4 +87,21 @@ public class MilkTea {
 		this.points = points;
 	}
 
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getClassification() {
+		return classification;
+	}
+
+	public void setClassification(String classification) {
+		this.classification = classification;
+	}
+
+	
 }

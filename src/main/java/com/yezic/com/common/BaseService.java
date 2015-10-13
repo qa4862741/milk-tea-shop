@@ -14,8 +14,8 @@ public abstract class BaseService<T> {
 	 */
 	protected abstract BaseMapper<T> getMapper();
 
-	public T getById(int id) {
-		return getMapper().getById(id);
+	public T getOneById(int id) {
+		return getMapper().getOneById(id);
 	}
 
 	public int insert(T entity) {
