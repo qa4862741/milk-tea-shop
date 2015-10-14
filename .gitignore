@@ -14,5 +14,4 @@ target
 config.properties
 /.classpath
 /.project
-src\main\resources\config.properties
 /resources/*.properties
