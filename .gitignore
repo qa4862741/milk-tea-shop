@@ -11,3 +11,7 @@ target
 #     file    #
 ###############
 *.properties
+config.properties
+/.classpath
+/.project
+src\main\resources\config.properties
