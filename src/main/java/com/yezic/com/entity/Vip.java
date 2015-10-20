@@ -45,11 +45,11 @@ public class Vip {
 		this.integral = integral;
 	}
 
-	public BigDecimal getCapacity() {
+	public BigDecimal getDiscount() {
 		return discount;
 	}
 
-	public void setCapacity(BigDecimal discount) {
+	public void setDiscount(BigDecimal discount) {
 		this.discount = discount;
 	}
 }
