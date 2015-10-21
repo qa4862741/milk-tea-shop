@@ -198,11 +198,21 @@
 				</li>
 				
 				<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-envelope"></i> <span>销售管理 </span>
+				</a>
+					<ul class="sub">
+						<li><a href="${basePath}/sales/list">销售列表</a></li>
+						<li><a href="${basePath}/sales/cashier" target="blank">收银</a></li>
+					</ul>
+				</li>
+				
+				<li class="sub-menu"><a href="javascript:;"> <i
 						class="fa fa-envelope"></i> <span>会员管理 </span>
 				</a>
 					<ul class="sub">
 						<li><a href="${basePath}/vip/list">会员管理</a></li>
 					</ul></li>
+					
 				<li class="sub-menu"><a href="javascript:;"> <i
 						class=" fa fa-bar-chart-o"></i> <span>Charts</span>
 				</a>

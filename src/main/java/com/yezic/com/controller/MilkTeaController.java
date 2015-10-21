@@ -19,7 +19,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.yezic.com.common.SimpleReturnVo;
 import com.yezic.com.common.SimpleReturnVo.ResponseCode;
 import com.yezic.com.entity.MilkTea;
+import com.yezic.com.entity.MilkTeaClassification;
+import com.yezic.com.entity.MilkTeaTaste;
+import com.yezic.com.entity.MilkTeaUnit;
+import com.yezic.com.service.MilkTeaClassificationService;
 import com.yezic.com.service.MilkTeaService;
+import com.yezic.com.service.MilkTeaTasteService;
+import com.yezic.com.service.MilkTeaUnitService;
 import com.yezic.com.util.ServletContextUtil;
 
 @Controller
@@ -30,16 +36,34 @@ public class MilkTeaController extends BaseController {
 	@Resource
 	private MilkTeaService milkTeaService;
 
+	@Resource
+	private MilkTeaClassificationService milkClaService;
+
+	@Resource
+	private MilkTeaTasteService milkTeaTasteService;
+	
+	@Resource
+	private MilkTeaUnitService milkTeaUnitService;
+
 	@RequestMapping("list")
 	public void list(MilkTea milkTea, Model model) {
 		List<MilkTea> milkTeaList = milkTeaService.getAll(milkTea);
 		model.addAttribute("milkTeaList", milkTeaList);
+		
+		List<MilkTeaClassification> milkClas = milkClaService.getAll(new MilkTeaClassification());
+		model.addAttribute("milkClas", milkClas);
+
+		List<MilkTeaTaste> milkTeaTastes = milkTeaTasteService.getAll(new MilkTeaTaste());
+		model.addAttribute("milkTeaTastes", milkTeaTastes);
+		
+		List<MilkTeaUnit> milkTeaUnits = milkTeaUnitService.getAll(new MilkTeaUnit());
+		model.addAttribute("milkTeaUnits", milkTeaUnits);
 	}
 
 	@RequestMapping("add")
 	@ResponseBody
 	public Object add(MilkTea milkTea, MultipartHttpServletRequest multipartRequest) {
-		String path = ServletContextUtil.getServletContext().getRealPath("/") + "fileUpload" + File.separator;
+		String path = ServletContextUtil.getServletContext().getRealPath("/") + "resources/fileUpload" + File.separator;
 		File pathFile = new File(path);
 		if (!pathFile.exists()) {
 			pathFile.mkdirs();
@@ -55,7 +79,8 @@ public class MilkTeaController extends BaseController {
 				data = mf.getBytes();
 				break;
 			}
-			milkTeaService.insert(path + fileName, data, milkTea);
+			
+			milkTeaService.insert(path + fileName, data,multipartRequest.getAttribute("basePath")+"/resources/fileUpload/"+ fileName, milkTea);
 		} catch (Exception e) {
 			logger.error("添加出现异常！" + e.getMessage(), e);
 			return new SimpleReturnVo(ResponseCode.FAIL, "添加出现异常！");

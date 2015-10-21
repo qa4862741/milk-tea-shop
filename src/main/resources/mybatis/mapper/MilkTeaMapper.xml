@@ -6,10 +6,18 @@
 		<result column="name" jdbcType="VARCHAR" property="name" />
 		<result column="productNumber" jdbcType="VARCHAR" property="productNumber" />
 		<result column="unit" jdbcType="VARCHAR" property="unit" />
-		<result column="capacity" jdbcType="VARCHAR" property="capacity" />
+		<result column="unitId" jdbcType="INTEGER" property="unitId" />
+		
+		<result column="classification" jdbcType="VARCHAR" property="classification" />
+		<result column="classificationId" jdbcType="INTEGER" property="classificationId" />
+		
+		<result column="taste" jdbcType="VARCHAR" property="taste" />
+		<result column="tasteId" jdbcType="INTEGER" property="tasteId" />
+		
 		<result column="salePrice" property="salePrice" jdbcType="DECIMAL" />	
 		<result column="costPrice" property="costPrice" jdbcType="DECIMAL" />
 		<result column="points" property="points" jdbcType="DECIMAL" />
+		<result column="imagePath" jdbcType="VARCHAR" property="imagePath" />
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -17,13 +25,14 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, name ,productNumber,unit,capacity,salePrice,costPrice,points
+		id, name ,productNumber,unit, unitId, classification,classificationId,taste,tasteId,salePrice,costPrice,points,imagePath
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="MilkTea" >
 		insert into <include refid="Base_Table" />
-		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{productNumber,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, 
-        #{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL},#{points,jdbcType=DECIMAL}
+		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{productNumber,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR}, 
+		#{unitId,jdbcType=INTEGER}, #{classification,jdbcType=VARCHAR}, #{classificationId,jdbcType=INTEGER},  #{taste,jdbcType=VARCHAR}, #{tasteId,jdbcType=INTEGER}, 
+        #{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL},#{points,jdbcType=DECIMAL},#{imagePath,jdbcType=VARCHAR}
       )
 	</insert>
 	

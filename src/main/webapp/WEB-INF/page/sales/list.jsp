@@ -41,7 +41,7 @@
 					<div class="col-sm-12">
 						<section class="panel">
 							<header class="panel-heading">
-								<strong>奶茶列表</strong><span class="tools pull-right"> <a
+								<strong>奶茶单位列表</strong><span class="tools pull-right"> <a
 									href="javascript:;" class="fa fa-chevron-down"></a> <a
 									href="javascript:;" class="fa fa-cog"></a> <a
 									href="javascript:;" class="fa fa-times"></a>
@@ -51,7 +51,7 @@
 								<div class="adv-table editable-table ">
 									<div class="clearfix">
 										<div class="btn-group">
-											<a href="#addMilkTeaModal" data-toggle="modal">
+											<a href="#addMilkTeaModal" data-toggle="modal" id="addMilkButton">
 												<button id="editable-sample_new" class="btn btn-primary">
 													添加 <i class="fa fa-plus"></i>
 												</button>
@@ -75,33 +75,19 @@
 										<thead>
 											<tr>
 												<th>名称</th>
-												<th>产品编号</th>
-												<th>单位</th>
-												<th>口味</th>
-												<th>分类</th>
-												<th>销售价格</th>
-												<th>成本价格</th>
-												<th>积分</th>
 												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${milkTeaList}" var="item">
+											<c:forEach items="${milkTeaUnitList}" var="item">
 												<tr class="">
 													<td>${item.name}</td>
-													<td>${item.productNumber}</td>
-													<td>${item.unit}</td>
-													<td>${item.taste}</td>
-													<td>${item.classification}</td>
-													<td>￥${item.salePrice}</td>
-													<td>￥${item.costPrice}</td>
-													<td>${item.points}</td>
-													<td><a href="${basePath}/milk/update?id=${item.id}">
+													<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
-													</a> <a href="${basePath}/milk/delete?id=${item.id}"
-														style="padding-left: 10px">
+													</a> <a href="${basePath}/milkunit/delete?id=${item.id}" style="padding-left: 10px">
 															<button class="btn btn btn-primary">删除</button>
-													</a></td>
+													</a> 
+													</td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -356,72 +342,18 @@
 		<!-- Modal -->
 		<div class="modal fade" id="addMilkTeaModal" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title">添加产品</h4>
+						<h4 class="modal-title">添加产品单位</h4>
 					</div>
 
 					<div class="modal-body row">
-
-						<div class="col-md-6 img-modal">
-							<label class="control-label">选择图片</label> <input type="file"
-								id="addMilkImage" name="addMilkImage" class="file-loading" />
-
-							<!--<img src="images/gallery/image1.jpg" alt="">
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit Image</a>
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View Full Size</a>
-
-                                            <p class="mtop10"><strong>File Name:</strong> img01.jpg</p>
-                                            <p><strong>File Type:</strong> jpg</p>
-                                            <p><strong>Resolution:</strong> 300x200</p>
-                                            <p><strong>Uploaded By:</strong> <a href="#">ThemeBucket</a></p>-->
-						</div>
 						<div class="col-md-5">
 							<div class="form-group">
 								<label> 名称：</label> <input id="name" name="name"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 产品编号：</label> <input id="productNumber"
-									name="productNumber" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>分类：</label> 
-								<select class="form-control"  id="classification">
-									<c:forEach items="${milkClas}" var="item">
-										<option value="${item.id}#${item.name}">${item.name}</option>
-									</c:forEach>
-								</select> 
-							</div>
-							<div class="form-group">
-								<label> 单位：</label> 
-								<select class="form-control" id="unit">
-									<c:forEach items="${milkTeaUnits}" var="item">
-										<option value="${item.id}#${item.name}">${item.name}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>口味：</label> 
-								<select class="form-control"  id="taste">
-									<c:forEach items="${milkTeaTastes}" var="item">
-										<option value="${item.id}#${item.name}">${item.name}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="form-group">
-								<label> 销售价格：</label> <input id="salePrice" name="salePrice"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 成本价格：</label> <input id="costPrice" name="salePrice"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 积分：</label> <input id="points" name="points"
 									class="form-control">
 							</div>
 						</div>
@@ -451,80 +383,55 @@
 	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
 		type="text/javascript"></script>
 	<script type="text/javascript">
+	    var add = true;
+	    var id;
 		jQuery(document).ready(function() {
 			EditableTable.init();
 		});
+		
+		$('#addMilkButton').click(function(){
+			$('#name').val('');
+		});
+		
+		$('.updateContent').each(function(){
+			$(this).click(function(){
+				add = false;
+				id = $(this).attr('idattr');
+				
+				$.ajax({
+					type : "GET",
+					url : basePath + '/milkunit/getOneById?id='+id,
+					async: false, 
+					success : function(returnValue) {
+						$('#name').val(returnValue.name);
+					}
+			    });	     
+			});
+		});
 
 		$('#saveChanges').click(function() {
+			url = basePath + '/milkunit/add';
+			
+			if(add==false){
+				url = basePath + '/milkunit/update';
+			}
 			var name = $('#name').val();
-			var productNumber = $('#productNumber').val();
-
-			var unit = $('#unit').val();
-			var salePrice = $('#salePrice').val();
-			var costPrice = $('#costPrice').val();
-			var points = $('#points').val();
 			
-			var classificationId =  $('#classification').val().split('#')[0];
-			var classification = $('#classification').val().split('#')[1];
-			
-			var tasteId = $('#taste').val().split('#')[0];
-			var taste = $('#taste').val().split('#')[1];
-
-			var unitId = $('#unit').val().split('#')[0];
-			var unit = $('#unit').val().split('#')[1];
-			
-			$.ajaxFileUpload({
-				url : basePath + '/milk/add',
-				fileElementId : 'addMilkImage',
-				dataType : 'text',
+			$.ajax({
+				type : "POST",
+				url : url,
 				data : {
+					id : id,
 					name : name,
-					productNumber : productNumber,
-					unit : unit,
-					unitId:unitId,
-					tasteId:tasteId,
-					taste:taste,
-					classification:classification,
-					classificationId:classificationId,
-					salePrice : salePrice,
-					costPrice : costPrice,
-					points : points
 				},
-
-				success : function(returnValue, textStatus) {
-					location.reload();
-				},
-
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					location.reload();
-				},
-
-				complete : function(XMLHttpRequest, textStatus) {
+				async: true, 
+				success : function(returnValue) {
+					 location.reload();
 				}
-
-			});
+		    });	     
 			$('#addMilkTeaModal').modal('hide');
 		});
 
-		$("#addMilkImage")
-				.fileinput(
-						{
-							maxFileCount : 1,
-							showUpload : false,
-							initialPreview : [
-									"<img src='"+basePath+"/resources/images/gallery/image5.jpg' class='file-preview-image' alt='Desert' title='Desert'>", ],
-
-							initialPreviewConfig : [ {
-								caption : 'desert.jpg',
-								width : '120px',
-								url : '/localhost/avatar/delete',
-								key : 100,
-								extra : {
-									id : 100
-								}
-							} ]
-
-						});
 	</script>
 </body>
 </html>

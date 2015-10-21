@@ -24,8 +24,9 @@ public class MilkTeaService extends BaseService<MilkTea> {
 		return milkTeaMapper;
 	}
 
-	public void insert(String fileName, byte[] data, MilkTea milkTea) throws IOException {
+	public void insert(String fileName, byte[] data,String savePath, MilkTea milkTea) throws IOException {
 		File file = new File(fileName);
+		milkTea.setImagePath(savePath);
 		FileCopyUtils.copy(data, file);
 		super.insert(milkTea);
 	}
