@@ -78,6 +78,7 @@
 												<th>联系方式</th>
 												<th>折扣</th>
 												<th>积分</th>
+												<th>余额</th>
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -88,6 +89,7 @@
 													<td>${item.tel}</td>
 													<td>${item.discount}</td>
                                                     <td>￥${item.integral}</td>
+                                                    <td>￥${item.recharge}</td>
 															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
 													</a> <a href="${basePath}/vip/delete?id=${item.id}" style="padding-left: 10px">
@@ -367,6 +369,10 @@
 									name="tel" class="form-control">
 							</div>
 							<div class="form-group">
+								<label> 余额：</label> <input id="recharge" name="recharge"
+									class="form-control">
+							</div>
+							<div class="form-group">
 								<label> 折扣：</label> <input id="discount" name="discount"
 									class="form-control">
 							</div>
@@ -444,6 +450,7 @@
 					tel:tel,
 					discount:discount,
 					integral:integral,
+					recharge:recharge
 				},
 				async: true, 
 				success : function(returnValue) {

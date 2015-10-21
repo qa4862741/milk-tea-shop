@@ -12,6 +12,16 @@ public class Vip {
 	private BigDecimal discount;
 
 	private Integer integral;
+	
+	private BigDecimal recharge;
+
+	public BigDecimal getRecharge() {
+		return recharge;
+	}
+
+	public void setRecharge(BigDecimal recharge) {
+		this.recharge = recharge;
+	}
 
 	public int getId() {
 		return id;

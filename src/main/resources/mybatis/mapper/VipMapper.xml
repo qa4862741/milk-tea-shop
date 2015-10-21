@@ -7,6 +7,7 @@
 		<result column="tel" jdbcType="VARCHAR" property="tel" />
 		<result column="discount" jdbcType="DECIMAL" property="discount" />
 		<result column="integral" jdbcType="INTEGER" property="integral" />
+		<result column="recharge" jdbcType="DECIMAL" property="recharge" />
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -14,14 +15,14 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, name,tel,discount,integral
+		id, name,tel,discount,integral,recharge
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Vip" >
 		insert into <include refid="Base_Table" />
 		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}
 		,#{tel,jdbcType=VARCHAR},#{discount,jdbcType=DECIMAL}
-		,#{integral,jdbcType=INTEGER}
+		,#{integral,jdbcType=INTEGER},#{recharge,jdbcType=DECIMAL}
       )
 	</insert>
 	
@@ -40,6 +41,9 @@
 			</if>
 			<if test="integral != null">
 				integral = #{integral,jdbcType=INTEGER},
+			</if>
+			<if test="recharge != null">
+				recharge = #{recharge,jdbcType=DECIMAL},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}

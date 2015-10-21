@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2015-10-20 21:44:26
+Date: 2015-10-21 20:21:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,10 +25,11 @@ CREATE TABLE `t_milk_tea_vip` (
   `tel` varbinary(13) DEFAULT NULL,
   `discount` decimal(10,0) DEFAULT NULL COMMENT '折扣',
   `integral` int(11) DEFAULT NULL,
+  `recharge` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_milk_tea_vip
 -- ----------------------------
-INSERT INTO `t_milk_tea_vip` VALUES ('1', 0x646173, 0x3131, '1', '1');
+INSERT INTO `t_milk_tea_vip` VALUES ('2', 0x65, '', null, null, null);
