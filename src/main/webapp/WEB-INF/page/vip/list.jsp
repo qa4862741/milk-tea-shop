@@ -440,6 +440,10 @@
 				url = basePath + '/vip/update';
 			}
 			var name = $('#name').val();
+			var tel = $('#tel').val();
+			var discount = $('#discount').val();
+			var integral = $('#integral').val();
+			var recharge = $('#recharge').val();
 			
 			$.ajax({
 				type : "POST",

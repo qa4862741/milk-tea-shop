@@ -59,4 +59,8 @@
 	<select id="getAll" resultMap="BaseResultMap" parameterType="MilkTea">
 		<include refid="baseQuery" />
 	</select>
+	
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="int">
+		select * from <include refid="Base_Table" /> where id = #{id}
+	</select>
 </mapper>

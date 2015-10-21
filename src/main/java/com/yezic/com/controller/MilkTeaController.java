@@ -87,6 +87,18 @@ public class MilkTeaController extends BaseController {
 		}
 		return new SimpleReturnVo(ResponseCode.SUCCESS, "添加成功！");
 	}
+	
+	@RequestMapping("getOneById")
+	@ResponseBody
+	public Object getOneById(int id) {
+		try {
+			 MilkTea milkTea = milkTeaService.getOneById(id);
+			 return milkTea;
+		} catch (Exception e) {
+			logger.error("删除出现异常！" + e.getMessage(), e);
+		}
+		return new SimpleReturnVo(ResponseCode.FAIL, "查找失败！");
+	}
 
 	@RequestMapping("delete")
 	public String delete(int id) {
