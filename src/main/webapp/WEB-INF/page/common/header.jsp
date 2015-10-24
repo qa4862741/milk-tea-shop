@@ -213,6 +213,13 @@
 						<li><a href="${basePath}/vip/list">会员管理</a></li>
 					</ul></li>
 					
+					<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-envelope"></i> <span>门店管理 </span>
+				</a>
+					<ul class="sub">
+						<li><a href="${basePath}/stores/list">门店管理</a></li>
+					</ul></li>
+					
 				<li class="sub-menu"><a href="javascript:;"> <i
 						class=" fa fa-bar-chart-o"></i> <span>Charts</span>
 				</a>

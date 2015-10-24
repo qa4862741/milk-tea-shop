@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezic.com.repository.StoresMapper">
+	<resultMap id="BaseResultMap" type="Stores">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+	</resultMap>
+	
+	<sql id="Base_Table">
+		t_milk_stores
+	</sql>
+	
+	<sql id="Base_Column_List">
+		id, name,tel
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Stores" >
+		insert into <include refid="Base_Table" />
+		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}
+		,#{tel,jdbcType=VARCHAR}
+      )
+	</insert>
+	
+	<update id="update" parameterType="Stores">
+		update
+		<include refid="Base_Table" />
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		<include refid="Base_Table" />
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<sql id="baseQuery">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Base_Table" />
+		<where>
+			<if test="name!='' and name!=null">and name=#{name}</if>
+		</where>
+	</sql>
+	
+	<select id="getPageModel" resultMap="BaseResultMap" parameterType="Stores">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="Stores">
+		<include refid="baseQuery" />
+	</select>
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="Stores">
+		select
+		<include refid="Base_Column_List" />
+		from
+		<include refid="Base_Table" />
+		where id = #{id}
+	</select>
+</mapper>
