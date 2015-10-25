@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezic.com.repository.EmployeeMapper">
+	<resultMap id="BaseResultMap" type="Employee">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="jobid" jdbcType="VARCHAR" property="jobid" />
+		<result column="stores" jdbcType="VARCHAR" property="stores" />
+		<result column="role" jdbcType="VARCHAR" property="role" />
+	</resultMap>
+	
+	<sql id="Base_Table">
+		t_milk_tea_employee
+	</sql>
+	
+	<sql id="Base_Column_List">
+		id, name,tel,jobid,stores,role
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Employee" >
+		insert into <include refid="Base_Table" />
+		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}
+		,#{tel,jdbcType=VARCHAR},#{jobid,jdbcType=VARCHAR}
+		,#{stores,jdbcType=VARCHAR},#{role,jdbcType=VARCHAR}
+      )
+	</insert>
+	
+	<update id="update" parameterType="Employee">
+		update
+		<include refid="Base_Table" />
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="jobid != null">
+				jobid = #{jobid,jdbcType=VARCHAR},
+			</if>
+			<if test="stores != null">
+				stores = #{stores,jdbcType=VARCHAR},
+			</if>
+			<if test="role != null">
+				role = #{role,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		<include refid="Base_Table" />
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<sql id="baseQuery">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Base_Table" />
+		<where>
+			<if test="name!='' and name!=null">and name=#{name}</if>
+		</where>
+	</sql>
+	
+	<select id="getPageModel" resultMap="BaseResultMap" parameterType="Employee">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="Employee">
+		<include refid="baseQuery" />
+	</select>
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="Employee">
+		select
+		<include refid="Base_Column_List" />
+		from
+		<include refid="Base_Table" />
+		where id = #{id}
+	</select>
+</mapper>
