@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezic.com.repository.ResourcesMapper">
+	<resultMap id="BaseResultMap" type="Resources">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="parentId" jdbcType="INTEGER" property="parentId" />
+		<result column="resKey" jdbcType="VARCHAR" property="resKey" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="resUrl" jdbcType="VARCHAR" property="resUrl" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="icon" jdbcType="VARCHAR" property="icon" />
+		<result column="ishide" jdbcType="INTEGER" property="ishide" />
+		<result column="description" jdbcType="VARCHAR" property="description" />
+	</resultMap>
+	
+	<sql id="Base_Table">
+		t_resources
+	</sql>
+	
+	<sql id="Base_Column_List">
+		id, name, parentId, resKey, type, resUrl, level, icon, ishide, description
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Resources" >
+		insert into <include refid="Base_Table" /> values 
+		(
+		  #{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},
+		  #{parentId,jdbcType=INTEGER},#{resKey,jdbcType=VARCHAR},#{type,jdbcType=INTEGER},#{resUrl,jdbcType=VARCHAR}
+		  #{level,jdbcType=INTEGER},#{icon,jdbcType=VARCHAR},#{ishide,jdbcType=INTEGER},#{description,jdbcType=VARCHAR}
+        )
+	</insert>
+	
+	<update id="update" parameterType="Resources">
+		update
+		<include refid="Base_Table" />
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="parentId != null">
+				parentId = #{parentId,jdbcType=INTEGER},
+			</if>
+			
+			<if test="resKey != null">
+				resKey = #{resKey,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			
+			<if test="resUrl != null">
+				resUrl = #{resUrl,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="level != null">
+				level = #{level,jdbcType=INTEGER},
+			</if>
+			
+			<if test="icon != null">
+				icon = #{icon,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="ishide != null">
+				ishide = #{ishide,jdbcType=INTEGER},
+			</if>
+			
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		<include refid="Base_Table" />
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<!-- 根据账号Id获取该用户的权限 -->
+	<select id="findUserResourcess" parameterType="String" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		from <include refid="Base_Table" /> where id in(
+		select resId from t_user_resources
+		where userId=#{userId})
+	</select>
+	
+	<sql id="baseQuery">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Base_Table" />
+		<where>
+			<if test="name!='' and name!=null">and name=#{name}</if>
+		</where>
+	</sql>
+	
+	<select id="getPageModel" resultMap="BaseResultMap" parameterType="Resources">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="Resources">
+		<include refid="baseQuery" />
+	</select>
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="Resources">
+		select
+		<include refid="Base_Column_List" />
+		from
+		<include refid="Base_Table" />
+		where id = #{id}
+	</select>
+</mapper>

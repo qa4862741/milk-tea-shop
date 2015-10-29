@@ -29,4 +29,5 @@
 
 	<task:annotation-driven />
 
+    <beans:import resource="classpath:spring-conf/spring-mvc-shiro.xml"/>
 </beans:beans>
