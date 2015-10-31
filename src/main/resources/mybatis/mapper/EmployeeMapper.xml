@@ -44,6 +44,9 @@
 			<if test="stores != null">
 				stores = #{stores,jdbcType=VARCHAR},
 			</if>
+			<if test="storesId != null">
+				storesId = #{storesId,jdbcType=INTEGER},
+			</if>
 			<if test="role != null">
 				role = #{role,jdbcType=VARCHAR},
 			</if>

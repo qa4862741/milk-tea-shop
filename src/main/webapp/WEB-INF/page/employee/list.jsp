@@ -431,7 +431,12 @@
 					url : basePath + '/employee/getOneById?id='+id,
 					async: false, 
 					success : function(returnValue) {
+						$('#jobid').val(returnValue.jobid);
 						$('#name').val(returnValue.name);
+						$('#tel').val(returnValue.tel);
+						$('#stores').val(returnValue.stores);
+						$('#storesId').val(returnValue.storesId);
+						$('#role').val(returnValue.role);
 					}
 			    });	     
 			});
