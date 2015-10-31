@@ -76,6 +76,7 @@
 											<tr>
 												<th>名称</th>
 												<th>联系方式</th>
+												<th>地址</th>
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -84,6 +85,7 @@
 												<tr class="">
 													<td>${item.name}</td>
 													<td>${item.tel}</td>
+													<td>${item.address}</td>
 															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
 													</a> <a href="${basePath}/stores/delete?id=${item.id}" style="padding-left: 10px">
@@ -362,6 +364,10 @@
 								<label> 联系方式：</label> <input id="tel"
 									name="tel" class="form-control">
 							</div>
+							<div class="form-group">
+								<label> 联系方式：</label> <input id="address"
+									name="address" class="form-control">
+							</div>
 						</div>
 
 					</div>
@@ -410,6 +416,8 @@
 					async: false, 
 					success : function(returnValue) {
 						$('#name').val(returnValue.name);
+						$('#tel').val(returnValue.tel);
+						$('#address').val(returnValue.address);
 					}
 			    });	     
 			});
@@ -423,6 +431,7 @@
 			}
 			var name = $('#name').val();
 			var tel = $('#tel').val();
+			var address = $('#address').val();
 			
 			$.ajax({
 				type : "POST",
@@ -431,6 +440,7 @@
 					id : id,
 					name : name,
 					tel:tel,
+					address:address
 					},
 				async: true, 
 				success : function(returnValue) {

@@ -5,6 +5,7 @@
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="name" jdbcType="VARCHAR" property="name" />
 		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -12,13 +13,13 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, name,tel
+		id, name,tel,address
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Stores" >
 		insert into <include refid="Base_Table" />
 		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}
-		,#{tel,jdbcType=VARCHAR}
+		,#{tel,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR}
       )
 	</insert>
 	
@@ -31,6 +32,9 @@
 			</if>
 			<if test="tel != null">
 				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}

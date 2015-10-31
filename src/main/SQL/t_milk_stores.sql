@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2015-10-24 15:48:52
+Date: 2015-10-31 15:38:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,9 +23,12 @@ CREATE TABLE `t_milk_stores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_milk_stores
 -- ----------------------------
+INSERT INTO `t_milk_stores` VALUES ('1', 'AAA', '1', null);
+INSERT INTO `t_milk_stores` VALUES ('2', 'rqwr', '11', null);

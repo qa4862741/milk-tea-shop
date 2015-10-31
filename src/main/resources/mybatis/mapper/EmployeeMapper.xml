@@ -16,7 +16,7 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, name,tel,jobid,stores,role
+		id, name,tel,jobid,stores,role,storesId
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Employee" >
