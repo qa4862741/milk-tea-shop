@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yezic.com.common.SimpleReturnVo;
 import com.yezic.com.common.SimpleReturnVo.ResponseCode;
 import com.yezic.com.entity.Employee;
+import com.yezic.com.entity.MilkTeaClassification;
+import com.yezic.com.entity.Stores;
 import com.yezic.com.service.EmployeeService;
+import com.yezic.com.service.StoresService;
 
 @Controller
 @RequestMapping("employee")
@@ -23,11 +26,17 @@ public class EmployeeController extends BaseController{
 
 	@Resource
 	private EmployeeService employeeService;
+	
+	@Resource
+	private StoresService storesService;
 
 	@RequestMapping("list")
 	public void list(Employee employee, Model model) {
 		List<Employee> employeeList = employeeService.getAll(employee);
 		model.addAttribute("employeeList", employeeList);
+		
+		List<Stores> milkClas = storesService.getAll(new Stores());
+		model.addAttribute("storesList", milkClas);
 	}
 
 	@RequestMapping("add")

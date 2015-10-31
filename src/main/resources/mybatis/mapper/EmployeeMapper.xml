@@ -7,6 +7,7 @@
 		<result column="tel" jdbcType="VARCHAR" property="tel" />
 		<result column="jobid" jdbcType="VARCHAR" property="jobid" />
 		<result column="stores" jdbcType="VARCHAR" property="stores" />
+		<result column="storesId" jdbcType="INTEGER" property="storesId" />
 		<result column="role" jdbcType="VARCHAR" property="role" />
 	</resultMap>
 	
@@ -22,7 +23,8 @@
 		insert into <include refid="Base_Table" />
 		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}
 		,#{tel,jdbcType=VARCHAR},#{jobid,jdbcType=VARCHAR}
-		,#{stores,jdbcType=VARCHAR},#{role,jdbcType=VARCHAR}
+		,#{stores,jdbcType=VARCHAR},#{role,jdbcType=VARCHAR},
+		#{storesId,jdbcType=INTEGER}
       )
 	</insert>
 	

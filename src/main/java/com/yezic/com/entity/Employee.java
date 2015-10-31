@@ -20,6 +20,16 @@ public class Employee {
 	
 	private String stores;
 	
+	private int storesId;
+
+	public int getStoresId() {
+		return storesId;
+	}
+
+	public void setStoresId(int storesId) {
+		this.storesId = storesId;
+	}
+
 	private String role;
 
 	public String getStores() {

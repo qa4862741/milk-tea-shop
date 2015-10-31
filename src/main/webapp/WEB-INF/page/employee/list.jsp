@@ -369,8 +369,12 @@
 									class="form-control">
 							</div>
 							<div class="form-group">
-								<label> 门店：</label> <input id="stores" name="stores"
-									class="form-control">
+								<label> 门店：</label> 									
+									<select class="form-control"  id="stores">
+									<c:forEach items="${storesList}" var="item">
+										<option value="${item.id}#${item.name}">${item.name}</option>
+									</c:forEach>
+								</select> 
 							</div>
 							<div class="form-group">
 								<label> 角色：</label> <input id="role" name="role"
@@ -441,7 +445,10 @@
 			}
 			var jobid=$('#jobid').val();
 			var name = $('#name').val();
-			var stores = $('#stores').val();
+			
+			
+			var storesId= $('#stores').val().split('#')[0];
+			var stores = $('#stores').val().split('#')[1];
 			var role = $('#role').val();
 			var tel = $('#tel').val();
 			
@@ -452,6 +459,7 @@
 					id : id,
 					jobid:jobid,
 					name : name,
+					storesId:storesId,
 					stores : stores,
 					role : role,
 					tel:tel,

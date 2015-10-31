@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2015-10-25 09:32:58
+Date: 2015-10-31 14:53:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,9 +26,11 @@ CREATE TABLE `t_milk_tea_employee` (
   `jobid` varchar(255) DEFAULT NULL,
   `stores` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
+  `storesId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_milk_tea_employee
 -- ----------------------------
+INSERT INTO `t_milk_tea_employee` VALUES ('1', '1', '', '', '1#AAA', '', null);
