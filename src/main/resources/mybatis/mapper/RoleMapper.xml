@@ -14,7 +14,7 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, state, name, password, roleKey, description
+		id, state, name, roleKey, description
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Role" >
