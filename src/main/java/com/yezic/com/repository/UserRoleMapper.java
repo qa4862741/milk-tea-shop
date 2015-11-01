@@ -1,5 +1,8 @@
 package com.yezic.com.repository;
 
-public class UserRoleMapper {
+import com.yezic.com.common.BaseMapper;
+import com.yezic.com.entity.UserRole;
+
+public interface UserRoleMapper extends BaseMapper<UserRole>{
 
 }

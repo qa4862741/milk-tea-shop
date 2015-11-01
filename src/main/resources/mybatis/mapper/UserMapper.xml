@@ -11,6 +11,8 @@
 		<result column="locked" jdbcType="VARCHAR" property="locked" />
 		<result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="deletestatus" jdbcType="INTEGER" property="deletestatus" />
+		<result column="employId" jdbcType="INTEGER" property="employId" />
+		
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -18,15 +20,15 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, userName, accountName, password, credentialsSalt, description, locked, createTime, deletestatus
+		id, userName, accountName, password, credentialsSalt, description, locked, createTime, deletestatus,employId
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="User" >
 		insert into <include refid="Base_Table" /> values 
 		(
-		  #{id,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR},
-		  #{password,jdbcType=VARCHAR},#{credentialsSalt,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR}
-		  #{locked,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{deletestatus,jdbcType=INTEGER}
+		  #{id,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
+		  #{credentialsSalt,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR}#{locked,jdbcType=VARCHAR},
+		  #{createTime,jdbcType=TIMESTAMP},#{deletestatus,jdbcType=INTEGER},#{employId,jdbcType=INTEGER}
         )
 	</insert>
 	

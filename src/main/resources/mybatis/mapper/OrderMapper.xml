@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezic.com.repository.OrderMapper">
+	<resultMap id="BaseResultMap" type="Order">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="orderNumber" jdbcType="VARCHAR" property="orderNumber" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="customer" jdbcType="VARCHAR" property="customer" />
+		<result column="vipId" jdbcType="INTEGER" property="vipId" />
+		<result column="vipName" jdbcType="VARCHAR" property="vipName" />
+		<result column="employeeId" jdbcType="INTEGER" property="employeeId" />
+		<result column="salesMan" jdbcType="VARCHAR" property="salesMan" />
+		<result column="count" jdbcType="INTEGER" property="count" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />	
+		<result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="storeId" jdbcType="INTEGER" property="storeId" />
+		<result column="storeName" jdbcType="VARCHAR" property="storeName" />
+	</resultMap>
+	
+	<sql id="Base_Table">
+		t_order
+	</sql>
+	
+	<sql id="Base_Column_List">
+		id, orderNumber ,status,customer,vipId,vipName, employeeId,salesMan,count, amount,createTime,storeId,storeName
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Order" >
+		insert into <include refid="Base_Table" />(<include refid="Base_Column_List" />)
+		values (#{id,jdbcType=INTEGER},#{orderNumber,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},
+		 #{customer,jdbcType=VARCHAR},#{vipId,jdbcType=INTEGER},#{vipName,jdbcType=VARCHAR},#{employeeId,jdbcType=INTEGER},
+         #{salesMan,jdbcType=VARCHAR},#{count,jdbcType=INTEGER},#{amount,jdbcType=DECIMAL},#{createTime,jdbcType=TIMESTAMP},
+         #{storeId,jdbcType=INTEGER},#{storeName,jdbcType=VARCHAR}
+      )
+	</insert>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		<include refid="Base_Table" />
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<sql id="baseQuery">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Base_Table" />
+		<where>
+			<if test="orderNumber!='' and orderNumber!=null">and orderNumber=#{orderNumber}</if>
+		</where>
+	</sql>
+	
+	<select id="getPageModel" resultMap="BaseResultMap" parameterType="Order">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="Order">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="int">
+		select * from <include refid="Base_Table" /> where id = #{id}
+	</select>
+</mapper>

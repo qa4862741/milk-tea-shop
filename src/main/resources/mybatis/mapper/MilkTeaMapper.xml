@@ -18,6 +18,7 @@
 		<result column="costPrice" property="costPrice" jdbcType="DECIMAL" />
 		<result column="points" property="points" jdbcType="DECIMAL" />
 		<result column="imagePath" jdbcType="VARCHAR" property="imagePath" />
+		<result column="scaledImagePath" jdbcType="VARCHAR" property="scaledImagePath" />
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -25,14 +26,14 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, name ,productNumber,unit, unitId, classification,classificationId,taste,tasteId,salePrice,costPrice,points,imagePath
+		id, name ,productNumber,unit, unitId, classification,classificationId,taste,tasteId,salePrice,costPrice,points,imagePath,scaledImagePath
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="MilkTea" >
-		insert into <include refid="Base_Table" />
+		insert into <include refid="Base_Table" />(<include refid="Base_Column_List" />)
 		values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{productNumber,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR}, 
 		#{unitId,jdbcType=INTEGER}, #{classification,jdbcType=VARCHAR}, #{classificationId,jdbcType=INTEGER},  #{taste,jdbcType=VARCHAR}, #{tasteId,jdbcType=INTEGER}, 
-        #{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL},#{points,jdbcType=DECIMAL},#{imagePath,jdbcType=VARCHAR}
+        #{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL},#{points,jdbcType=DECIMAL},#{imagePath,jdbcType=VARCHAR},#{scaledImagePath,jdbcType=VARCHAR}
       )
 	</insert>
 	

@@ -12,7 +12,8 @@ public class User {
 	private String locked;
 	private Date createTime;
 	private String deletestatus;
-
+    private int employId;
+    
 	public int getId() {
 		return id;
 	}
@@ -83,6 +84,14 @@ public class User {
 
 	public void setDeletestatus(String deletestatus) {
 		this.deletestatus = deletestatus;
+	}
+
+	public int getEmployId() {
+		return employId;
+	}
+
+	public void setEmployId(int employId) {
+		this.employId = employId;
 	}
 
 }
