@@ -1,5 +1,8 @@
 package com.yezic.com.repository;
 
-public class UserResourcesMapper {
+import com.yezic.com.common.BaseMapper;
+import com.yezic.com.entity.UserResources;
+
+public interface UserResourcesMapper extends BaseMapper<UserResources>{
 
 }

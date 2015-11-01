@@ -74,14 +74,27 @@
 										id="editable-sample">
 										<thead>
 											<tr>
-												<th>名称</th>
+												<th>订单号</th>
+												<th>销售时间</th>
+												<th>订单项数量</th>
+												<th>订单总金额</th>
+												<th>会员</th>
+												<th>收银员</th>
+												<th>门店</th>
 												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${milkTeaUnitList}" var="item">
+											<c:forEach items="${orders}" var="item">
 												<tr class="">
-													<td>${item.name}</td>
+													<td>${item.orderNumber}</td>
+													<td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+													<td>${item.count}</td>
+													<td>￥${item.amount}</td>
+													<td>${item.vipName}</td>
+													<td>${item.salesMan}</td>
+													<td>${item.storeName}</td>
+													
 													<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
 													</a> <a href="${basePath}/milkunit/delete?id=${item.id}" style="padding-left: 10px">

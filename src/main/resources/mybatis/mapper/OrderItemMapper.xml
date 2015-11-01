@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezic.com.repository.OrderItemMapper">
+	<resultMap id="BaseResultMap" type="OrderItem">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="orderId" jdbcType="INTEGER" property="orderId" />
+		<result column="goodsId" jdbcType="INTEGER" property="goodsId" />
+		<result column="goodsName" jdbcType="VARCHAR" property="goodsName" />
+		<result column="unit" jdbcType="VARCHAR" property="unit" />
+		<result column="count" jdbcType="INTEGER" property="count" />
+		<result column="unitPrice" jdbcType="DECIMAL" property="unitPrice" />
+		<result column="salePrice" jdbcType="DECIMAL" property="salePrice" />
+		<result column="isPresent" jdbcType="BIT" property="isPresent" />
+		<result column="imagePath" jdbcType="VARCHAR" property="imagePath" />
+	</resultMap>
+	
+	<sql id="Base_Table">
+		t_order_item
+	</sql>
+	
+	<sql id="Base_Column_List">
+		id, orderId ,goodsId,goodsName, unit,count, unitPrice,salePrice,isPresent,imagePath
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="MilkTea" >
+		insert into <include refid="Base_Table" />
+		values (#{id,jdbcType=INTEGER},#{orderId,jdbcType=INTEGER},#{goodsId,jdbcType=INTEGER},#{goodsName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+		#{count,jdbcType=INTEGER},#{unitPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, #{isPresent,jdbcType=BIT},#{imagePath,jdbcType=VARCHAR}
+      )
+	</insert>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		<include refid="Base_Table" />
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<sql id="baseQuery">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Base_Table" />
+		<where>
+			<if test="goodsName!='' and goodsName!=null">and goodsName=#{goodsName}</if>
+		</where>
+	</sql>
+	
+	<select id="getPageModel" resultMap="BaseResultMap" parameterType="OrderItem">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="OrderItem">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="int">
+		select * from <include refid="Base_Table" /> where id = #{id}
+	</select>
+</mapper>

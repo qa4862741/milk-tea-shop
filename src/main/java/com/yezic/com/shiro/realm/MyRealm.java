@@ -18,8 +18,10 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
+import com.yezic.com.entity.Employee;
 import com.yezic.com.entity.Resources;
 import com.yezic.com.entity.User;
+import com.yezic.com.repository.EmployeeMapper;
 import com.yezic.com.repository.ResourcesMapper;
 import com.yezic.com.repository.UserMapper;
 
@@ -31,6 +33,9 @@ public class MyRealm extends AuthorizingRealm {
 
 	@Inject
 	private ResourcesMapper resourcesMapper;
+	
+	@Inject
+	private EmployeeMapper employeeMapper;
 
 	@Inject
 	private UserMapper userMapper;
@@ -79,6 +84,7 @@ public class MyRealm extends AuthorizingRealm {
 			if ("2".equals(user.getLocked())){
 				throw new LockedAccountException(); // 帐号锁定
 			}
+			
 			// 从数据库查询出来的账号名和密码,与用户输入的账号和密码对比
 			// 当用户执行登录时,在方法处理上要实现user.login(token);
 			// 然后会自动进入这个类进行认证
@@ -92,6 +98,9 @@ public class MyRealm extends AuthorizingRealm {
 			Session session = SecurityUtils.getSubject().getSession();
 			session.setAttribute("userSession", user);
 			session.setAttribute("userSessionId", user.getId());
+			
+			Employee employ = employeeMapper.getOneById(user.getEmployId());
+			session.setAttribute("employ", employ);
 			return authenticationInfo;
 		} else {
 			throw new UnknownAccountException();// 没找到帐号

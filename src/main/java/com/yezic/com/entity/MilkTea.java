@@ -30,6 +30,8 @@ public class MilkTea {
 	private int enabled;
 
 	private String imagePath;
+	
+	private String scaledImagePath;
 
 	public int getId() {
 		return id;
@@ -142,5 +144,15 @@ public class MilkTea {
 	public void setClassificationId(int classificationId) {
 		this.classificationId = classificationId;
 	}
+
+	public String getScaledImagePath() {
+		return scaledImagePath;
+	}
+
+	public void setScaledImagePath(String scaledImagePath) {
+		this.scaledImagePath = scaledImagePath;
+	}
+	
+	
 
 }

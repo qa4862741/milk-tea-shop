@@ -80,7 +80,7 @@ public class MilkTeaController extends BaseController {
 				break;
 			}
 			
-			milkTeaService.insert(path + fileName, data,multipartRequest.getAttribute("basePath")+"/resources/fileUpload/"+ fileName, milkTea);
+			milkTeaService.insert(fileName,path , data,multipartRequest.getAttribute("basePath")+"/resources/fileUpload/", milkTea);
 		} catch (Exception e) {
 			logger.error("添加出现异常！" + e.getMessage(), e);
 			return new SimpleReturnVo(ResponseCode.FAIL, "添加出现异常！");
