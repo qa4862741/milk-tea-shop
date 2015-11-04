@@ -96,7 +96,7 @@
 													<td>￥${item.salePrice}</td>
 													<td>￥${item.costPrice}</td>
 													<td>${item.points}</td>
-													<td><a href="${basePath}/milk/update?id=${item.id}">
+													<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
 													</a> <a href="${basePath}/milk/delete?id=${item.id}"
 														style="padding-left: 10px">
@@ -449,13 +449,52 @@
 		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput_locale_zh.js"/>"
 		type="text/javascript"></script>
 	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
-		type="text/javascript"></script>
+		type="text/javascript"></script>		
+		
 	<script type="text/javascript">
+	 var add = true;
+	    var id;
 		jQuery(document).ready(function() {
 			EditableTable.init();
 		});
+		
+		$('#addMilkButton').click(function(){
+			$('#name').val('');
+		});
+		
+		$('.updateContent').each(function(){
+			$(this).click(function(){
+				add = false;
+				id = $(this).attr('idattr');
+				
+				$.ajax({
+					type : "GET",
+					url : basePath + '/milk/getOneById?id='+id,
+					async: false, 
+					success : function(returnValue) {
+						$('#name').val(returnValue.name);
+						$('#productNumber').val(returnValue.productNumber);
+						$('#unit').val(returnValue.unit);
+						$('#salePrice').val(returnValue.salePrice);
+						$('#costPrice').val(returnValue.costPrice);
+						$('#points').val(returnValue.points);
+						$('#classificationId').val(returnValue.classificationId);
+						$('#classification').val(returnValue.classification);
+						$('#tasteId').val(returnValue.salePrice);
+						$('#taste').val(returnValue.salePrice);
+						$('#unitId').val(returnValue.salePrice);
+						$('#unit').val(returnValue.salePrice);
+					}
+			    });	     
+			});
+		});
 
 		$('#saveChanges').click(function() {
+             url = basePath + '/milk/add';
+			
+			if(add==false){
+				url = basePath + '/milk/update';
+			}
 			var name = $('#name').val();
 			var productNumber = $('#productNumber').val();
 
@@ -474,9 +513,8 @@
 			var unit = $('#unit').val().split('#')[1];
 			
 			$.ajaxFileUpload({
-				url : basePath + '/milk/add',
-				fileElementId : 'addMilkImage',
-				dataType : 'text',
+				type : "POST",
+				url : url,
 				data : {
 					name : name,
 					productNumber : productNumber,

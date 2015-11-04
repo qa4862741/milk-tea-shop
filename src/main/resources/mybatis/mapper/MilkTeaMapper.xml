@@ -37,6 +37,53 @@
       )
 	</insert>
 	
+	<update id="update" parameterType="MilkTea">
+		update
+		<include refid="Base_Table" />
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="productNumber != null">
+				productNumber = #{productNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				unit = #{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="unitId != null">
+				unitId = #{unitId,jdbcType=INTEGER},
+			</if>
+			<if test="classification != null">
+				classification = #{classification,jdbcType=VARCHAR},
+			</if>
+			<if test="classificationId != null">
+				classificationId = #{classificationId,jdbcType=INTEGER},
+			</if>
+			<if test="taste != null">
+				taste = #{taste,jdbcType=VARCHAR},
+			</if>
+			<if test="tasteId != null">
+				tasteId = #{tasteId,jdbcType=INTEGER},
+			</if>
+			<if test="salePrice != null">
+				salePrice = #{salePrice,jdbcType=DECIMAL},
+			</if>
+			<if test="costPrice != null">
+				costPrice = #{costPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="points != null">
+				points = #{points,jdbcType=DECIMAL},
+			</if>
+			<if test="imagePath != null">
+				imagePath = #{imagePath,jdbcType=VARCHAR},
+			</if>
+			<if test="scaledImagePath != null">
+				scaledImagePath = #{scaledImagePath,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
 	<delete id="delete" parameterType="java.lang.Integer">
 		delete from
 		<include refid="Base_Table" />

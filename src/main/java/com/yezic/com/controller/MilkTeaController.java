@@ -109,4 +109,13 @@ public class MilkTeaController extends BaseController {
 		}
 		return "redirect:/milk/list";
 	}
+	@RequestMapping("update")
+	public String update(MilkTea milkTea) {
+		try {
+			milkTeaService.update(milkTea);
+		} catch (Exception e) {
+			logger.error("删除出现异常！" + e.getMessage(), e);
+		}
+		return "redirect:/milk/list";
+	}
 }
