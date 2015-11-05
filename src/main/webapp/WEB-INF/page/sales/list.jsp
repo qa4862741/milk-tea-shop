@@ -50,13 +50,6 @@
 							<div class="panel-body">
 								<div class="adv-table editable-table ">
 									<div class="clearfix">
-										<div class="btn-group">
-											<a href="#addMilkTeaModal" data-toggle="modal" id="addMilkButton">
-												<button id="editable-sample_new" class="btn btn-primary">
-													添加 <i class="fa fa-plus"></i>
-												</button>
-											</a>
-										</div>
 										<div class="btn-group pull-right">
 											<button class="btn btn-default dropdown-toggle"
 												data-toggle="dropdown">
@@ -81,7 +74,6 @@
 												<th>会员</th>
 												<th>收银员</th>
 												<th>门店</th>
-												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -93,13 +85,7 @@
 													<td>￥${item.amount}</td>
 													<td>${item.vipName}</td>
 													<td>${item.salesMan}</td>
-													<td>${item.storeName}</td>
-													
-													<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
-															<button class="btn btn-success">修改</button>
-													</a> <a href="${basePath}/milkunit/delete?id=${item.id}" style="padding-left: 10px">
-															<button class="btn btn btn-primary">删除</button>
-													</a> 
+													<td>${item.storeName}</td>										
 													</td>
 												</tr>
 											</c:forEach>
