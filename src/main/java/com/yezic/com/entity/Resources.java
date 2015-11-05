@@ -1,9 +1,11 @@
 package com.yezic.com.entity;
 
+import java.util.List;
+
 public class Resources {
 	private int id;
 	private String name;
-	private String parentId;
+	private int parentId;
 	private String resKey;
 	private String type;
 	private String resUrl;
@@ -11,6 +13,8 @@ public class Resources {
 	private String icon;
 	private int ishide;
 	private String description;
+
+	private List<Resources> children;
 
 	public int getId() {
 		return id;
@@ -28,11 +32,11 @@ public class Resources {
 		this.name = name;
 	}
 
-	public String getParentId() {
+	public int getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(String parentId) {
+	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
 
@@ -90,6 +94,14 @@ public class Resources {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Resources> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Resources> children) {
+		this.children = children;
 	}
 
 }

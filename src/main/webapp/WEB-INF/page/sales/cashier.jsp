@@ -122,7 +122,7 @@
                             <a class="btn btn-success  btn-lg"><i class="fa fa-cloud"></i>
                                                               口味
                             </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a class="btn btn-danger btn-lg"><i class="fa fa-times"></i>
+                            <a class="btn btn-danger delete btn-lg"><i class="fa fa-times"></i>
                                                              删除
                             </a>
 						</div>
