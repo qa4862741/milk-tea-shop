@@ -365,7 +365,7 @@
 									name="tel" class="form-control">
 							</div>
 							<div class="form-group">
-								<label> 联系方式：</label> <input id="address"
+								<label> 地址：</label> <input id="address"
 									name="address" class="form-control">
 							</div>
 						</div>

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <script>
 	var basePath = "${basePath}";
+	var activeId = "${activeId}";
 </script>
 
 <meta charset="utf-8">

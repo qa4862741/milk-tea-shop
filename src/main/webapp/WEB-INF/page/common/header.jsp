@@ -186,62 +186,64 @@
 		<div class="leftside-navigation">
 			<ul class="sidebar-menu" id="nav-accordion">
 			   <li class="sub-menu">
-				    <a href="javascript:;"> 
+				    <a href="javascript:;" class="managers"> 
 				        <i class="fa fa-laptop"></i> <span>基础资料管理</span>
 				    </a>
 					<ul class="sub">
-						<li><a href="${basePath}/milk/list">奶茶产品管理</a></li>
-						<li><a href="${basePath}/milkclassification/list">奶茶分类管理</a></li>
-						<li><a href="${basePath}/milkunit/list">奶茶单位管理</a></li>
-						<li><a href="${basePath}/milktaste/list">奶茶口味管理</a></li>
+						<li><a href="${basePath}/milk/list" class="clickItem" id="milkList">奶茶产品管理</a></li>
+						<li><a href="${basePath}/milkclassification/list" class="clickItem" id="milkclassificationList">奶茶分类管理</a></li>
+						<li><a href="${basePath}/milkunit/list" class="clickItem" id="milkunitList">奶茶单位管理</a></li>
+						<li><a href="${basePath}/milktaste/list" class="clickItem" id="milktasteList">奶茶口味管理</a></li>
 					</ul>
 				</li>
 				
-				<li class="sub-menu"><a href="javascript:;"> <i
+				<li class="sub-menu"><a href="javascript:;" class="managers"> <i
 						class="fa fa-shopping-cart"></i> <span>销售管理 </span>
 				</a>
 					<ul class="sub">
-						<li><a href="${basePath}/sales/list">销售列表</a></li>
-						<li><a href="${basePath}/sales/cashier" target="blank">收银</a></li>
+						<li><a href="${basePath}/sales/list" class="clickItem" id="salesList">销售列表</a></li>
+						<li><a href="${basePath}/sales/cashier" target="blank" class="clickItem" id="salesCashier">收银</a></li>
 					</ul>
 				</li>
 				
-				<li class="sub-menu"><a href="javascript:;"> <i
+				<li class="sub-menu"><a href="javascript:;" class="managers"> <i
 						class="fa  fa-vimeo-square"></i> <span>会员管理 </span>
 				</a>
 					<ul class="sub">
-						<li><a href="${basePath}/vip/list">会员管理</a></li>
+						<li><a href="${basePath}/vip/list" class="clickItem" id="vipList">会员管理</a></li>
 					</ul></li>
 					
-					<li class="sub-menu"><a href="javascript:;"> <i
+					<li class="sub-menu"><a href="javascript:;" class="managers"> <i
 						class="fa fa-envelope"></i> <span>门店管理 </span>
 				</a>
 					<ul class="sub">
-						<li><a href="${basePath}/stores/list">门店管理</a></li>
+						<li><a href="${basePath}/stores/list" class="clickItem" id="storesList">门店管理</a></li>
 					</ul></li>
 					
-					<li class="sub-menu"><a href="javascript:;"> <i
+					<li class="sub-menu"><a href="javascript:;" class="managers"> <i
 						class="fa fa-male"></i> <span>员工管理 </span>
 				</a>
 					<ul class="sub">
-						<li><a href="${basePath}/employee/list">员工管理</a></li>
+						<li><a href="${basePath}/employee/list" class="clickItem" id="employeeList">员工管理</a></li>
 					</ul></li>
 					
-					<li class="sub-menu"><a href="javascript:;"> <i
+					<li class="sub-menu"><a href="javascript:;"  class="managers"> <i
 						class="fa fa-user"></i> <span>用户权限管理 </span>
 				</a>
 					<ul class="sub">
-					    <li><a href="${basePath}/user/list">用户管理</a></li>
-						<li><a href="${basePath}/role/list">角色管理</a></li>
-						<li><a href="${basePath}/resources/list">资源管理</a></li>
+					    <li><a href="${basePath}/user/list" class="clickItem"  id="userList">用户管理</a></li>
+						<li><a href="${basePath}/role/list" class="clickItem"  id="roleList">角色管理</a></li>
+						<li><a href="${basePath}/resources/list" class="clickItem"  id="resourcesList">资源管理</a></li>
 					</ul></li>
 					
-					<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-bar-chart-o"></i> <span>报表管理 </span>
-				</a>
-					<ul class="sub">
-					    <li><a href="${basePath}/reports/monthSaleReports">奶茶销量月度报表</a></li>
-					</ul></li>
+					<li class="sub-menu">
+					  <a href="javascript:;"  class="managers"> 
+					     <i class="fa fa-bar-chart-o"></i> <span>报表管理 </span>
+				      </a>
+				      <ul class="sub">
+					    <li><a href="${basePath}/reports/monthSaleReports" class="clickItem"  id="reportsMonthSaleReports">奶茶销量月度报表</a></li>
+					  </ul>
+					</li>
 					
 					
 					
@@ -251,3 +253,4 @@
 	</div>
 </aside>
 <!--sidebar end-->
+

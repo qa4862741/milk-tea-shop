@@ -205,7 +205,7 @@
 							<li>
 								<div class="prog-row">
 									<div class="user-thumb">
-										<a href="#"><img src="images/avatar1_small.jpg" alt=""></a>
+										<a href="#"><img src="<c:url value="/resources/images/avatar1_small.jpg"/>" alt=""></a>
 									</div>
 									<div class="user-details">
 										<h4>
@@ -219,7 +219,7 @@
 								</div>
 								<div class="prog-row">
 									<div class="user-thumb">
-										<a href="#"><img src="images/avatar1.jpg" alt=""></a>
+										<a href="#"><img src="<c:url value="/resources/images/avatar1.jpg"/>" alt=""></a>
 									</div>
 									<div class="user-details">
 										<h4>
@@ -233,7 +233,7 @@
 								</div>
 								<div class="prog-row">
 									<div class="user-thumb">
-										<a href="#"><img src="images/chat-avatar2.jpg" alt=""></a>
+										<a href="#"><img src="<c:url value="/resources/images/chat-avatar2.jpg"/>" alt=""></a>
 									</div>
 									<div class="user-details">
 										<h4>
@@ -247,7 +247,7 @@
 								</div>
 								<div class="prog-row">
 									<div class="user-thumb">
-										<a href="#"><img src="images/avatar1_small.jpg" alt=""></a>
+										<a href="#"><img src="<c:url value="/resources/images/avatar1_small.jpg"/>" alt=""></a>
 									</div>
 									<div class="user-details">
 										<h4>
@@ -261,7 +261,7 @@
 								</div>
 								<div class="prog-row">
 									<div class="user-thumb">
-										<a href="#"><img src="images/avatar1.jpg" alt=""></a>
+										<a href="#"><img src="<c:url value="/resources/images/avatar1.jpg"/>" alt=""></a>
 									</div>
 									<div class="user-details">
 										<h4>
@@ -372,7 +372,7 @@
 
 					<div class="modal-body row">
 
-						<div class="col-md-6 img-modal">
+						<div class="col-md-5 img-modal">
 							<label class="control-label">选择图片</label> <input type="file"
 								id="addMilkImage" name="addMilkImage" class="file-loading" />
 
@@ -385,51 +385,99 @@
                                             <p><strong>Resolution:</strong> 300x200</p>
                                             <p><strong>Uploaded By:</strong> <a href="#">ThemeBucket</a></p>-->
 						</div>
-						<div class="col-md-5">
-							<div class="form-group">
-								<label> 名称：</label> <input id="name" name="name"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 产品编号：</label> <input id="productNumber"
-									name="productNumber" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>分类：</label> 
-								<select class="form-control"  id="classification">
-									<c:forEach items="${milkClas}" var="item">
-										<option value="${item.id}#${item.name}">${item.name}</option>
-									</c:forEach>
-								</select> 
-							</div>
-							<div class="form-group">
-								<label> 单位：</label> 
-								<select class="form-control" id="unit">
-									<c:forEach items="${milkTeaUnits}" var="item">
-										<option value="${item.id}#${item.name}">${item.name}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>口味：</label> 
-								<select class="form-control"  id="taste">
-									<c:forEach items="${milkTeaTastes}" var="item">
-										<option value="${item.id}#${item.name}">${item.name}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="form-group">
-								<label> 销售价格：</label> <input id="salePrice" name="salePrice"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 成本价格：</label> <input id="costPrice" name="salePrice"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 积分：</label> <input id="points" name="points"
-									class="form-control">
-							</div>
+						
+						<div class="col-md-7">
+							<section class="panel">
+								<div class="panel-body">
+									<form class="form-horizontal bucket-form" method="get">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">名称：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success">@</span> <input id="name" name="name" class="form-control" placeholder="请输入名称">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">产品编号：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success"><i class="fa fa-envelope"></i></span> <input id="productNumber"
+									                      name="productNumber" class="form-control" placeholder="请输入账户名">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">分类：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <select class="form-control"  id="classification">
+									                 <c:forEach items="${milkClas}" var="item">
+										             <option value="${item.id}#${item.name}">${item.name}</option>
+									                 </c:forEach>
+								                    </select> 
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">单位：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <select class="form-control" id="unit">
+									                  <c:forEach items="${milkTeaUnits}" var="item">
+										                <option value="${item.id}#${item.name}">${item.name}</option>
+									                  </c:forEach>
+								                     </select>
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">口味：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success"><i class="fa fa-envelope"></i></span> <select class="form-control"  id="taste">
+									                  <c:forEach items="${milkTeaTastes}" var="item">
+										              <option value="${item.id}#${item.name}">${item.name}</option>
+									                  </c:forEach>
+								                    </select>
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">销售价格：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+                                                    <span class="input-group-addon btn-info">￥</span><input id="salePrice" name="salePrice" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">成本价格：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+                                                    <span class="input-group-addon btn-info">￥</span><input id="costPrice" name="costPrice" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">积分：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+                                                    <span class="input-group-addon btn-info">￥</span><input id="points" name="points" class="form-control">
+												</div>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</section>
 						</div>
 
 					</div>
@@ -626,7 +674,6 @@
 	        initialPreviewConfig : [ {
 	        	caption : 'desert.jpg',
 	        	width : '120px',
-	        	url : '/localhost/avatar/delete',
 	        	key : 100,
 	        	extra : {
 	        		id : 100
