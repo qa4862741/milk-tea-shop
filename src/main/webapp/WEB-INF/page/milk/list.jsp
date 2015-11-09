@@ -10,6 +10,11 @@
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-reset.css"/>"
 	rel="stylesheet">
+	
+<link
+	href="<c:url value="/resources/js/jnotify/jNotify.jquery.css"/>"
+	media="all" rel="stylesheet" type="text/css" />
+	
 <link
 	href="<c:url value="/resources/font-awesome/css/font-awesome.css"/>"
 	rel="stylesheet" />
@@ -25,6 +30,8 @@
 <link
 	href="<c:url value="/resources/js/bootstrap-fileupload/fileinput.css"/>"
 	media="all" rel="stylesheet" type="text/css" />
+	
+
 </head>
 
 <body>
@@ -98,10 +105,9 @@
 													<td>${item.points}</td>
 													<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
-													</a> <a href="${basePath}/milk/delete?id=${item.id}"
-														style="padding-left: 10px">
-															<button class="btn btn btn-primary">删除</button>
-													</a></td>
+													</a> 
+															<button class="btn btn btn-primary deleteMilk"  idattr="${item.id}">删除</button>
+													</td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -450,7 +456,11 @@
 		type="text/javascript"></script>
 	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
 		type="text/javascript"></script>		
-		
+	<script src="<c:url value="/resources/js/bootbox.js"/>"
+		type="text/javascript"></script>
+
+	<script src="<c:url value="/resources/js/jnotify/jNotify.jquery.js"/>"
+		type="text/javascript"></script>
 	<script type="text/javascript">
 	 var add = true;
 	    var id;
@@ -488,6 +498,40 @@
 			    });	     
 			});
 		});
+		
+
+		$('.deleteMilk').each(function() {
+			$(this).click(function() {
+				 id = $(this).attr('idattr');
+			      bootbox.confirm({  
+			          buttons: {  
+			              confirm: {  
+			                  label: '确认',  
+			                  className: 'btn-info'  
+			              },  
+			              cancel: {  
+			                  label: '取消',  
+			                  className: 'btn-default'  
+			              }  
+			          },  
+			          message: '您确认删除选定的记录吗？',  
+			          callback: function(result) {  
+			              if(result) {  
+			            	   $.ajax({
+			       					type : "GET",
+			       					url : basePath + '/milk/delete?id=' + id,
+			       					async : true,
+			       					success : function(returnValue) {
+			       						showSuccess("删除选定的记录成功")
+			       					    location.reload();
+			       					}
+			       				}); 
+			              } 
+			          },  
+			          //title: "bootbox confirm也可以添加标题哦",  
+			          });
+			});
+		});
 
 		$('#saveChanges').click(function() {
              url = basePath + '/milk/add';
@@ -515,6 +559,8 @@
 			$.ajaxFileUpload({
 				type : "POST",
 				url : url,
+				fileElementId : 'addMilkImage',
+				dataType : 'text',
 				data : {
 					name : name,
 					productNumber : productNumber,
@@ -530,10 +576,21 @@
 				},
 
 				success : function(returnValue, textStatus) {
+					if(add==false){
+						showSuccess('更新奶茶成功！');
+					}else{
+						showSuccess('添加奶茶成功！');
+					}
+					showSuccess('添加奶茶成功！');
 					location.reload();
 				},
 
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					if(add==false){
+						showSuccess('更新奶茶成功！');
+					}else{
+						showSuccess('添加奶茶成功！');
+					}
 					location.reload();
 				},
 
@@ -543,26 +600,39 @@
 			});
 			$('#addMilkTeaModal').modal('hide');
 		});
+		
+		function showSuccess(tip){
+			 jSuccess(tip,{
+      		  autoHide : false,                // 是否自动隐藏提示条
+      		  clickOverlay : false,            // 是否单击遮罩层才关闭提示条
+      		  MinWidth : 200,                    // 最小宽度
+      		  TimeShown : 1500,                 // 显示时间：毫秒
+      		  ShowTimeEffect : 200,             // 显示到页面上所需时间：毫秒
+      		  HideTimeEffect : 200,             // 从页面上消失所需时间：毫秒
+      		  LongTrip : 15,                    // 当提示条显示和隐藏时的位移
+      		  HorizontalPosition : "center",     // 水平位置:left, center, right
+      		  VerticalPosition : "center",     // 垂直位置：top, center, bottom
+      		  ShowOverlay : true,                // 是否显示遮罩层
+      		  ColorOverlay : "#000",            // 设置遮罩层的颜色
+      		  OpacityOverlay : 0.3,            // 设置遮罩层的透明度
+      	  });
+		}
 
-		$("#addMilkImage")
-				.fileinput(
-						{
-							maxFileCount : 1,
-							showUpload : false,
-							initialPreview : [
-									"<img src='"+basePath+"/resources/images/gallery/image5.jpg' class='file-preview-image' alt='Desert' title='Desert'>", ],
-
-							initialPreviewConfig : [ {
-								caption : 'desert.jpg',
-								width : '120px',
-								url : '/localhost/avatar/delete',
-								key : 100,
-								extra : {
-									id : 100
-								}
-							} ]
-
-						});
+		$("#addMilkImage").fileinput({
+	        maxFileCount : 1,
+	        showUpload : false,
+	        initialPreview : ["<img src='"+basePath+"/resources/images/gallery/image5.jpg' class='file-preview-image' alt='Desert' title='Desert'>", ],
+            
+	        initialPreviewConfig : [ {
+	        	caption : 'desert.jpg',
+	        	width : '120px',
+	        	url : '/localhost/avatar/delete',
+	        	key : 100,
+	        	extra : {
+	        		id : 100
+	        	}
+	        } ]
+		});
 	</script>
 </body>
 </html>

@@ -2,6 +2,8 @@ package com.yezic.com.entity;
 
 import java.util.Date;
 
+import com.yezic.com.common.AccountLockType;
+
 public class User {
 	private int id;
 	private String userName;
@@ -10,6 +12,7 @@ public class User {
 	private String credentialsSalt;
 	private String description;
 	private String locked;
+	private String lockedDescription;
 	private Date createTime;
 	private String deletestatus;
     private int employId;
@@ -93,5 +96,15 @@ public class User {
 	public void setEmployId(int employId) {
 		this.employId = employId;
 	}
+
+	public String getLockedDescription() {
+		return AccountLockType.getTextByKey(this.locked);
+	}
+
+	public void setLockedDescription(String lockedDescription) {
+		this.lockedDescription = lockedDescription;
+	}
+	
+	
 
 }

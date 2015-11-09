@@ -198,7 +198,7 @@
 				</li>
 				
 				<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-envelope"></i> <span>销售管理 </span>
+						class="fa fa-shopping-cart"></i> <span>销售管理 </span>
 				</a>
 					<ul class="sub">
 						<li><a href="${basePath}/sales/list">销售列表</a></li>
@@ -207,7 +207,7 @@
 				</li>
 				
 				<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-envelope"></i> <span>会员管理 </span>
+						class="fa  fa-vimeo-square"></i> <span>会员管理 </span>
 				</a>
 					<ul class="sub">
 						<li><a href="${basePath}/vip/list">会员管理</a></li>
@@ -221,19 +221,30 @@
 					</ul></li>
 					
 					<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-envelope"></i> <span>员工管理 </span>
+						class="fa fa-male"></i> <span>员工管理 </span>
 				</a>
 					<ul class="sub">
 						<li><a href="${basePath}/employee/list">员工管理</a></li>
 					</ul></li>
 					
 					<li class="sub-menu"><a href="javascript:;"> <i
-						class="fa fa-envelope"></i> <span>用户管理 </span>
+						class="fa fa-user"></i> <span>用户权限管理 </span>
 				</a>
 					<ul class="sub">
+					    <li><a href="${basePath}/user/list">用户管理</a></li>
 						<li><a href="${basePath}/role/list">角色管理</a></li>
 						<li><a href="${basePath}/resources/list">资源管理</a></li>
 					</ul></li>
+					
+					<li class="sub-menu"><a href="javascript:;"> <i
+						class="fa fa-bar-chart-o"></i> <span>报表管理 </span>
+				</a>
+					<ul class="sub">
+					    <li><a href="${basePath}/reports/monthSaleReports">奶茶销量月度报表</a></li>
+					</ul></li>
+					
+					
+					
 			</ul>
 		</div>
 		<!-- sidebar menu end-->

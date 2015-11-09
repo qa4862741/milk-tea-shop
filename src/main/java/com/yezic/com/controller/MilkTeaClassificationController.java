@@ -26,6 +26,9 @@ public class MilkTeaClassificationController extends BaseController {
 
 	@RequestMapping("list")
 	public void list(MilkTeaClassification milkTeaCla, Model model) {
+		logger.info("send to logstash");
+		logger.debug("send to logstash");
+		logger.error("send to logstash");
 		List<MilkTeaClassification> milkTeaClassificationList = milkTeaClassificationService.getAll(milkTeaCla);
 		model.addAttribute("milkTeaClassificationList", milkTeaClassificationList);
 	}

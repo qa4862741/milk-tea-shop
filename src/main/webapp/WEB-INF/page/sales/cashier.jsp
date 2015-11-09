@@ -190,59 +190,105 @@
 		<!-- page end-->
 	</div>
 	
-		<!-- Modal -->
-		<div class="modal fade" id="cashierModal" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title">收银</h4>
-					</div>
-
-					<div class="modal-body row">
-						<div class="col-md-5">
-							<div class="form-group">
-								<label> 应收金额：</label> <input id="shouldPay" name="name"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 现金付费：</label> <input id="actulPay"
-									name="actulPay" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>储蓄卡付费：</label> 
-								<input id="productNumber"
-									name="productNumber" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 信用卡付费：</label> 
-								<input id="productNumber"
-									name="productNumber" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>代金券付费：</label> 
-								<input id="productNumber"
-									name="productNumber" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 找零：</label> <input id="exchange" name="exchange"
-									class="form-control">
-							</div>
-						</div>
-
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveChanges">保存</button>
-					</div>
-
+	<!-- Modal -->
+	<div class="modal fade" id="cashierModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">收银</h4>
 				</div>
+
+				<div class="modal-body row">
+					<div class="col-md-10">
+						<section class="panel">
+							<div class="panel-body">
+								<form class="form-horizontal bucket-form" method="get">
+									<div class="form-group">
+										<label class="col-sm-3 control-label col-lg-3">应收金额：</label>
+										<div class="col-lg-9">
+											<div class="input-group m-bot15">
+
+												<span class="input-group-addon btn-success">￥</span> <input
+													type="text" id="shouldPay" class="form-control"> <span
+													class="input-group-addon btn-info">元</span> 
+													
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label col-lg-3">现金付费：</label>
+										<div class="col-lg-9">
+											<div class="input-group m-bot15">
+											    <span class="input-group-addon btn-success">￥</span> <input
+													type="text" id="actulPay" class="form-control"> <span
+													class="input-group-addon btn-info">元</span> 
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label col-lg-3">储蓄卡付费：</label>
+										<div class="col-lg-9">
+											<div class="input-group m-bot15">
+												  <span class="input-group-addon btn-success">￥</span> <input
+													type="text" class="form-control"> <span
+													class="input-group-addon btn-info">元</span> 
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label col-lg-3">信用卡付费：</label>
+										<div class="col-lg-9">
+											<div class="input-group m-bot15">
+												  <span class="input-group-addon btn-success">￥</span> <input
+													type="text" class="form-control"> <span
+													class="input-group-addon btn-info">元</span> 
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label col-lg-3">代金券付费：</label>
+										<div class="col-lg-9">
+											<div class="input-group m-bot15">
+												  <span class="input-group-addon btn-success">￥</span> <input
+													type="text" class="form-control"> <span
+													class="input-group-addon btn-info">元</span> 
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label col-lg-3">找零：</label>
+										<div class="col-lg-9">
+											<div class="input-group m-bot15">
+											      <span class="input-group-addon btn-success">￥</span> <input
+													type="text" id="exchange" class="form-control"> <span
+													class="input-group-addon btn-info">元</span> 
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</section>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						id="saveChanges">保存</button>
+				</div>
+
 			</div>
 		</div>
-		<!-- modal -->
+	</div>
+	<!-- modal -->
 
 	<!-- page end-->
 

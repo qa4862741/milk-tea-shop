@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jNotify——优秀的jQuery结果提示框插件_我爱模板 www.5imoban.net</title>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<style type="text/css">
+.demo{width:450px; height:300px; margin:100px auto}
+.demo p{line-height:42px; height:42px; font-size:18px}
+</style>
+<!--引入开始-->
+<link rel="stylesheet" type="text/css" href="jNotify.jquery.css" />
+<script type="text/javascript" src="http://www.5imoban.net/download/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="jNotify.jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("a.success").click(function(){
+		jSuccess("恭喜，操作成功! + <strong>10</strong> 金币!",{
+			VerticalPosition : 'center',
+			HorizontalPosition : 'center'
+		});
+	});
+	$("a.notice").click(function(){
+		jNotify("注意：请完善你的<strong>个人资料！</strong>");
+	});
+	$("a.error").click(function(){
+		jError("操作失败，请重试!!");
+	});
+	$("a.three").click(function(){
+		jSuccess("操作成功，2秒后显示下一个提示框!!",{
+			TimeShown : 2000,
+			onClosed:function(){
+				jNotify("注意：点击这里显示下一个提示框",{
+					VerticalPosition : 'top',
+					autoHide : false,
+					onClosed:function(){
+						jError("出错啦! 演示结束,<br /> 请点击背景层关闭提示框。",{
+							   clickOverlay : true,
+							   autoHide : false,
+							   HorizontalPosition : 'left'
+						});
+					}
+				});
+			}
+		});
+	});
+});
+</script>
+<!--引入结束-->
+<style>
+body{margin:0; padding:0;}
+ul#wimoban_nav{padding-left:50px; margin-bottom:10px; border-bottom:2px solid #ccc; overflow:hidden; _zoom:1;}
+ul#wimoban_nav li{float:left; display:inline; margin:10px;}
+ul#wimoban_nav li a{display:block; font-size:16px;}
+ul#wimoban_nav li a,#wimoban_p,#wimoban_p a{color:#fff; font-family:"微软雅黑";}
+#wimoban_p,#wimoban_p a{color:#000;}
+ul#wimoban_nav li a:hover,#wimoban_p a:hover{color:red;}
+#wimoban_p{text-align:center; font-size:14px; clear:both;}
+</style>
+</head>	
+<body oncontextmenu='return false' ondragstart='return false'>
+<ul id="wimoban_nav">
+    <li><a title="返回网站首页" href="http://www.5imoban.net/">首页</a></li>
+    <li><a title="网页PSD模板下载" href="http://www.5imoban.net/psdmoban/">PSD模板</a></li>
+    <li><a title="网页CSS模板下载" href="http://www.5imoban.net/cssmoban/">CSS模板</a></li>
+    <li><a title="网页特效、网页插件" href="http://www.5imoban.net/texiao/">特效插件</a></li>
+    <li><a title="整站源码下载" href="http://www.5imoban.net/yuanma/">源码下载</a></li>
+    <li><a title="酷站欣赏" href="http://www.5imoban.net/kuzhan/">酷站欣赏</a></li>
+    <li><a title="建站资源" href="http://www.5imoban.net/ziyuan/">建站资源</a></li>
+    <li><a title="建站视频教程、建站教程" href="http://www.5imoban.net/jiaocheng/">建站教程</a></li>
+    <li><a title="建站心得、互联网事、心境之旅" href="http://www.5imoban.net/article/">心境之旅</a></li>
+</ul>
+<!-- 代码开始 -->
+<div id="main">
+<h2 class="top_title"><a href="http://www.5imoban.net">jNotify——优秀的jQuery结果提示框插件</a></h2>
+<div class="demo">
+	<p><a href="#" class="success">点击查看操作成功提示</a></p>
+	<p><a href="#" class="notice">点击查看操作提醒</a></p>
+	<p><a href="#" class="error">点击查看操作失败提示</a></p><br />
+	<p><a href="#" class="three">点击查看依次弹出操作成功、提醒、失败三个提示框</a></p>
+</div>
+<!-- 代码结束 -->
+<div id="wimoban_p">
+    <p>来代码整理：<a href="http://www.5imoban.net/" title="模板网" alt="模板网">我爱模板网</a></p>
+    <p>＊尊重他人劳动成果，转载请自觉注明出处！注：此代码仅供学习交流，请勿用于商业用途。</p>
+    <p></p>
+</div>
+</body>
+</html>
