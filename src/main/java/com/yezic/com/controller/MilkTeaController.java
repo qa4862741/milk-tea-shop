@@ -109,13 +109,36 @@ public class MilkTeaController extends BaseController {
 		}
 		return "redirect:/milk/list";
 	}
+	
+	
 	@RequestMapping("update")
-	public String update(MilkTea milkTea) {
-		try {
-			milkTeaService.update(milkTea);
-		} catch (Exception e) {
-			logger.error("删除出现异常！" + e.getMessage(), e);
+	@ResponseBody
+	public Object update(MilkTea milkTea, MultipartHttpServletRequest multipartRequest) {
+		String path = ServletContextUtil.getServletContext().getRealPath("/") + "resources/fileUpload" + File.separator;
+		File pathFile = new File(path);
+		if (!pathFile.exists()) {
+			pathFile.mkdirs();
 		}
-		return "redirect:/milk/list";
+
+		try {
+			String fileName = null;
+			byte[] data = null;
+			Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+			for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
+				CommonsMultipartFile mf = (CommonsMultipartFile) entity.getValue();
+				fileName = mf.getFileItem().getName();
+				data = mf.getBytes();
+				break;
+			}
+			if(data==null||data.length==0){
+				milkTeaService.update(milkTea);
+			}else{
+				milkTeaService.update(fileName,path , data,multipartRequest.getAttribute("basePath")+"/resources/fileUpload/", milkTea);
+			}
+		} catch (Exception e) {
+			logger.error("更新出现异常！" + e.getMessage(), e);
+			return new SimpleReturnVo(ResponseCode.FAIL, "更新出现异常！");
+		}
+		return new SimpleReturnVo(ResponseCode.SUCCESS, "成功！");
 	}
 }

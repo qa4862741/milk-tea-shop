@@ -394,6 +394,7 @@
 											<label class="col-sm-3 control-label col-lg-3">名称：</label>
 											<div class="col-lg-9">
 												<div class="input-group m-bot15">
+												    <input id="milkId" name="milkId" type="hidden">
 													<span class="input-group-addon btn-success">@</span> <input id="name" name="name" class="form-control" placeholder="请输入名称">
 												</div>
 											</div>
@@ -510,6 +511,23 @@
 	<script src="<c:url value="/resources/js/jnotify/jNotify.jquery.js"/>"
 		type="text/javascript"></script>
 	<script type="text/javascript">
+	 $("#addMilkImage").fileinput({
+        maxFileCount : 1,
+        showUpload : false,
+        initialPreview : ["<img src='"+basePath+"/resources/images/gallery/image5.jpg' class='file-preview-image' alt='Desert' title='Desert'>", ],
+        
+        initialPreviewConfig : [ {
+        	caption : 'desert.jpg',
+        	width : '120px',
+        	key : 100,
+        	extra : {
+        		id : 100
+        	}
+        } ]
+	 });
+	 
+	 $('.kv-file-remove btn btn-xs btn-default disabled').remove();
+	 
 	 var add = true;
 	    var id;
 		jQuery(document).ready(function() {
@@ -530,22 +548,42 @@
 					url : basePath + '/milk/getOneById?id='+id,
 					async: false, 
 					success : function(returnValue) {
+						$('.form-control').val("");
 						$('#name').val(returnValue.name);
 						$('#productNumber').val(returnValue.productNumber);
-						$('#unit').val(returnValue.unit);
 						$('#salePrice').val(returnValue.salePrice);
 						$('#costPrice').val(returnValue.costPrice);
 						$('#points').val(returnValue.points);
-						$('#classificationId').val(returnValue.classificationId);
-						$('#classification').val(returnValue.classification);
-						$('#tasteId').val(returnValue.salePrice);
-						$('#taste').val(returnValue.salePrice);
-						$('#unitId').val(returnValue.salePrice);
-						$('#unit').val(returnValue.salePrice);
+						$('#milkId').val(returnValue.id);
+                         
+						setSelect('classification',returnValue.classificationId+"#"+returnValue.classification);
+						setSelect('taste',returnValue.tasteId+"#"+returnValue.taste);
+						setSelect('unit',returnValue.unitId+"#"+returnValue.unit);
+						$('#classification').val(returnValue.classificationId+"#"+returnValue.classification);
+						$('#taste').val(returnValue.tasteId+"#"+returnValue.taste);
+						$('#unit').val(returnValue.unitId+"#"+returnValue.unit);
+                        $('.file-preview-image').attr('src',returnValue.imagePath);
+                        var index = returnValue.imagePath.lastIndexOf('/');
+                        var fileName = returnValue.imagePath.substring(index+1,returnValue.imagePath.length);
+                        $('.file-footer-caption').html(fileName);
+                        $('.file-caption-name').html("<span class='glyphicon glyphicon-file kv-caption-icon'></span>"+fileName);
+                      
 					}
 			    });	     
 			});
 		});
+		
+		function setSelect(id,selected){
+			var classificationOptions = $('#'+id).children();
+			for(var i=0;i<classificationOptions.length;i++){
+				var option = classificationOptions[i];
+				if($(option).val()==selected){
+					$(option).attr("selected", true);
+				}else{
+					$(option).removeAttr("selected");
+				}
+			}
+		}
 		
 
 		$('.deleteMilk').each(function() {
@@ -582,10 +620,11 @@
 		});
 
 		$('#saveChanges').click(function() {
-             url = basePath + '/milk/add';
-			
+            url = basePath + '/milk/add';
+			var id=0;
 			if(add==false){
 				url = basePath + '/milk/update';
+				id = $('#milkId').val();
 			}
 			var name = $('#name').val();
 			var productNumber = $('#productNumber').val();
@@ -604,12 +643,15 @@
 			var unitId = $('#unit').val().split('#')[0];
 			var unit = $('#unit').val().split('#')[1];
 			
+			
+			
 			$.ajaxFileUpload({
 				type : "POST",
 				url : url,
 				fileElementId : 'addMilkImage',
 				dataType : 'text',
 				data : {
+					id:id,
 					name : name,
 					productNumber : productNumber,
 					unit : unit,
@@ -666,20 +708,7 @@
       	  });
 		}
 
-		$("#addMilkImage").fileinput({
-	        maxFileCount : 1,
-	        showUpload : false,
-	        initialPreview : ["<img src='"+basePath+"/resources/images/gallery/image5.jpg' class='file-preview-image' alt='Desert' title='Desert'>", ],
-            
-	        initialPreviewConfig : [ {
-	        	caption : 'desert.jpg',
-	        	width : '120px',
-	        	key : 100,
-	        	extra : {
-	        		id : 100
-	        	}
-	        } ]
-		});
+		
 	</script>
 </body>
 </html>

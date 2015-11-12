@@ -340,7 +340,7 @@
 						if(idValue==null||idValue==undefined){
 							var upDown = 
 							"<div class='input-group input-small' style='width:80px;'>"
-                              +"<input type='text' value='1' class='spinner-input form-control countValue' id='countValue"+id+"'>"
+                              +"<input type='text' value='1' count='1' class='spinner-input form-control countValue' id='countValue"+id+"'>"
                               +"<div class='spinner-buttons input-group-btn btn-group-vertical'>"
                                 +"<button type='button' class='btn spinner-up btn-xs btn-info addCount' id='addCount"+id+"'>"
                                     +"<i class='fa fa-angle-up'></i>" 
@@ -372,9 +372,29 @@
 							 var sumCount = $('#sumCount').html();
 							 $('#sumCount').html(parseInt(sumCount)+1); 
 							 
+							 $('#countValue'+id).bind("blur",function(){
+								 var countBefore = $('#countValue'+id).attr('count');
+								 var countValEle = $('#countValue'+id);
+								 var count = $('#countValue'+id).val();
+								 $('#countValue'+id).attr('count',count);
+								 var trTail = countValEle.parent().parent().parent();
+								 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
+									
+									var payMoneyEle = trTail.find('.payMoney');
+									var payMoney = payMoneyEle.html().substring(1);
+									payMoneyEle.html('￥'+(count*parseFloat(salesTrUnitPrice)));
+									
+								    var sumAmount = $('#sumCash').html().substring(1);
+									$('#sumCash').html('￥'+(parseFloat(sumAmount)+(count-countBefore)*parseFloat(salesTrUnitPrice)));
+									
+									var sumCount = $('#sumCount').html();
+									$('#sumCount').html(parseInt(sumCount)+parseInt(count)-parseInt(countBefore)); 
+							 });
+							 
 							 $('#addCount'+id).click(function(){
 								 var countValEle = $('#countValue'+id);
 								 countValEle.val(parseInt(countValEle.val())+1);
+								 countValEle.attr('count',parseInt(countValEle.val())+1);
 								 
 								 var trTail = countValEle.parent().parent().parent();
 								 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
@@ -394,6 +414,8 @@
 								 var countValEle = $('#countValue'+id);
 								 if(parseInt(countValEle.val())!=1){
 									 countValEle.val(parseInt(countValEle.val())-1);
+									 countValEle.attr('count',parseInt(countValEle.val())-1);
+									 
 									 var trTail = countValEle.parent().parent().parent();
 									 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
 										
@@ -415,6 +437,7 @@
 							var countEle = trTail.find('.salesTrCount').find('#countValue'+id);
 							var count = countEle.val();
 							countEle.val(parseInt(count)+1);
+							countEle.attr('count',parseInt(count)+1);
 							
 							var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
 							

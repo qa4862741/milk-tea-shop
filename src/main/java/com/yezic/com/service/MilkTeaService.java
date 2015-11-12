@@ -40,7 +40,18 @@ public class MilkTeaService extends BaseService<MilkTea> {
 		zoomOut(file, new File(scale));
 		super.insert(milkTea);
 	}
+	
+	public void update(String fileName, String savePath, byte[] data, String accessPath, MilkTea milkTea)
+			throws IOException {
+		File file = new File(savePath + fileName);
+		String scale = savePath + "scale_" + fileName;
+		milkTea.setImagePath(accessPath + fileName);
+		milkTea.setScaledImagePath(scale);
+		FileCopyUtils.copy(data, file);
 
+		zoomOut(file, new File(scale));
+		super.update(milkTea);
+	}
 	public static void zoomOut(File source, File dest) throws IOException {
 		BufferedImage srcBufferImage = ImageIO.read(new FileInputStream(source));
 
