@@ -169,11 +169,6 @@
 					<li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
 				</ul></li>
 			<!-- user login dropdown end -->
-			<li>
-				<div class="toggle-right-box">
-					<div class="fa fa-bars"></div>
-				</div>
-			</li>
 		</ul>
 		<!--search & user info end-->
 	</div>
