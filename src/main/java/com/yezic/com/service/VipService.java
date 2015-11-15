@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 
+import org.aspectj.weaver.ast.Var;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
@@ -32,4 +33,7 @@ public class VipService extends BaseService<Vip> {
 		super.insert(vip);
 	}
 
+	public Vip getOneByTelId(String telid) {
+	   return ((VipMapper) getMapper()).getOneByTelId(telid);
+	}
 }

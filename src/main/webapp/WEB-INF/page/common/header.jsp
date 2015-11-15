@@ -206,6 +206,7 @@
 				</a>
 					<ul class="sub">
 						<li><a href="${basePath}/vip/list" class="clickItem" id="vipList">会员管理</a></li>
+						<li><a href="${basePath}/vip/recharge" class="clickItem" id="viprecharge">会员充值</a></li>
 					</ul></li>
 					
 					<li class="sub-menu"><a href="javascript:;" class="managers"> <i

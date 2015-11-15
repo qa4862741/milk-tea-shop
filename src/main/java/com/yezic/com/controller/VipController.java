@@ -53,6 +53,18 @@ public class VipController extends BaseController{
 		}
 		return vip;
 	}
+	
+	@RequestMapping("getOneByTelId")
+	@ResponseBody
+	public Object getOneByTelId(String telid) {
+		Vip vip = null;
+		try {
+			vip = vipService.getOneByTelId(telid);
+		} catch (Exception e) {
+			logger.error("删除出现异常！" + e.getMessage(), e);
+		}
+		return vip;
+	}
 
 	@RequestMapping("delete")
 	public String delete(int id) {

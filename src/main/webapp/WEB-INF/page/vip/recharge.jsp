@@ -41,7 +41,7 @@
 					<div class="col-sm-12">
 						<section class="panel">
 							<header class="panel-heading">
-								<strong>会员充值</strong><span class="tools pull-right"> <a
+								<strong>会员列表</strong><span class="tools pull-right"> <a
 									href="javascript:;" class="fa fa-chevron-down"></a> <a
 									href="javascript:;" class="fa fa-cog"></a> <a
 									href="javascript:;" class="fa fa-times"></a>
@@ -51,16 +51,23 @@
 								<div class="adv-table editable-table ">
 									<div class="clearfix">
 										<div class="btn-group">
-										<label class="col-sm-3 control-label col-lg-3">联系方式：</label>
-											<div class="col-lg-9">
-												<div class="input-group m-bot15">
-												    <input id="telId" name="telId" type="hidden">
-													</div>
-											</div>
-											<a href="#addMilkTeaModal" data-toggle="modal" idattr="${telId}" class="searchtelContent">
-															<button class="btn btn-success">查询</button></a>
+											<a href="#addMilkTeaModal" data-toggle="modal" id="addMilkButton">
+												<button id="editable-sample_new" class="btn btn-primary">
+													添加 <i class="fa fa-plus"></i>
+												</button>
+											</a>
 										</div>
-										
+										<div class="btn-group pull-right">
+											<button class="btn btn-default dropdown-toggle"
+												data-toggle="dropdown">
+												Tools <i class="fa fa-angle-down"></i>
+											</button>
+											<ul class="dropdown-menu pull-right">
+												<li><a href="#">Print</a></li>
+												<li><a href="#">Save as PDF</a></li>
+												<li><a href="#">Export to Excel</a></li>
+											</ul>
+										</div>
 									</div>
 									<div class="space15"></div>
 									<table class="table table-striped table-hover table-bordered"
@@ -181,21 +188,6 @@
 				$.ajax({
 					type : "GET",
 					url : basePath + '/vip/getOneById?id='+id,
-					async: false, 
-					success : function(returnValue) {
-						$('#name').val(returnValue.name);
-					}
-			    });	     
-			});
-		});
-		
-		$('.searchtelContent').each(function(){
-			$(this).click(function(){
-				telid = $(this).attr('idattr');
-				
-				$.ajax({
-					type : "GET",
-					url : basePath + '/vip/getOneById?telid='+telid,
 					async: false, 
 					success : function(returnValue) {
 						$('#name').val(returnValue.name);

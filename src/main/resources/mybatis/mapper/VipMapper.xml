@@ -79,4 +79,11 @@
 		<include refid="Base_Table" />
 		where id = #{id}
 	</select>
+	<select id="getOneByTelId" resultMap="BaseResultMap" parameterType="Vip">
+		select
+		<include refid="Base_Column_List" />
+		from
+		<include refid="Base_Table" />
+		where tel = #{tel}
+	</select>
 </mapper>
