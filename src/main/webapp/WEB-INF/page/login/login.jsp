@@ -65,6 +65,22 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<div class="controls">
+					<div class="main_input_box">
+						<span class="add-on bg_ly"><img
+							src="<c:url value="/resources/login/22.png"/>"
+							alt="请选择门店"></span> 
+							<select name="storeId"  style="height: 32px;width:295px; margin-bottom: 0px;">
+								 <c:forEach items="${storesList}" var="item">
+									<option value="${item.id}">${item.name}</option>
+								 </c:forEach>
+						    </select>
+					</div>
+				</div>
+			</div>
+			
 			<div class="form-actions">
 				<span class="pull-left" style="width: 33%"><a href="#"
 					class="flip-link btn btn-info" id="to-recover">忘记密码？</a></span>  <span

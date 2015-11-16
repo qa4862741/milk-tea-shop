@@ -1,5 +1,7 @@
 package com.yezic.com.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,9 +13,15 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.yezic.com.entity.Stores;
+import com.yezic.com.entity.User;
+import com.yezic.com.service.EmployeeService;
+import com.yezic.com.service.StoresService;
+import com.yezic.com.service.UserService;
 import com.yezic.com.shiro.realm.MyRealm;
 
 @Controller
@@ -23,8 +31,19 @@ public class LoginController extends BaseController {
 	@Resource 
 	private MyRealm myRealm;
 	
+	@Resource
+	private StoresService storesService;
+	
+	@Resource
+	private UserService userService;
+	
+	@Resource
+	private EmployeeService employeeService;
+	
 	@RequestMapping("login")
-	public void login() {
+	public void login(Model model) {
+		List<Stores> storesList = storesService.getAll(new Stores());
+		model.addAttribute("storesList", storesList);
 	}
 
 	@RequestMapping("denied")
@@ -32,7 +51,7 @@ public class LoginController extends BaseController {
 	}
 	
 	@RequestMapping(value = "doLogin", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
-	public String login(String userName, String password, HttpServletRequest request) {
+	public String login(String userName, String password,int storeId, HttpServletRequest request) {
 		try {
 			if (!request.getMethod().equals("POST")) {
 				request.setAttribute("error", "支持POST方法提交！");
@@ -62,6 +81,8 @@ public class LoginController extends BaseController {
 				request.setAttribute("error", "用户或密码不正确！");
 				return "redirect:/login/login";
 			}
+			setAttributeToSession(userName, storeId, user);
+			
 			//Session session = SecurityUtils.getSubject().getSession();
 			/*userLogin.put("userId", session.getAttribute("userSessionId"));
 			userLogin.put("accountName", username);
@@ -74,5 +95,13 @@ public class LoginController extends BaseController {
 			return "redirect:/login/login";
 		}
 		return "redirect:/";
+	}
+
+	private void setAttributeToSession(String userName, int storeId, Subject user) {
+		Stores stores = storesService.getOneById(storeId);
+		SecurityUtils.getSubject().getSession().setAttribute("stores", stores);
+		List<User> userEntity = userService.findUserByName(userName);
+		SecurityUtils.getSubject().getSession().setAttribute("user", user);
+		SecurityUtils.getSubject().getSession().setAttribute("employ", employeeService.getOneById(userEntity.get(0).getEmployId()));
 	}
 }

@@ -11,8 +11,8 @@ var Script = function () {
         // validate signup form on keyup and submit
         $("#signupForm").validate({
             rules: {
-                firstname: "required",
-                lastname: "required",
+                name: "required",
+                productNumber: "required",
                 username: {
                     required: true,
                     minlength: 2

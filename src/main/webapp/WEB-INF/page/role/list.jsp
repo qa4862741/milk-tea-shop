@@ -75,7 +75,6 @@
 										<thead>
 											<tr>
 												<th>名称</th>
-												<th>状态</th>
 												<th>描述</th>
 												<th>角色键</th>
 												<th>操作</th>
@@ -85,9 +84,8 @@
 											<c:forEach items="${roleList}" var="item">
 												<tr class="">
 													<td>${item.name}</td>
-													<td>${item.state}</td>
 													<td>${item.description}</td>
-                                                    <td>￥${item.roleKey}</td>
+                                                    <td>${item.roleKey}</td>
 															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
 													</a> <a href="${basePath}/role/delete?id=${item.id}" style="padding-left: 10px">
@@ -359,12 +357,8 @@
 					<div class="modal-body row">
 						<div class="col-md-5">
 							<div class="form-group">
-								<label> 姓名：</label> <input id="name" name="name"
+								<label> 名称：</label> <input id="name" name="name"
 									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 状态：</label> <input id="state"
-									name="state" class="form-control">
 							</div>
 							<div class="form-group">
 								<label> 角色键：</label> <input id="roleKey" name="roleKey"

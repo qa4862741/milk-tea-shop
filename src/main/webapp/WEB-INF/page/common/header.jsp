@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
@@ -155,13 +156,16 @@
 	<div class="top-nav clearfix">
 		<!--search & user info start-->
 		<ul class="nav pull-right top-menu">
-			<li><input type="text" class="form-control search"
-				placeholder=" Search"></li>
+			<li class="dropdown"><a data-toggle="dropdown"
+				class="dropdown-toggle" href="#"> <img alt=""
+					src="<c:url value="/resources/images/gallery/image2.jpg"/>"> <span class="username">${stores.name}</span> <b class="" ></b>
+			</a></li>
+		    <li>&nbsp;&nbsp;&nbsp;&nbsp;
+			</li>
 			<!-- user login dropdown start-->
 			<li class="dropdown"><a data-toggle="dropdown"
 				class="dropdown-toggle" href="#"> <img alt=""
-					src="<c:url value="/resources/images/avatar1_small.jpg"/>"> <span class="username">John
-						Doe</span> <b class="caret"></b>
+					src="<c:url value="/resources/images/avatar1_small.jpg"/>"> <span class="username">${employ.name}</span> <b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu extended logout">
 					<li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
@@ -229,7 +233,10 @@
 					<ul class="sub">
 					    <li><a href="${basePath}/user/list" class="clickItem"  id="userList">用户管理</a></li>
 						<li><a href="${basePath}/role/list" class="clickItem"  id="roleList">角色管理</a></li>
-						<li><a href="${basePath}/resources/list" class="clickItem"  id="resourcesList">资源管理</a></li>
+						<shiro:hasPermission name="resourcesManager"> 
+                           <li><a href="${basePath}/resources/list" class="clickItem"  id="resourcesList">资源管理</a></li>
+                        </shiro:hasPermission>
+						
 					</ul></li>
 					
 					<li class="sub-menu">

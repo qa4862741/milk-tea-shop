@@ -1,5 +1,7 @@
 package com.yezic.com.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +31,10 @@ public class UserService extends BaseService<User> {
 		entity.setCredentialsSalt(salt);
 		entity.setPassword(password);
 		return super.insert(entity);
+	}
+
+	public List<User> findUserByName(String userName) {
+		return userMapper.findUserByName(userName);
 	}
 
 }

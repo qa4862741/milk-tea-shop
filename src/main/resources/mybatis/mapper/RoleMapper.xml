@@ -71,7 +71,7 @@
 	<select id="getAll" resultMap="BaseResultMap" parameterType="Role">
 		<include refid="baseQuery" />
 	</select>
-	<select id="getOneById" resultMap="BaseResultMap" parameterType="Role">
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="int">
 		select
 		<include refid="Base_Column_List" />
 		from

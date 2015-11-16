@@ -12,11 +12,7 @@
 <script src="<c:url value="/resources/js/easypiechart/jquery.easypiechart.js"/>"></script>
 <!--Sparkline Chart-->
 <script src="<c:url value="/resources/js/sparkline/jquery.sparkline.js"/>"></script>
-<!--jQuery Flot Chart-->
-<script src="<c:url value="/resources/js/flot-chart/jquery.flot.js"/>"></script>
-<script src="<c:url value="/resources/js/flot-chart/jquery.flot.tooltip.min.js"/>"></script>
-<script src="<c:url value="/resources/js/flot-chart/jquery.flot.resize.js"/>"></script>
-<script src="<c:url value="/resources/js/flot-chart/jquery.flot.pie.resize.js"/>"></script>
+
 
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="<c:url value="/resources/js/advanced-datatable/js/jquery.dataTables.js"/>"></script>
@@ -29,5 +25,5 @@
 
 <script type="text/javascript">
     $('#'+activeId).parent().addClass('active');
-    $('#'+activeId).parent().parent().parent().find('.managers').addClass('active');
+    $('#'+activeId).parent().parent().parent().find('.managers').addClass('active'); 
 </script>
