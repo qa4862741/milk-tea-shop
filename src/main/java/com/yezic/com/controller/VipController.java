@@ -24,6 +24,10 @@ public class VipController extends BaseController{
 	@Resource
 	private VipService vipService;
 
+	@RequestMapping("recharge")
+	public void recharge() {
+	}
+	
 	@RequestMapping("list")
 	public void list(Vip vip, Model model) {
 		List<Vip> vipList = vipService.getAll(vip);
