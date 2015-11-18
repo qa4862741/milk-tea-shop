@@ -55,7 +55,7 @@
 								<label> 联系方式：</label> <input id="telId"
 									name="telId" class="form-control">
 							</div>
-											<a href="#addMilkTeaModal" data-toggle="modal" idattr="${telId}" class="updateContent">
+											<a href="#addMilkTeaModal" data-toggle="modal" idattr="11" class="updateContent">
 															<button class="btn btn-success">修改</button></a>
 										</div>
 									</div>
