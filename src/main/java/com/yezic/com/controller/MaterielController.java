@@ -23,10 +23,6 @@ public class MaterielController extends BaseController{
 
 	@Resource
 	private MaterielService materielServiceService;
-
-	@RequestMapping("recharge")
-	public void recharge() {
-	}
 	
 	@RequestMapping("list")
 	public void list(Materiel materiel, Model model) {

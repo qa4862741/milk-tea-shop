@@ -248,7 +248,14 @@
 					  </ul>
 					</li>
 					
-					
+					<li class="sub-menu">
+					  <a href="javascript:;"  class="managers"> 
+					     <i class="fa fa-bar-chart-o"></i> <span>物料管理 </span>
+				      </a>
+				      <ul class="sub">
+					    <li><a href="${basePath}/materiel/list" class="clickItem"  id="materiel">物料管理</a></li>
+					  </ul>
+					</li>
 					
 			</ul>
 		</div>
