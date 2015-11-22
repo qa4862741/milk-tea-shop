@@ -41,7 +41,7 @@
 					<div class="col-sm-12">
 						<section class="panel">
 							<header class="panel-heading">
-								<strong>奶茶口味列表</strong><span class="tools pull-right"> <a
+								<strong>奶茶配料列表</strong><span class="tools pull-right"> <a
 									href="javascript:;" class="fa fa-chevron-down"></a> <a
 									href="javascript:;" class="fa fa-cog"></a> <a
 									href="javascript:;" class="fa fa-times"></a>
@@ -79,12 +79,12 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${milkTeaTasteList}" var="item">
+											<c:forEach items="${materialAdditionList}" var="item">
 												<tr class="">
 													<td>${item.name}</td>
 													<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
-													</a> <a href="${basePath}/milktaste/delete?id=${item.id}" style="padding-left: 10px">
+													</a> <a href="${basePath}/milkclassification/delete?id=${item.id}" style="padding-left: 10px">
 															<button class="btn btn btn-primary">删除</button>
 													</a> 
 													</td>
@@ -347,7 +347,7 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title">添加产品分类</h4>
+						<h4 class="modal-title">添加奶茶配料</h4>
 					</div>
 
 					<div class="modal-body row">
@@ -390,7 +390,6 @@
 		});
 		
 		$('#addMilkButton').click(function(){
-			add = true;
 			$('#name').val('');
 		});
 		
@@ -401,8 +400,8 @@
 				
 				$.ajax({
 					type : "GET",
-					url : basePath + '/milktaste/getOneById?id='+id,
-					async: false, 
+					url : basePath + '/materialaddition/getOneById?id='+id,
+					async: true, 
 					success : function(returnValue) {
 						$('#name').val(returnValue.name);
 					}
@@ -411,10 +410,10 @@
 		});
 
 		$('#saveChanges').click(function() {
-			url = basePath + '/milktaste/add';
+			url = basePath + '/materialaddition/add';
 			
 			if(add==false){
-				url = basePath + '/milktaste/update';
+				url = basePath + '/materialaddition/update';
 			}
 			var name = $('#name').val();
 			

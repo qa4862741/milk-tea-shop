@@ -51,7 +51,8 @@
 								<div class="adv-table editable-table ">
 									<div class="clearfix">
 										<div class="btn-group">
-											<a href="#addMilkTeaModal" data-toggle="modal" id="addMilkButton">
+											<a href="#addMilkTeaModal" data-toggle="modal"
+												id="addMilkButton">
 												<button id="editable-sample_new" class="btn btn-primary">
 													添加 <i class="fa fa-plus"></i>
 												</button>
@@ -85,13 +86,18 @@
 												<tr class="">
 													<td>${item.name}</td>
 													<td>${item.description}</td>
-                                                    <td>${item.roleKey}</td>
-															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
+													<td>${item.roleKey}</td>
+													<td><a href="#addMilkTeaModal" data-toggle="modal"
+														idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
-													</a> <a href="${basePath}/role/delete?id=${item.id}" style="padding-left: 10px">
+													</a> <a href="${basePath}/role/delete?id=${item.id}"
+														style="padding-left: 10px">
 															<button class="btn btn btn-primary">删除</button>
-													</a> 
-													</td>
+													</a><a href="#addPermissionModal" data-toggle="modal"
+														style="padding-left: 10px" idattr="${item.id}"
+														class="addPermission">
+															<button class="btn btn-success">分配权限</button>
+													</a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -343,6 +349,9 @@
 		</div>
 		<!--right sidebar end-->
 
+
+
+
 		<!-- Modal -->
 		<div class="modal fade" id="addMilkTeaModal" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -355,21 +364,50 @@
 					</div>
 
 					<div class="modal-body row">
-						<div class="col-md-5">
-							<div class="form-group">
-								<label> 名称：</label> <input id="name" name="name"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 角色键：</label> <input id="roleKey" name="roleKey"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 描述：</label> <input id="description" name="description"
-									class="form-control">
-							</div>
-						</div>
+						<div class="col-md-10">
+							<section class="panel">
+								<div class="panel-body">
+									<form class="form-horizontal bucket-form" method="get">
+									    <input type="hidden" id="roleIdInput">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">名称：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success">@</span> <input
+														type="text" id="name" class="form-control"
+														placeholder="请输入角色名称">
+												</div>
+											</div>
+										</div>
 
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3"> 角色键：</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success"><i
+														class="fa fa-envelope"></i></span> <input type="text"
+														id="roleKey" class="form-control" placeholder="请输入角色键">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">描述:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success"><i
+														class="fa fa-envelope"></i></span> <input type="text"
+														id="description" class="form-control"
+														placeholder="请输入角色描述">
+												</div>
+											</div>
+										</div>
+
+
+									</form>
+								</div>
+							</section>
+						</div>
 					</div>
 
 					<div class="modal-footer">
@@ -382,6 +420,71 @@
 		</div>
 		<!-- modal -->
 
+		<!-- Modal -->
+		<div class="modal fade" id="addPermissionModal" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">分配权限</h4>
+					</div>
+
+					<div class="modal-body row">
+						<div class="col-md-12">
+							<section class="panel">
+								<div class="panel-body">
+                                    <table class="table table-striped table-hover table-bordered"
+										id="editable-sample">
+										<thead>
+											<tr>
+												<th>一级菜单权限</th>
+												<th>二级菜单权限</th>
+												<!-- <th>子菜单权限</th> -->
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${resourceList}" var="item" varStatus="status">
+												<tr class="">
+												    <td rowspan="${fn:length(item.children)}" style="vertical-align:middle">${item.name}</td>
+												    
+												    <c:if test="${fn:length(item.children[0].children)==0}">
+												          <td colspan="1" style="vertical-align:middle"><input type="checkbox" class="operationClass" id="${item.children[0].id}"> &nbsp;&nbsp;${item.children[0].name}</td>
+												    </c:if>
+												    
+												    <c:if test="${fn:length(item.children[0].children)!=0}">
+												          <td colspan="1" style="vertical-align:middle"><input type="checkbox" class="operationClass" id="${item.children[0].id}">&nbsp;&nbsp;${item.children[0].name}</td>
+												    </c:if>
+												  
+
+												</tr>
+												<c:forEach items="${item.children}" var="itemChild" varStatus="status">
+												       <c:if test="${status.count!=1}">
+												           <tr>
+												             <td colspan="1" style="vertical-align:middle"><input type="checkbox" class="operationClass" id="${itemChild.id}">&nbsp;&nbsp;${itemChild.name}</td>
+												           </tr>
+												       </c:if>
+                                                       
+                                                 </c:forEach> 
+
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</section>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="savePermissionChanges">保存</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- modal -->
 
 	</section>
 	<%@ include file="/WEB-INF/page/common/footer.jsp"%>
@@ -395,64 +498,93 @@
 	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
 		type="text/javascript"></script>
 	<script type="text/javascript">
-	    var add = true;
-	    var id;
+		var add = true;
+		var id;
 		jQuery(document).ready(function() {
 			EditableTable.init();
 		});
-		
-		$('#addMilkButton').click(function(){
+
+		$('#addMilkButton').click(function() {
 			$('#name').val('');
 		});
-		
-		$('.updateContent').each(function(){
-			$(this).click(function(){
+
+		$('.updateContent').each(function() {
+			$(this).click(function() {
 				add = false;
 				id = $(this).attr('idattr');
-				
+
 				$.ajax({
 					type : "GET",
-					url : basePath + '/role/getOneById?id='+id,
-					async: false, 
+					url : basePath + '/role/getOneById?id=' + id,
+					async : false,
 					success : function(returnValue) {
 						$('#name').val(returnValue.name);
 						$('#state').val(returnValue.state);
 						$('#roleKey').val(returnValue.roleKey);
 						$('#description').val(returnValue.description);
 					}
-			    });	     
+				});
 			});
 		});
 
 		$('#saveChanges').click(function() {
 			url = basePath + '/role/add';
-			
-			if(add==false){
+
+			if (add == false) {
 				url = basePath + '/role/update';
 			}
 			var name = $('#name').val();
 			var state = $('#state').val();
 			var roleKey = $('#roleKey').val();
 			var description = $('#description').val();
-			
+
 			$.ajax({
 				type : "POST",
 				url : url,
 				data : {
 					id : id,
 					name : name,
-					state:state,
-					roleKey:roleKey,
-					description:description
+					state : state,
+					roleKey : roleKey,
+					description : description
 				},
-				async: true, 
+				async : true,
 				success : function(returnValue) {
-					 location.reload();
+					location.reload();
 				}
-		    });	     
+			});
 			$('#addMilkTeaModal').modal('hide');
 		});
-
+		
+		$('.addPermission').each(function(){
+			var roleId = $(this).attr('idattr');
+			$('#roleIdInput').val(roleId);
+		});
+		
+		$('#savePermissionChanges').click(function(){
+			var operationIds = "";
+			$('.operationClass').each(function(){
+				if (true == $(this).is(':checked')) {
+			          alert( $(this).attr('id') );
+			          operationIds = operationIds + $(this).attr('id')+",";
+			    }
+			});
+			operationIds = operationIds.substring(0,operationIds.length-1);
+			var roleId = $('#roleIdInput').val();
+			
+			$.ajax({
+				type : "POST",
+				url :  basePath + '/role/assignOperation',
+				data : {
+					roleId : roleId,
+					operationIds : operationIds
+				},
+				async : true,
+				success : function(returnValue) {
+					location.reload();
+				}
+			});
+		});
 	</script>
 </body>
 </html>

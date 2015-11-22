@@ -1,5 +1,7 @@
 package com.yezic.com.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -32,5 +34,9 @@ public class OrderService extends BaseService<Order> {
 			orderItemMapper.insert(orderItem);
 		}
 		return result;
+	}
+	
+	public List<OrderItem> getOrderItemsByOrderId(int orderId){
+		return orderItemMapper.getOrderItemsByOrderId(orderId);
 	}
 }

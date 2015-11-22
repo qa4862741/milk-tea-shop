@@ -63,10 +63,13 @@ public class SalesController extends BaseController {
 	}
 	
 	@RequestMapping(value="doCashier",method =RequestMethod.POST)
-	public void cashier(String content,String orderNumber,String amount,ServletRequest request){
+	public void cashier(String content,String orderNumber,String amount,String exchange,String actualPay,String paymentway,ServletRequest request){
 		Order order = new Order();
 		order.setOrderNumber(orderNumber);
 		order.setAmount(new BigDecimal(amount));
+		order.setExchange(new BigDecimal(exchange));
+		order.setActulPay(new BigDecimal(actualPay));
+		order.setPamentway(paymentway);
 		order.setCreateTime(new Date());
 		JSONArray  orderItems = JSONArray.fromObject(content);
 		for (Object object : orderItems) {
@@ -76,6 +79,8 @@ public class SalesController extends BaseController {
 			orderItem.setGoodsName(jsonOb.getString("name"));
 			orderItem.setUnitPrice(new BigDecimal(jsonOb.getString("unitPrice")));
 			orderItem.setUnit(jsonOb.getString("unit"));
+			orderItem.setAddition(jsonOb.getString("addition"));
+			orderItem.setTaste(jsonOb.getString("taste"));
 			orderItem.setCount(jsonOb.getInt("count"));
 			order.addOrderItem(orderItem);
 		}

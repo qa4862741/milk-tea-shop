@@ -390,6 +390,7 @@
 		});
 		
 		$('#addMilkButton').click(function(){
+			add = true;
 			$('#name').val('');
 		});
 		

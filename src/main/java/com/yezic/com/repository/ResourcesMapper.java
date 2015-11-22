@@ -7,6 +7,8 @@ import com.yezic.com.entity.Resources;
 
 public interface ResourcesMapper extends BaseMapper<Resources>{
 	List<Resources> findUserResourcess(String userId);
+	
+	List<Resources> findResourcesByUserId(String userId);
 }
 
 

@@ -29,6 +29,7 @@
 <link
 	href="<c:url value="/resources/js/jnotify/jNotify.jquery.css"/>"
 	media="all" rel="stylesheet" type="text/css" />
+ <link rel="stylesheet" type="text/css" href="<c:url value="/resources/js/jquery-multi-select/css/multi-select.css"/>" />
 </head>
 
 <body>
@@ -353,7 +354,7 @@
 		<!-- Modal -->
 		<div class="modal fade" id="addUserModal" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg" >
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -362,10 +363,10 @@
 					</div>
 
 					<div class="modal-body row">
-						<div class="col-md-10">
+						<div class="col-md-6">
 							<section class="panel">
 								<div class="panel-body">
-									<form class="form-horizontal bucket-form" method="get">
+									<form class="form-horizontal bucket-form" id="addOrUpdateUserForm" method="get">
 										<div class="form-group">
 											<label class="col-sm-3 control-label col-lg-3">用户名:</label>
 											<div class="col-lg-9">
@@ -432,6 +433,17 @@
 								</div>
 							</section>
 						</div>
+						
+						
+						<div class="col-md-6 img-modal">
+						    <br>
+							<label class="control-label">&nbsp;&nbsp;&nbsp;选择角色：</label><br><br>
+							<select multiple="multiple" class="multi-select" id="my_multi_select1" name="my_multi_select1[]">
+                                <c:forEach items="${roleList}" var="item">
+								   <option value="${item.id}#${item.name}">${item.name}</option>
+								</c:forEach>
+                            </select>
+						</div>
 					</div>
 
 					<div class="modal-footer">
@@ -446,22 +458,75 @@
 
 
 	</section>
-	<%@ include file="/WEB-INF/page/common/footer.jsp"%>
-	<script src="<c:url value="/resources/js/table-editable.js"/>"></script>
-	<script
-		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput.js"/>"
-		type="text/javascript"></script>
-	<script
-		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput_locale_zh.js"/>"
-		type="text/javascript"></script>
-	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
-		type="text/javascript"></script>
+	<script src="<c:url value="/resources/js/jquery.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-1.8.3.min.js"/>"></script>
+<script src="<c:url value="/resources/bs3/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-ui-1.9.2.custom.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.dcjqaccordion.2.7.js"/>" class="include" type="text/javascript"/></script>
+<script src="<c:url value="/resources/js/jquery.scrollTo.min.js"/>"></script>
+<script src="<c:url value="/resources/js/easypiechart/jquery.easypiechart.js"/>"></script>
+<script src="<c:url value="/resources/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.nicescroll.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.nicescroll.js"/>"></script>
+
+<script src="<c:url value="/resources/js/bootstrap-switch.js"/>"></script>
+
+<script src="<c:url value="/resources/js/fuelux/js/spinner.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-fileupload/bootstrap-fileupload.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-datepicker/js/bootstrap-datepicker.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-daterangepicker/moment.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-daterangepicker/daterangepicker.js"/>"></script>
+
+<script src="<c:url value="/resources/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-timepicker/js/bootstrap-timepicker.js"/>"></script>
+
+
+
+<script src="<c:url value="/resources/js/jquery-multi-select/js/jquery.multi-select.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-multi-select/js/jquery.quicksearch.js"/>"></script>
+
+<script src="<c:url value="/resources/js/bootstrap-inputmask/bootstrap-inputmask.min.js"/>"></script>
+
+<script src="<c:url value="/resources/js/jquery-tags-input/jquery.tagsinput.js"/>"></script>
+
+<script src="<c:url value="/resources/js/select2/select2.js"/>"></script>
+<script src="<c:url value="/resources/js/select-init.js"/>"></script>
+
+
+<!--common script init for all pages-->
+<script src="<c:url value="/resources/js/scripts.js"/>"></script>
+
+<script src="<c:url value="/resources/js/toggle-init.js"/>"></script>
+
+<script src="<c:url value="/resources/js/advanced-form.js"/>"></script>
+<!--Easy Pie Chart-->
+<script src="<c:url value="/resources/js/easypiechart/jquery.easypiechart.js"/>"></script>
+<!--Sparkline Chart-->
+<script src="<c:url value="/resources/js/sparkline/jquery.sparkline.js"/>"></script>
+<!--jQuery Flot Chart-->
+<script src="<c:url value="/resources/js/flot-chart/jquery.flot.js"/>"></script>
+<script src="<c:url value="/resources/js/flot-chart/jquery.flot.tooltip.min.js"/>"></script>
+<script src="<c:url value="/resources/js/flot-chart/jquery.flot.resize.js"/>"></script>
+<script src="<c:url value="/resources/js/flot-chart/jquery.flot.pie.resize.js"/>"></script>
+
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="<c:url value="/resources/js/advanced-datatable/js/jquery.dataTables.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/data-tables/DT_bootstrap.js"/>"></script>
+
+<script src="<c:url value="/resources/js/table-editable.js"/>"></script>
+<script src="<c:url value="/resources/js/dynamic_table_init.js"/>"></script>
+		
+		
 	<script src="<c:url value="/resources/js/bootbox.js"/>"
 		type="text/javascript"></script>
 
 	<script src="<c:url value="/resources/js/jnotify/jNotify.jquery.js"/>"
 		type="text/javascript"></script>
-		
+
+
 	<script type="text/javascript">
 		var add = true;
 		var id;
@@ -470,10 +535,19 @@
 		});
 
 		$('#addMilkButton').click(function() {
-			var userName = $('#userName').val();
-			var accountName = $('#accountName').val();
-			var password = $('#password').val();
-			var description = $('#description').val();
+			add = true;
+			clearForm($('#addOrUpdateUserForm'));
+			var selectAble = $('#ms-my_multi_select1').find('.ms-selectable')
+			var selection = $('#ms-my_multi_select1').find('.ms-selection')
+			$(selectAble).find('li').each(function(){
+				$(this).removeClass('ms-selected');
+				$(this).css("display","block");
+			});
+			
+			$(selection).find('li').each(function(){
+				$(this).removeClass('ms-selected');
+				$(this).css("display","none");
+			});
 		});
 
 		$('.updateContent').each(function() {
@@ -483,10 +557,53 @@
 
 				$.ajax({
 					type : "GET",
-					url : basePath + '/milktaste/getOneById?id=' + id,
+					url : basePath + '/user/getOneById?id=' + id,
 					async : false,
 					success : function(returnValue) {
-						$('#name').val(returnValue.name);
+						$('#userName').val(returnValue.userName);
+						$('#accountName').val(returnValue.accountName);
+						$('#password').val(returnValue.password);
+						$('#description').val(returnValue.description);
+						$('#repeatPassword').val(returnValue.password);
+						$("#locked option").map(function(){
+							if($(this).val()==returnValue.locked){
+								$(this).attr("selected", true);
+							}else{
+								$(this).removeAttr("selected");
+							}
+						});
+					}
+				});
+				
+				$.ajax({
+					type : "GET",
+					url : basePath + '/role/getRoleByUserId?userId=' + id,
+					async : false,
+					success : function(returnValue) {
+						
+						var selectAble = $('#ms-my_multi_select1').find('.ms-selectable')
+						var selection = $('#ms-my_multi_select1').find('.ms-selection')
+						$(selectAble).find('li').each(function(){
+							$(this).removeClass('ms-selected');
+							$(this).css("display","block");
+						});
+						
+						$(selection).find('li').each(function(){
+							$(this).removeClass('ms-selected');
+							$(this).css("display","none");
+						});
+						
+						for (var i = 0; i < returnValue.length; i++) {
+							var role = returnValue[i];
+							var selectedId = role.id + "_-selectable";
+							var selectionId = role.id + "_-selection";
+							
+							$('#'+selectedId).css("display","none");
+							$('#'+selectedId).addClass('ms-selected')
+							
+							$('#'+selectionId).css("display","block");
+							$('#'+selectionId).addClass('ms-selected');
+						}
 					}
 				});
 			});
@@ -554,7 +671,14 @@
 			var password = $('#password').val();
 			var description = $('#description').val();
 			var locked = $('#locked').val();
-
+			var roles = "";
+			$('#ms-my_multi_select1').find('.ms-elem-selectable.ms-selected').each(function(){
+				var roleIdElement = $(this).attr('id');
+				var roleId = roleIdElement.split('_')[0];
+				roles = roles+roleId+',';
+			});
+			roles = roles.substring(0,roles.length-1);
+			
 			$.ajax({
 				type : "POST",
 				url : url,
@@ -564,7 +688,8 @@
 					accountName:accountName,
 					password:password,
 					description:description,
-					locked:locked
+					locked:locked,
+					roles:roles
 				},
 				async : true,
 				success : function(returnValue) {
@@ -574,6 +699,27 @@
 			});
 			$('#addUserModal').modal('hide');
 		});
+		
+		function clearForm(form) {
+			  // iterate over all of the inputs for the form
+			  // element that was passed in
+			  $(':input', form).each(function() {
+			    var type = this.type;
+			    var tag = this.tagName.toLowerCase(); // normalize case
+			    // it's ok to reset the value attr of text inputs,
+			    // password inputs, and textareas
+			    if (type == 'text' || type == 'password' || tag == 'textarea')
+			      this.value = "";
+			    // checkboxes and radios need to have their checked state cleared
+			    // but should *not* have their 'value' changed
+			    else if (type == 'checkbox' || type == 'radio')
+			      this.checked = false;
+			    // select elements need to have their 'selectedIndex' property set to -1
+			    // (this works for both single and multiple select elements)
+			    else if (tag == 'select')
+			      this.selectedIndex = 0;
+			  });
+			};
 	</script>
 </body>
 </html>

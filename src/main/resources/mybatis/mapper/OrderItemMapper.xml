@@ -12,6 +12,8 @@
 		<result column="salePrice" jdbcType="DECIMAL" property="salePrice" />
 		<result column="isPresent" jdbcType="BIT" property="isPresent" />
 		<result column="imagePath" jdbcType="VARCHAR" property="imagePath" />
+		<result column="taste" jdbcType="VARCHAR" property="taste" />
+		<result column="addition" jdbcType="VARCHAR" property="addition" />
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -19,13 +21,14 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, orderId ,goodsId,goodsName, unit,count, unitPrice,salePrice,isPresent,imagePath
+		id, orderId ,goodsId,goodsName, unit,count, unitPrice,salePrice,isPresent,imagePath,taste,addition
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="MilkTea" >
 		insert into <include refid="Base_Table" />
 		values (#{id,jdbcType=INTEGER},#{orderId,jdbcType=INTEGER},#{goodsId,jdbcType=INTEGER},#{goodsName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
-		#{count,jdbcType=INTEGER},#{unitPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, #{isPresent,jdbcType=BIT},#{imagePath,jdbcType=VARCHAR}
+		#{count,jdbcType=INTEGER},#{unitPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, #{isPresent,jdbcType=BIT},#{imagePath,jdbcType=VARCHAR},
+		#{taste,jdbcType=VARCHAR},#{addition,jdbcType=VARCHAR}
       )
 	</insert>
 	
@@ -44,6 +47,10 @@
 			<if test="goodsName!='' and goodsName!=null">and goodsName=#{goodsName}</if>
 		</where>
 	</sql>
+		
+	<select id="getOrderItemsByOrderId" resultMap="BaseResultMap" parameterType="int">
+		select * from <include refid="Base_Table" /> where orderId = #{orderId}
+	</select>
 	
 	<select id="getPageModel" resultMap="BaseResultMap" parameterType="OrderItem">
 		<include refid="baseQuery" />

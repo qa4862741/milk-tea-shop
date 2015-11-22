@@ -13,13 +13,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yezic.com.common.SimpleReturnVo;
 import com.yezic.com.common.SimpleReturnVo.ResponseCode;
+import com.yezic.com.entity.Resources;
 import com.yezic.com.entity.Role;
+import com.yezic.com.service.ResourcesService;
 import com.yezic.com.service.RoleService;
 
 @Controller
 @RequestMapping("role")
-public class RoleController extends BaseController{
+public class RoleController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(RoleController.class);
+
+	@Resource
+	private ResourcesService resourcesService;
 
 	@Resource
 	private RoleService roleService;
@@ -27,6 +32,8 @@ public class RoleController extends BaseController{
 	@RequestMapping("list")
 	public void list(Role role, Model model) {
 		List<Role> roleList = roleService.getAll(role);
+		List<Resources> resources = resourcesService.getRecursionList();
+		model.addAttribute("resourceList", resources);
 		model.addAttribute("roleList", roleList);
 	}
 
@@ -41,7 +48,13 @@ public class RoleController extends BaseController{
 		}
 		return new SimpleReturnVo(ResponseCode.SUCCESS, "添加成功！");
 	}
-	
+
+	@RequestMapping("assignOperation")
+	@ResponseBody
+	public void assignOperations(int roleId,String operationIds) {
+		roleService.aassignOperations(roleId,operationIds);
+	}
+
 	@RequestMapping("getOneById")
 	@ResponseBody
 	public Object getOneById(int id) {
@@ -53,6 +66,18 @@ public class RoleController extends BaseController{
 		}
 		return role;
 	}
+	
+	@RequestMapping("getRoleByUserId")
+	@ResponseBody
+	public Object getRoleByUserId(int userId) {
+		List<Role> roles = null;
+		try {
+			roles = roleService.getRoleByUserId(userId);
+		} catch (Exception e) {
+			logger.error("删除出现异常！" + e.getMessage(), e);
+		}
+		return roles;
+	}
 
 	@RequestMapping("delete")
 	public String delete(int id) {
@@ -63,7 +88,7 @@ public class RoleController extends BaseController{
 		}
 		return "redirect:/role/list";
 	}
-	
+
 	@RequestMapping("update")
 	public String update(Role role) {
 		try {

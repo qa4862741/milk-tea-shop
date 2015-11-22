@@ -58,7 +58,7 @@
 								<div class="adv-table editable-table ">
 									<div class="clearfix">
 										<div class="btn-group">
-											<a href="#addMilkTeaModal" data-toggle="modal">
+											<a href="#addMilkTeaModal"  id="addMilkButton" data-toggle="modal">
 												<button id="editable-sample_new" class="btn btn-primary">
 													添加 <i class="fa fa-plus"></i>
 												</button>
@@ -387,7 +387,7 @@
 						<div class="col-md-7">
 							<section class="panel">
 								<div class="panel-body">
-									<form class="form-horizontal bucket-form" method="get">
+									<form class="form-horizontal bucket-form" id="addmilkForm" method="get">
 										<div class="form-group">
 											<label class="col-sm-3 control-label col-lg-3">名称：</label>
 											<div class="col-lg-9">
@@ -408,7 +408,7 @@
 											<div class="col-lg-9">
 												<div class="input-group m-bot15">
 													<span class="input-group-addon btn-success"><i class="fa fa-envelope"></i></span> <input id="productNumber"
-									                      name="productNumber" class="form-control" placeholder="请输入账户名">
+									                      name="productNumber" class="form-control" placeholder="请输入产品编号">
 												</div>
 											</div>
 										</div>
@@ -540,7 +540,8 @@
 		});
 		
 		$('#addMilkButton').click(function(){
-			$('#name').val('');
+			add = true;
+			clearForm($('#addmilkForm'));
 		});
 		
 		$('.updateContent').each(function(){
@@ -553,7 +554,6 @@
 					url : basePath + '/milk/getOneById?id='+id,
 					async: false, 
 					success : function(returnValue) {
-						$('.form-control').val("");
 						$('#name').val(returnValue.name);
 						$('#productNumber').val(returnValue.productNumber);
 						$('#salePrice').val(returnValue.salePrice);
@@ -563,6 +563,7 @@
 						setSelect('classification',returnValue.classificationId+"#"+returnValue.classification);
 						setSelect('taste',returnValue.tasteId+"#"+returnValue.taste);
 						setSelect('unit',returnValue.unitId+"#"+returnValue.unit);
+						
 						$('#classification').val(returnValue.classificationId+"#"+returnValue.classification);
 						$('#taste').val(returnValue.tasteId+"#"+returnValue.taste);
 						$('#unit').val(returnValue.unitId+"#"+returnValue.unit);
@@ -712,6 +713,7 @@
 				}
 
 			});
+			
 			$('#addMilkTeaModal').modal('hide');
 		});
 		
@@ -732,6 +734,26 @@
       	  });
 		}
 
+		function clearForm(form) {
+			  // iterate over all of the inputs for the form
+			  // element that was passed in
+			  $(':input', form).each(function() {
+			    var type = this.type;
+			    var tag = this.tagName.toLowerCase(); // normalize case
+			    // it's ok to reset the value attr of text inputs,
+			    // password inputs, and textareas
+			    if (type == 'text' || type == 'password' || tag == 'textarea')
+			      this.value = "";
+			    // checkboxes and radios need to have their checked state cleared
+			    // but should *not* have their 'value' changed
+			    else if (type == 'checkbox' || type == 'radio')
+			      this.checked = false;
+			    // select elements need to have their 'selectedIndex' property set to -1
+			    // (this works for both single and multiple select elements)
+			    else if (tag == 'select')
+			      this.selectedIndex = 0;
+			  });
+			};
 		
 	</script>
 </body>

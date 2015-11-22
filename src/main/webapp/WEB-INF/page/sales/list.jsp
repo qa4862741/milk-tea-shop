@@ -41,32 +41,20 @@
 					<div class="col-sm-12">
 						<section class="panel">
 							<header class="panel-heading">
-								<strong>奶茶单位列表</strong><span class="tools pull-right"> <a
-									href="javascript:;" class="fa fa-chevron-down"></a> <a
-									href="javascript:;" class="fa fa-cog"></a> <a
-									href="javascript:;" class="fa fa-times"></a>
+								订单列表 <span
+									class="tools pull-right"> <a href="javascript:;"
+									class="fa fa-chevron-down"></a> <a href="javascript:;"
+									class="fa fa-cog"></a> <a href="javascript:;"
+									class="fa fa-times"></a>
 								</span>
 							</header>
 							<div class="panel-body">
-								<div class="adv-table editable-table ">
-									<div class="clearfix">
-										<div class="btn-group pull-right">
-											<button class="btn btn-default dropdown-toggle"
-												data-toggle="dropdown">
-												Tools <i class="fa fa-angle-down"></i>
-											</button>
-											<ul class="dropdown-menu pull-right">
-												<li><a href="#">Print</a></li>
-												<li><a href="#">Save as PDF</a></li>
-												<li><a href="#">Export to Excel</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="space15"></div>
-									<table class="table table-striped table-hover table-bordered"
-										id="editable-sample">
+								<div class="adv-table">
+									<table cellpadding="0" cellspacing="0" border="0"
+										class="display table table-bordered" id="hidden-table-info">
 										<thead>
 											<tr>
+											    <th style="display:none"></th>
 												<th>订单号</th>
 												<th>销售时间</th>
 												<th>订单项数量</th>
@@ -79,13 +67,15 @@
 										<tbody>
 											<c:forEach items="${orders}" var="item">
 												<tr class="">
+												   <td style="display:none">${item.id}</td>
 													<td>${item.orderNumber}</td>
-													<td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+													<td><fmt:formatDate value="${item.createTime}"
+															pattern="yyyy-MM-dd HH:mm:ss" /></td>
 													<td>${item.count}</td>
 													<td>￥${item.amount}</td>
 													<td>${item.vipName}</td>
 													<td>${item.salesMan}</td>
-													<td>${item.storeName}</td>										
+													<td>${item.storeName}</td>
 													</td>
 												</tr>
 											</c:forEach>
@@ -372,7 +362,6 @@
 
 	</section>
 	<%@ include file="/WEB-INF/page/common/footer.jsp"%>
-	<script src="<c:url value="/resources/js/table-editable.js"/>"></script>
 	<script
 		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput.js"/>"
 		type="text/javascript"></script>
@@ -382,40 +371,39 @@
 	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
 		type="text/javascript"></script>
 	<script type="text/javascript">
-	    var add = true;
-	    var id;
+		var add = true;
+		var id;
 		jQuery(document).ready(function() {
-			EditableTable.init();
 		});
-		
-		$('#addMilkButton').click(function(){
+
+		$('#addMilkButton').click(function() {
 			$('#name').val('');
 		});
-		
-		$('.updateContent').each(function(){
-			$(this).click(function(){
+
+		$('.updateContent').each(function() {
+			$(this).click(function() {
 				add = false;
 				id = $(this).attr('idattr');
-				
+
 				$.ajax({
 					type : "GET",
-					url : basePath + '/milkunit/getOneById?id='+id,
-					async: false, 
+					url : basePath + '/milkunit/getOneById?id=' + id,
+					async : false,
 					success : function(returnValue) {
 						$('#name').val(returnValue.name);
 					}
-			    });	     
+				});
 			});
 		});
 
 		$('#saveChanges').click(function() {
 			url = basePath + '/milkunit/add';
-			
-			if(add==false){
+
+			if (add == false) {
 				url = basePath + '/milkunit/update';
 			}
 			var name = $('#name').val();
-			
+
 			$.ajax({
 				type : "POST",
 				url : url,
@@ -423,14 +411,13 @@
 					id : id,
 					name : name,
 				},
-				async: true, 
+				async : true,
 				success : function(returnValue) {
-					 location.reload();
+					location.reload();
 				}
-		    });	     
+			});
 			$('#addMilkTeaModal').modal('hide');
 		});
-
 	</script>
 </body>
 </html>

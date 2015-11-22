@@ -12,10 +12,11 @@ public class User {
 	private String credentialsSalt;
 	private String description;
 	private String locked;
-	private String lockedDescription;
 	private Date createTime;
 	private String deletestatus;
     private int employId;
+    
+    private String roles;
     
 	public int getId() {
 		return id;
@@ -101,10 +102,13 @@ public class User {
 		return AccountLockType.getTextByKey(this.locked);
 	}
 
-	public void setLockedDescription(String lockedDescription) {
-		this.lockedDescription = lockedDescription;
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
 	}
 	
-	
-
+    
 }

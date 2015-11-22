@@ -1,6 +1,8 @@
 package com.yezic.com.shiro.realm;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -48,7 +50,11 @@ public class MyRealm extends AuthorizingRealm {
 		String loginName = SecurityUtils.getSubject().getPrincipal().toString();
 		if (loginName != null) {
 			String userId = SecurityUtils.getSubject().getSession().getAttribute("userSessionId").toString();
-			List<Resources> rs = resourcesMapper.findUserResourcess(userId);
+			List<Resources> userResources = resourcesMapper.findUserResourcess(userId);
+			
+			List<Resources> userRoleResources = resourcesMapper.findResourcesByUserId(userId);
+			
+			Set<String> resourceSet = new LinkedHashSet<String>();
 			// 权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			// 用户的角色集合
@@ -56,10 +62,17 @@ public class MyRealm extends AuthorizingRealm {
 			// 用户的角色集合
 			// info.setRoles(user.getRolesName());
 			// 用户的角色对应的所有权限，如果只使用角色定义访问权限
-			for (Resources resources : rs) {
-				info.addStringPermission(resources.getResKey());
+			for (Resources resources : userResources) {
+				if(resourceSet.add(resources.getResKey())){
+					info.addStringPermission(resources.getResKey());
+				}
 			}
 
+			for (Resources resources : userRoleResources) {
+				if(resourceSet.add(resources.getResKey())){
+					info.addStringPermission(resources.getResKey());
+				}
+			}
 			return info;
 		}
 		return null;

@@ -434,13 +434,25 @@
 						$('#jobid').val(returnValue.jobid);
 						$('#name').val(returnValue.name);
 						$('#tel').val(returnValue.tel);
-						$('#stores').val(returnValue.stores);
+						setSelect('stores',returnValue.storesId+"#"+returnValue.stores);
 						$('#storesId').val(returnValue.storesId);
 						$('#role').val(returnValue.role);
 					}
 			    });	     
 			});
 		});
+		
+		function setSelect(id,selected){
+			var options = $('#'+id).children();
+			for(var i=0;i<options.length;i++){
+				var option = options[i];
+				if($(option).val()==selected){
+					$(option).attr("selected", true);
+				}else{
+					$(option).removeAttr("selected");
+				}
+			}
+		}
 
 		$('#saveChanges').click(function() {
 			url = basePath + '/employee/add';

@@ -193,6 +193,7 @@
 						<li><a href="${basePath}/milkclassification/list" class="clickItem" id="milkclassificationList">奶茶分类管理</a></li>
 						<li><a href="${basePath}/milkunit/list" class="clickItem" id="milkunitList">奶茶单位管理</a></li>
 						<li><a href="${basePath}/milktaste/list" class="clickItem" id="milktasteList">奶茶口味管理</a></li>
+						<li><a href="${basePath}/materialaddition/list" class="clickItem" id="materialadditionList">奶茶配料管理</a></li>
 					</ul>
 				</li>
 				

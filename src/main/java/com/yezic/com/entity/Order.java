@@ -66,6 +66,21 @@ public class Order {
 	 * 门店名称
 	 */
 	private String storeName;
+	
+	/**
+	 * 找零
+	 */
+	private BigDecimal exchange;
+	
+	/**
+	 * 实付金额
+	 */
+	private BigDecimal actulPay;
+	
+	/**
+	 * 付款方式
+	 */
+	private String pamentway;
 
 	private List<OrderItem> orderItems;
 
@@ -187,6 +202,30 @@ public class Order {
 
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
+	}
+
+	public BigDecimal getExchange() {
+		return exchange;
+	}
+
+	public void setExchange(BigDecimal exchange) {
+		this.exchange = exchange;
+	}
+
+	public BigDecimal getActulPay() {
+		return actulPay;
+	}
+
+	public void setActulPay(BigDecimal actulPay) {
+		this.actulPay = actulPay;
+	}
+
+	public String getPamentway() {
+		return pamentway;
+	}
+
+	public void setPamentway(String pamentway) {
+		this.pamentway = pamentway;
 	}
 	
 	

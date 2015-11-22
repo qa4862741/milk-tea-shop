@@ -71,6 +71,7 @@
 	<select id="getAll" resultMap="BaseResultMap" parameterType="Role">
 		<include refid="baseQuery" />
 	</select>
+	
 	<select id="getOneById" resultMap="BaseResultMap" parameterType="int">
 		select
 		<include refid="Base_Column_List" />
@@ -78,4 +79,16 @@
 		<include refid="Base_Table" />
 		where id = #{id}
 	</select>
+	
+	<select id="getRoleByUserId" resultMap="BaseResultMap" parameterType="int">
+		select
+		<include refid="Base_Column_List" />
+		from
+		<include refid="Base_Table" />
+		where id in
+		(
+		   select roleId from t_user_role where userId = #{userId}
+		)
+	</select>
+	
 </mapper>

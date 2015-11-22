@@ -1,9 +1,19 @@
 package com.yezic.com.entity;
 
-public class RoleResourcs {
+public class RoleResources {
 	private int id;
 	private int roleId;
-	private int resourcesId;
+	private int resId;
+	
+	public RoleResources(int roleId, int resId) {
+		this.roleId = roleId;
+		this.resId = resId;
+	}
+	
+	public RoleResources() {
+	}
+
+
 
 	public int getId() {
 		return id;
@@ -21,12 +31,13 @@ public class RoleResourcs {
 		this.roleId = roleId;
 	}
 
-	public int getResourcesId() {
-		return resourcesId;
+	public int getResId() {
+		return resId;
 	}
 
-	public void setResourcesId(int resourcesId) {
-		this.resourcesId = resourcesId;
+	public void setResId(int resId) {
+		this.resId = resId;
 	}
 
+	
 }

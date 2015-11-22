@@ -48,6 +48,16 @@ public class OrderItem {
 	 * 图片路径
 	 */
 	private String imagePath;
+	
+	/**
+	 * 口味
+	 */
+	private String taste;
+	
+	/**
+	 * 加料
+	 */
+	private String addition;
 
 	public int getId() {
 		return id;
@@ -129,4 +139,21 @@ public class OrderItem {
 		this.imagePath = imagePath;
 	}
 
+	public String getTaste() {
+		return taste;
+	}
+
+	public void setTaste(String taste) {
+		this.taste = taste;
+	}
+
+	public String getAddition() {
+		return addition;
+	}
+
+	public void setAddition(String addition) {
+		this.addition = addition;
+	}
+
+	
 }

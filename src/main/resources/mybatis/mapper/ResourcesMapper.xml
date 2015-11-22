@@ -89,6 +89,17 @@
 		where userId=#{userId})
 	</select>
 	
+	<select id="findResourcesByUserId" parameterType="String" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		from <include refid="Base_Table" /> where id in
+		(
+		   select role_resources.resId from t_user_role user_role 
+		   inner join t_role_resources role_resources on user_role.roleId = role_resources.roleId
+		   where user_role.userId=#{userId}
+		)
+	</select>
+	
 	<sql id="baseQuery">
 		SELECT
 		<include refid="Base_Column_List" />

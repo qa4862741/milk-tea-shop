@@ -243,14 +243,14 @@
 						
 						<li style="padding-top:20px;padding-buttom:20px">
 							<h4>
-								<i class="fa fa-plus"></i>订单总金额：<strong id="sumCash">￥0</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;<i class="fa fa-plus"></i>订单总金额：<strong id="sumCash">￥0</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<i class="fa fa-plus"></i>订单项数量：<strong id="sumCount">0</strong>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="deleteOrder" margin-lef="100px" padding-lef="100px" class="btn btn-danger delete">删除订单<i class="fa fa-delete"></i></button>
+								<button id="deleteOrder" margin-lef="100px" padding-lef="100px" class="btn btn-danger delete">删除订单<i class="fa fa-delete"></i></button><br><br><br>
 							</h4>
 						</li>
-						
-						<a href="#cashierModal" data-toggle="modal" class="btn btn-compose btn-lg" id="doCashier">
+						<!-- data-toggle="modal" -->
+						<a href="#cashierModal"  class="btn btn-compose btn-lg" id="doCashier">
 					      <i class="fa fa-plus-square"></i>&nbsp;&nbsp;&nbsp;结账</a>
 					</ul>
 				</div>
@@ -336,60 +336,27 @@
 										<div class="col-lg-9">
 											<div class="input-group m-bot15">
 											    <span class="input-group-addon btn-success">￥</span> <input
-													type="text" id="actulPay" class="form-control"> <span
+													type="text" id="actualPay" class="form-control"> <span
 													class="input-group-addon btn-danger">元</span> 
 												 <div class="input-group-btn">
-                                    <button tabindex="-1" class="btn btn-info" type="button" id="paymentWayButton">现金付费</button>
-                                    <button tabindex="-1" data-toggle="dropdown" class="btn btn-info dropdown-toggle" type="button">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul role="menu" class="dropdown-menu pull-right">
-                                        <li class="divider"></li>
-                                        <li><a href="#" class="paymentWay">现金付费</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#" class="paymentWay">储蓄卡付费</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#" class="paymentWay">信用卡付费</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#" class="paymentWay">代金券付费</a></li>
-                                    </ul>
-                                </div>
+                                                    <button tabindex="-1" class="btn btn-info" type="button" id="paymentWayButton">现金付费</button>
+                                                    <button tabindex="-1" data-toggle="dropdown" class="btn btn-info dropdown-toggle" type="button">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul role="menu" class="dropdown-menu pull-right">
+                                                        <li class="divider"></li>
+                                                        <li><a href="#" class="paymentWay">现金付费</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#" class="paymentWay">储蓄卡付费</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#" class="paymentWay">信用卡付费</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#" class="paymentWay">代金券付费</a></li>
+                                                    </ul>
+                                                  </div>
 											</div>
 										</div>
 									</div>
-
-									<!-- <div class="form-group">
-										<label class="col-sm-3 control-label col-lg-3">储蓄卡付费：</label>
-										<div class="col-lg-9">
-											<div class="input-group m-bot15">
-												  <span class="input-group-addon btn-success">￥</span> <input
-													type="text" class="form-control"> <span
-													class="input-group-addon btn-info">元</span> 
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label col-lg-3">信用卡付费：</label>
-										<div class="col-lg-9">
-											<div class="input-group m-bot15">
-												  <span class="input-group-addon btn-success">￥</span> <input
-													type="text" class="form-control"> <span
-													class="input-group-addon btn-info">元</span> 
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label col-lg-3">代金券付费：</label>
-										<div class="col-lg-9">
-											<div class="input-group m-bot15">
-												  <span class="input-group-addon btn-success">￥</span> <input
-													type="text" class="form-control"> <span
-													class="input-group-addon btn-info">元</span> 
-											</div>
-										</div>
-									</div> -->
 
 									<div class="form-group">
 										<label class="col-sm-3 control-label col-lg-3">找零：</label>
@@ -408,7 +375,7 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-default" id="closeButton" data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal"
 						id="saveChanges">保存</button>
 				</div>
@@ -442,9 +409,13 @@
 	
 	<script
 		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput.js"/>"></script>
+		
 	<script
 		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput_locale_zh.js"/>"></script>
 
+    <script src="<c:url value="/resources/js/bootbox.js"/>"
+		type="text/javascript"></script>
+		
 	<script type="text/javascript">
 	    var delId = 0;
 	    $('.paymentWay').each(function() {
@@ -455,12 +426,13 @@
 	    
 	    $('#deleteOrder').click(function(){
 	    	$('#salesBody').children('tr').remove();
+	    	$('#doCashier').attr('data-toggle','');
 	    });
 		
-	    $('#actulPay').bind("input",function(){
+	    $('#actualPay').bind("input",function(){
 			var shouldPay = $('#shouldPay').val();
 				
-			var actualPay = $('#actulPay').val();
+			var actualPay = $('#actualPay').val();
 				
 			$('#exchange').val(actualPay-shouldPay);
 		 });
@@ -473,6 +445,10 @@
 					url : basePath + '/milk/getOneById?id=' + id,
 					async : true,
 					success : function(returnValue) {
+						var dataToggle = $('#doCashier').attr('data-toggle');
+						if(dataToggle==null||dataToggle==''){
+							$('#doCashier').attr('data-toggle','modal');
+						}
 						var idEle = $('#milkTeaId'+id);
 						var idValue = idEle.val();
 							var upDown = 
@@ -496,22 +472,22 @@
 					           +    "<input type='hidden' value='"+id+"' name='milkTeaId' id='milkTeaId"+id+"'/>"
 					           +    "<td colspan='3' class='salesTrName'>"+returnValue.name+"</td>"
 					           +    "<td  class='salesTrTaste'>"+returnValue.taste+"</td>"
-					           +    "<td  class='salesTrAddition'>"
-					           +       "<select>"
+					           +    "<td>"
+					           +       "<select class='salesTrAddition'>"
 							   +          "<option value='1'>冰块</option>"
-							   +          "<option value='1'>砂糖</option>"
-							   +          "<option value='1'>珍珠</option>"
+							   +          "<option value='2'>砂糖</option>"
+							   +          "<option value='3'>珍珠</option>"
 						       +       "</select>"
 							   +    "</td>"
 				               +"</tr>"
 					           +"<tr class='salesTrTail'>"
 				               +    "<td class='salesTrUnitPrice' style='vertical-align:middle'>￥"+returnValue.salePrice+"</td>"
 				               +    "<td class='salesTrCount' style='text-align:center;vertical-align:middle'>1</td>"
-				               +    "<td class='salesTrUnit' style='vertical-align:middle'>"
-					           +       "<select>"
+				               +    "<td style='vertical-align:middle'>"
+					           +       "<select class='salesTrUnit'>"
 							   +          "<option value='1'>大杯</option>"
-							   +          "<option value='1'>中杯</option>"
-							   +          "<option value='1'>小杯</option>"
+							   +          "<option value='2'>中杯</option>"
+							   +          "<option value='3'>小杯</option>"
 						       +       "</select>"
 				               +    "</td>"
 				               +    "<td class='payMoney' style='vertical-align:middle'>￥"+returnValue.salePrice+"</td>" 
@@ -519,6 +495,7 @@
 				               +        "<a class='btn btn-danger delete btn-sm' id='delMilkItem"+id+"del"+delId+"'><i class='fa fa-times'></i>删除</a>"
 				               +    "</td>"
 				               +"</tr>";
+				               
 							 $('#salesBody').append($(html));
 							 var sumAmount = $('#sumCash').html().substring(1);
 							 $('#sumCash').html('￥'+(parseFloat(sumAmount)+parseFloat(returnValue.salePrice)));
@@ -540,6 +517,11 @@
 								 $('#sumCash').html('￥'+(parseFloat(sumAmount)-parseFloat(payMoney)));
 								 var sumCount = $('#sumCount').html();
 								 $('#sumCount').html(parseInt(sumCount)-1);
+								 
+								 var size = $('#salesBody').children('tr').size();
+								 if(size==0){
+									 $('#doCashier').attr('data-toggle','');
+								 }
 							 });
 							 
 							 $('#countValue'+id).bind("blur",function(){
@@ -607,6 +589,29 @@
 		});
 		
 		$('#doCashier').click(function(){
+			var size = $('#salesBody').children('tr').size();
+			if(size==0){
+				 $('#closeButton').click();
+			      $('#cashierModal').modal('hide');
+			      bootbox.confirm({  
+			          buttons: {  
+			              confirm: {  
+			                  label: '确认',  
+			                  className: 'btn-info'  
+			              },  
+			              cancel: {  
+			                  label: '取消',  
+			                  className: 'btn-default'  
+			              }  
+			          },  
+			          message: '请先选择奶茶',  
+			          callback: function(result) {  
+
+			          },  
+			          });
+			     
+			      return ;
+			}
 			var money = 0.0;
 			$('.payMoney').each(function() {
 				var text = $(this).text();
@@ -615,7 +620,7 @@
 			});
 			$('#shouldPay').val(money);
 			
-			$('#actulPay').val(money);
+			$('#actualPay').val(money);
 			
 			$('#exchange').val(0);
 			
@@ -657,13 +662,16 @@
             	var taste = $(trHead).find('.salesTrTaste').html();
             	result = result+"\"taste\":"+"\""+taste+"\",";
             	
+            	var addition = $(trHead).find('.salesTrAddition').val();
+            	result = result+"\"addition\":"+"\""+addition+"\",";
+            	
             	var unitPrice = $(trTail).find('.salesTrUnitPrice').html();
             	result = result+"\"unitPrice\":"+"\""+unitPrice.substring(1) +"\",";
             	
-            	var count = $(trTail).find('.countValue').val();
+            	var count = $(trTail).find('.salesTrCount').html();
             	result = result+"\"count\":"+"\""+count+"\",";
             	
-            	var unit = $(trTail).find('.salesTrUnit').html();
+            	var unit = $(trTail).find('.salesTrUnit').val();
             	result = result+"\"unit\":"+"\""+unit+"\",";
             	
             	result = result + "}"
@@ -672,7 +680,16 @@
             	}
             }
             result = result + "]";
-            var shouldPay = $('#shouldPay').val().substring(1);
+            var shouldPay = $('#shouldPay').val();
+			
+			var actualPay = $('#actualPay').val();
+			
+			var exchange = $('#exchange').val();
+			
+            var shouldPay = $('#shouldPay').val();
+            
+            var paymentway = $('#paymentWayButton').html();
+            
             $.ajax({
 				type : "POST",
 				url : basePath + '/sales/doCashier',
@@ -680,7 +697,10 @@
 				data: {
 					content:result,
 					orderNumber : 'NC201510310005',
-					amount :shouldPay
+					amount :shouldPay,
+					exchange:exchange,
+					actualPay:actualPay,
+					paymentway:paymentway
 				},
 				success : function(returnValue) {
 					
