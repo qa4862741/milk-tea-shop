@@ -280,7 +280,7 @@
 						<c:forEach items="${milkTeas}" var="item">
 							<div class="${item.classificationId} item ">
 								<a href="#" class="chooseMilk" value="${item.id}"><img src="${item.imagePath}" alt="${item.name}"/></a>
-								<p>${item.name}</p>
+								<p><button class="btn btn-info btn-lg selectMilk" value="${item.id}">${item.name}<i class="fa fa-delete"></i></button></p>
 							</div>
 						</c:forEach>
 					</div>
@@ -437,154 +437,166 @@
 			$('#exchange').val(actualPay-shouldPay);
 		 });
 	    
+	    function addMilkTea(id){
+	    	
+			$.ajax({
+				type : "GET",
+				url : basePath + '/milk/getOneById?id=' + id,
+				async : true,
+				success : function(returnValue) {
+					var dataToggle = $('#doCashier').attr('data-toggle');
+					if(dataToggle==null||dataToggle==''){
+						$('#doCashier').attr('data-toggle','modal');
+					}
+					var idEle = $('#milkTeaId'+id);
+					var idValue = idEle.val();
+						var upDown = 
+						"<div class='input-group input-small' style='width:80px;'>"
+                          +"<input type='text' value='1' count='1' class='spinner-input form-control countValue' id='countValue"+id+"'>"
+                          +"<div class='spinner-buttons input-group-btn btn-group-vertical'>"
+                            +"<button type='button' class='btn spinner-up btn-xs btn-info addCount' id='addCount"+id+"'>"
+                                +"<i class='fa fa-angle-up'></i>" 
+                            +"</button>"
+                            +"<button type='button' class='btn spinner-down btn-xs btn-danger minutesCount' id='minutesCount"+id+"'>"
+                                +"<i class='fa fa-angle-down'></i>"
+                            +"</button>"
+                          +"</div>"
+                        +"</div>";
+                        
+                        delId++;
+						
+						var html = 
+						    "<tr class='salesTrHead'>"
+						   +    "<td rowspan='2' class='salesTrImage' style='text-align:center;vertical-align:middle'><img class='img' src='"+returnValue.scaledImagePath+"' alt='' /></td>"
+				           +    "<input type='hidden' value='"+id+"' name='milkTeaId' id='milkTeaId"+id+"'/>"
+				           +    "<td colspan='3' class='salesTrName'>"+returnValue.name+"</td>"
+				           +    "<td  class='salesTrTaste'>"+returnValue.taste+"</td>"
+				           +    "<td>"
+				           +       "<select class='salesTrAddition'>"
+						   +          "<option value='1'>冰块</option>"
+						   +          "<option value='2'>砂糖</option>"
+						   +          "<option value='3'>珍珠</option>"
+					       +       "</select>"
+						   +    "</td>"
+			               +"</tr>"
+				           +"<tr class='salesTrTail'>"
+			               +    "<td class='salesTrUnitPrice' style='vertical-align:middle'>￥"+returnValue.salePrice+"</td>"
+			               +    "<td class='salesTrCount' style='text-align:center;vertical-align:middle'>1</td>"
+			               +    "<td style='vertical-align:middle'>"
+				           +       "<select class='salesTrUnit'>"
+						   +          "<option value='1'>大杯</option>"
+						   +          "<option value='2'>中杯</option>"
+						   +          "<option value='3'>小杯</option>"
+					       +       "</select>"
+			               +    "</td>"
+			               +    "<td class='payMoney' style='vertical-align:middle'>￥"+returnValue.salePrice+"</td>" 
+			               +    "<td style='vertical-align:middle'>"
+			               +        "<a class='btn btn-danger delete btn-sm' id='delMilkItem"+id+"del"+delId+"'><i class='fa fa-times'></i>删除</a>"
+			               +    "</td>"
+			               +"</tr>";
+			               
+						 $('#salesBody').append($(html));
+						 var sumAmount = $('#sumCash').html().substring(1);
+						 $('#sumCash').html('￥'+(parseFloat(sumAmount)+parseFloat(returnValue.salePrice)));
+							 
+						 var sumCount = $('#sumCount').html();
+						 $('#sumCount').html(parseInt(sumCount)+1); 
+						 
+						 
+						 var delIdName = 'delMilkItem'+id+"del"+delId;
+						 $('#'+delIdName).click(function(){
+							 var salesTrTail = $(this).parent().parent();
+							 var salesTrHead = $(salesTrTail).prev();
+							 $(salesTrTail).remove();
+							 $(salesTrHead).remove();
+							
+							 var payMoneyEle = salesTrTail.find('.payMoney');
+							 var payMoney = payMoneyEle.html().substring(1);
+							 var sumAmount = $('#sumCash').html().substring(1);
+							 $('#sumCash').html('￥'+(parseFloat(sumAmount)-parseFloat(payMoney)));
+							 var sumCount = $('#sumCount').html();
+							 $('#sumCount').html(parseInt(sumCount)-1);
+							 
+							 var size = $('#salesBody').children('tr').size();
+							 if(size==0){
+								 $('#doCashier').attr('data-toggle','');
+							 }
+						 });
+						 
+						 $('#countValue'+id).bind("blur",function(){
+							 var countBefore = $('#countValue'+id).attr('count');
+							 var countValEle = $('#countValue'+id);
+							 var count = $('#countValue'+id).val();
+							 $('#countValue'+id).attr('count',count);
+							 var trTail = countValEle.parent().parent().parent();
+							 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
+								
+								var payMoneyEle = trTail.find('.payMoney');
+								var payMoney = payMoneyEle.html().substring(1);
+								payMoneyEle.html('￥'+(count*parseFloat(salesTrUnitPrice)));
+								
+							    var sumAmount = $('#sumCash').html().substring(1);
+								$('#sumCash').html('￥'+(parseFloat(sumAmount)+(count-countBefore)*parseFloat(salesTrUnitPrice)));
+								
+								var sumCount = $('#sumCount').html();
+								$('#sumCount').html(parseInt(sumCount)+parseInt(count)-parseInt(countBefore)); 
+						 });
+						 
+						 $('#addCount'+id).click(function(){
+							 var countValEle = $('#countValue'+id);
+							 countValEle.val(parseInt(countValEle.val())+1);
+							 countValEle.attr('count',parseInt(countValEle.val())+1);
+							 
+							 var trTail = countValEle.parent().parent().parent();
+							 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
+								
+								var payMoneyEle = trTail.find('.payMoney');
+								var payMoney = payMoneyEle.html().substring(1);
+								payMoneyEle.html('￥'+(parseFloat(payMoney)+parseFloat(salesTrUnitPrice)));
+								
+							    var sumAmount = $('#sumCash').html().substring(1);
+								$('#sumCash').html('￥'+(parseFloat(sumAmount)+parseFloat(salesTrUnitPrice)));
+								
+								var sumCount = $('#sumCount').html();
+								$('#sumCount').html(parseInt(sumCount)+1); 
+						 });
+						 
+						 $('#minutesCount'+id).click(function(){
+							 var countValEle = $('#countValue'+id);
+							 if(parseInt(countValEle.val())!=1){
+								 countValEle.val(parseInt(countValEle.val())-1);
+								 countValEle.attr('count',parseInt(countValEle.val())-1);
+								 
+								 var trTail = countValEle.parent().parent().parent();
+								 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
+									
+								 var payMoneyEle = trTail.find('.payMoney');
+								 var payMoney = payMoneyEle.html().substring(1);
+								 payMoneyEle.html('￥'+(parseFloat(payMoney)-parseFloat(salesTrUnitPrice)));
+								 
+								 var sumAmount = $('#sumCash').html().substring(1);
+								 $('#sumCash').html('￥'+(parseFloat(sumAmount)-parseFloat(salesTrUnitPrice)));
+								 
+								 var sumCount = $('#sumCount').html();
+								 $('#sumCount').html(parseInt(sumCount)-1);
+							 }
+						 });
+					
+				}
+			});
+	    }
+	    
 		$('.chooseMilk').each(function() {
 			$(this).click(function() {
 				var id = $(this).attr('value');
-				$.ajax({
-					type : "GET",
-					url : basePath + '/milk/getOneById?id=' + id,
-					async : true,
-					success : function(returnValue) {
-						var dataToggle = $('#doCashier').attr('data-toggle');
-						if(dataToggle==null||dataToggle==''){
-							$('#doCashier').attr('data-toggle','modal');
-						}
-						var idEle = $('#milkTeaId'+id);
-						var idValue = idEle.val();
-							var upDown = 
-							"<div class='input-group input-small' style='width:80px;'>"
-                              +"<input type='text' value='1' count='1' class='spinner-input form-control countValue' id='countValue"+id+"'>"
-                              +"<div class='spinner-buttons input-group-btn btn-group-vertical'>"
-                                +"<button type='button' class='btn spinner-up btn-xs btn-info addCount' id='addCount"+id+"'>"
-                                    +"<i class='fa fa-angle-up'></i>" 
-                                +"</button>"
-                                +"<button type='button' class='btn spinner-down btn-xs btn-danger minutesCount' id='minutesCount"+id+"'>"
-                                    +"<i class='fa fa-angle-down'></i>"
-                                +"</button>"
-                              +"</div>"
-                            +"</div>";
-                            
-                            delId++;
-							
-							var html = 
-							    "<tr class='salesTrHead'>"
-							   +    "<td rowspan='2' class='salesTrImage' style='text-align:center;vertical-align:middle'><img class='img' src='"+returnValue.scaledImagePath+"' alt='' /></td>"
-					           +    "<input type='hidden' value='"+id+"' name='milkTeaId' id='milkTeaId"+id+"'/>"
-					           +    "<td colspan='3' class='salesTrName'>"+returnValue.name+"</td>"
-					           +    "<td  class='salesTrTaste'>"+returnValue.taste+"</td>"
-					           +    "<td>"
-					           +       "<select class='salesTrAddition'>"
-							   +          "<option value='1'>冰块</option>"
-							   +          "<option value='2'>砂糖</option>"
-							   +          "<option value='3'>珍珠</option>"
-						       +       "</select>"
-							   +    "</td>"
-				               +"</tr>"
-					           +"<tr class='salesTrTail'>"
-				               +    "<td class='salesTrUnitPrice' style='vertical-align:middle'>￥"+returnValue.salePrice+"</td>"
-				               +    "<td class='salesTrCount' style='text-align:center;vertical-align:middle'>1</td>"
-				               +    "<td style='vertical-align:middle'>"
-					           +       "<select class='salesTrUnit'>"
-							   +          "<option value='1'>大杯</option>"
-							   +          "<option value='2'>中杯</option>"
-							   +          "<option value='3'>小杯</option>"
-						       +       "</select>"
-				               +    "</td>"
-				               +    "<td class='payMoney' style='vertical-align:middle'>￥"+returnValue.salePrice+"</td>" 
-				               +    "<td style='vertical-align:middle'>"
-				               +        "<a class='btn btn-danger delete btn-sm' id='delMilkItem"+id+"del"+delId+"'><i class='fa fa-times'></i>删除</a>"
-				               +    "</td>"
-				               +"</tr>";
-				               
-							 $('#salesBody').append($(html));
-							 var sumAmount = $('#sumCash').html().substring(1);
-							 $('#sumCash').html('￥'+(parseFloat(sumAmount)+parseFloat(returnValue.salePrice)));
-								 
-							 var sumCount = $('#sumCount').html();
-							 $('#sumCount').html(parseInt(sumCount)+1); 
-							 
-							 
-							 var delIdName = 'delMilkItem'+id+"del"+delId;
-							 $('#'+delIdName).click(function(){
-								 var salesTrTail = $(this).parent().parent();
-								 var salesTrHead = $(salesTrTail).prev();
-								 $(salesTrTail).remove();
-								 $(salesTrHead).remove();
-								
-								 var payMoneyEle = salesTrTail.find('.payMoney');
-								 var payMoney = payMoneyEle.html().substring(1);
-								 var sumAmount = $('#sumCash').html().substring(1);
-								 $('#sumCash').html('￥'+(parseFloat(sumAmount)-parseFloat(payMoney)));
-								 var sumCount = $('#sumCount').html();
-								 $('#sumCount').html(parseInt(sumCount)-1);
-								 
-								 var size = $('#salesBody').children('tr').size();
-								 if(size==0){
-									 $('#doCashier').attr('data-toggle','');
-								 }
-							 });
-							 
-							 $('#countValue'+id).bind("blur",function(){
-								 var countBefore = $('#countValue'+id).attr('count');
-								 var countValEle = $('#countValue'+id);
-								 var count = $('#countValue'+id).val();
-								 $('#countValue'+id).attr('count',count);
-								 var trTail = countValEle.parent().parent().parent();
-								 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
-									
-									var payMoneyEle = trTail.find('.payMoney');
-									var payMoney = payMoneyEle.html().substring(1);
-									payMoneyEle.html('￥'+(count*parseFloat(salesTrUnitPrice)));
-									
-								    var sumAmount = $('#sumCash').html().substring(1);
-									$('#sumCash').html('￥'+(parseFloat(sumAmount)+(count-countBefore)*parseFloat(salesTrUnitPrice)));
-									
-									var sumCount = $('#sumCount').html();
-									$('#sumCount').html(parseInt(sumCount)+parseInt(count)-parseInt(countBefore)); 
-							 });
-							 
-							 $('#addCount'+id).click(function(){
-								 var countValEle = $('#countValue'+id);
-								 countValEle.val(parseInt(countValEle.val())+1);
-								 countValEle.attr('count',parseInt(countValEle.val())+1);
-								 
-								 var trTail = countValEle.parent().parent().parent();
-								 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
-									
-									var payMoneyEle = trTail.find('.payMoney');
-									var payMoney = payMoneyEle.html().substring(1);
-									payMoneyEle.html('￥'+(parseFloat(payMoney)+parseFloat(salesTrUnitPrice)));
-									
-								    var sumAmount = $('#sumCash').html().substring(1);
-									$('#sumCash').html('￥'+(parseFloat(sumAmount)+parseFloat(salesTrUnitPrice)));
-									
-									var sumCount = $('#sumCount').html();
-									$('#sumCount').html(parseInt(sumCount)+1); 
-							 });
-							 
-							 $('#minutesCount'+id).click(function(){
-								 var countValEle = $('#countValue'+id);
-								 if(parseInt(countValEle.val())!=1){
-									 countValEle.val(parseInt(countValEle.val())-1);
-									 countValEle.attr('count',parseInt(countValEle.val())-1);
-									 
-									 var trTail = countValEle.parent().parent().parent();
-									 var salesTrUnitPrice = trTail.find('.salesTrUnitPrice').html().substring(1);
-										
-									 var payMoneyEle = trTail.find('.payMoney');
-									 var payMoney = payMoneyEle.html().substring(1);
-									 payMoneyEle.html('￥'+(parseFloat(payMoney)-parseFloat(salesTrUnitPrice)));
-									 
-									 var sumAmount = $('#sumCash').html().substring(1);
-									 $('#sumCash').html('￥'+(parseFloat(sumAmount)-parseFloat(salesTrUnitPrice)));
-									 
-									 var sumCount = $('#sumCount').html();
-									 $('#sumCount').html(parseInt(sumCount)-1);
-								 }
-							 });
-						
-					}
-				});
+				addMilkTea(id);
+			});
+		});
+		
+		$('.selectMilk').each(function() {
+			$(this).click(function() {
+				var id = $(this).attr('value');
+				addMilkTea(id);
 			});
 		});
 		
