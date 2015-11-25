@@ -258,6 +258,15 @@
 					  </ul>
 					</li>
 					
+					<li class="sub-menu">
+					  <a href="javascript:;"  class="managers"> 
+					     <i class="fa fa-bar-chart-o"></i> <span>物料入库</span>
+				      </a>
+				      <ul class="sub">
+					    <li><a href="${basePath}/inorder/list" class="clickItem"  id="inorder">物料入库</a></li>
+					  </ul>
+					</li>
+					
 			</ul>
 		</div>
 		<!-- sidebar menu end-->

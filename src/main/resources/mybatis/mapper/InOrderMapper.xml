@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezic.com.repository.InOrderMapper">
+	<resultMap id="BaseResultMap" type="InOrder">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="orderNumber" jdbcType="VARCHAR" property="orderNumber" />
+		<result column="materialId" jdbcType="INTEGER" property="materialId" />
+		<result column="materialName" jdbcType="VARCHAR" property="materialName" />
+		<result column="orderDate" jdbcType="TIMESTAMP" property="orderDate" />
+		<result column="orderNum" jdbcType="DECIMAL" property="orderNum" />
+		<result column="price" jdbcType="DECIMAL" property="price" />
+		<result column="shipment" jdbcType="DECIMAL" property="shipment" />
+		<result column="supplier" jdbcType="VARCHAR" property="supplier" />
+		<result column="inNum" jdbcType="DECIMAL" property="inNum" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+	
+	<sql id="Base_Table">
+		t_inorder
+	</sql>
+	
+	<sql id="Base_Column_List">
+		id,orderNumber, materialId,materialName,orderDate,orderNum,price,shipment,supplier,inNum,remark
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="InOrder" >
+		insert into <include refid="Base_Table" />
+		values (#{id,jdbcType=INTEGER},#{materialId,jdbcType=INTEGER}
+		,#{orderNumber,jdbcType=VARCHAR}
+		,#{materialName,jdbcType=VARCHAR},#{orderDate,jdbcType=TIMESTAMP}
+		,#{orderNum,jdbcType=DECIMAL},#{price,jdbcType=DECIMAL}
+		,#{shipment,jdbcType=DECIMAL},#{supplier,jdbcType=VARCHAR}
+		,#{inNum,jdbcType=DECIMAL},#{remark,jdbcType=VARCHAR}
+      )
+	</insert>
+	
+	<update id="update" parameterType="InOrder">
+		update
+		<include refid="Base_Table" />
+		<set>
+		<if test="orderNumber != null">
+				orderNumber = #{orderNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="materialId != null">
+				materialId = #{materialId,jdbcType=INTEGER},
+			</if>
+			<if test="materialName != null">
+				materialName = #{materialName,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDate != null">
+				orderDate = #{orderDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orderNum != null">
+				orderNum = #{orderNum,jdbcType=DECIMAL},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="shipment != null">
+				shipment = #{shipment,jdbcType=DECIMAL},
+			</if>
+			<if test="supplier != null">
+				supplier = #{supplier,jdbcType=VARCHAR},
+			</if>
+			<if test="inNum != null">
+				inNum = #{inNum,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		<include refid="Base_Table" />
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+	<sql id="baseQuery">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Base_Table" />
+		<where>
+			<if test="orderNumber!='' and orderNumber!=null">and orderNumber=#{orderNumber}</if>
+		</where>
+	</sql>
+	
+	<select id="getPageModel" resultMap="BaseResultMap" parameterType="InOrder">
+		<include refid="baseQuery" />
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="InOrder">
+		<include refid="baseQuery" />
+	</select>
+	<select id="getOneById" resultMap="BaseResultMap" parameterType="InOrder">
+		select
+		<include refid="Base_Column_List" />
+		from
+		<include refid="Base_Table" />
+		where id = #{id}
+	</select>
+</mapper>
