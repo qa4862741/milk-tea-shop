@@ -76,6 +76,7 @@
 											<tr>
 												<th>名称</th>
 												<th>单位</th>
+												<th>数量</th>
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -84,6 +85,7 @@
 												<tr class="">
 													<td>${item.name}</td>
 													<td>${item.unit}</td>
+													<td>${item.number}</td>
 															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
 													</a> <a href="${basePath}/materiel/delete?id=${item.id}" style="padding-left: 10px">

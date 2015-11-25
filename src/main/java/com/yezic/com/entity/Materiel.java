@@ -1,11 +1,23 @@
 package com.yezic.com.entity;
 
+import java.math.BigDecimal;
+
 public class Materiel {
 	private int id;
 
 	private String name;
 
 	private String unit;
+	
+	private BigDecimal number;
+
+	public BigDecimal getNumber() {
+		return number;
+	}
+
+	public void setNumber(BigDecimal number) {
+		this.number = number;
+	}
 
 	public int getId() {
 		return id;
