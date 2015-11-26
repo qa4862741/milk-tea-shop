@@ -14,6 +14,16 @@ private Date orderDate;
 	
 	private BigDecimal orderNum;
 	
+	private String orderNumber;
+	
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
 	public int getId() {
 		return id;
 	}

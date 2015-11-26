@@ -7,21 +7,22 @@
 		<result column="materialName" jdbcType="VARCHAR" property="materialName" />
 		<result column="orderDate" jdbcType="TIMESTAMP" property="orderDate" />
 		<result column="orderNum" jdbcType="DECIMAL" property="orderNum" />
+		<result column="orderNumber" jdbcType="VARCHAR" property="orderNumber" />
 	</resultMap>
 	
 	<sql id="Base_Table">
-		t_inorder
+		t_out_order
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, materialId,materialName,orderDate,orderNum
+		id, materialId,materialName,orderDate,orderNum,orderNumber
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="OutOrder" >
 		insert into <include refid="Base_Table" />
 		values (#{id,jdbcType=INTEGER},#{materialId,jdbcType=INTEGER}
 		,#{materialName,jdbcType=VARCHAR},#{orderDate,jdbcType=TIMESTAMP}
-		,#{orderNum,jdbcType=DECIMAL}
+		,#{orderNum,jdbcType=DECIMAL},#{orderNumber,jdbcType=VARCHAR}
       )
 	</insert>
 	
@@ -29,6 +30,9 @@
 		update
 		<include refid="Base_Table" />
 		<set>
+		<if test="orderNumber != null">
+				orderNumber = #{orderNumber,jdbcType=VARCHAR},
+			</if>
 			<if test="materialId != null">
 				materialId = #{materialId,jdbcType=INTEGER},
 			</if>
@@ -58,7 +62,7 @@
 		FROM
 		<include refid="Base_Table" />
 		<where>
-			<if test="name!='' and name!=null">and name=#{name}</if>
+			<if test="orderNumber!='' and orderNumber!=null">and orderNumber=#{orderNumber}</if>
 		</where>
 	</sql>
 	

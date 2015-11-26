@@ -41,7 +41,7 @@
 					<div class="col-sm-12">
 						<section class="panel">
 							<header class="panel-heading">
-								<strong>入库列表</strong><span class="tools pull-right"> <a
+								<strong>出库列表</strong><span class="tools pull-right"> <a
 									href="javascript:;" class="fa fa-chevron-down"></a> <a
 									href="javascript:;" class="fa fa-cog"></a> <a
 									href="javascript:;" class="fa fa-times"></a>
@@ -76,28 +76,18 @@
 											<tr>
 											<th>编号</th>
 												<th>物料名称</th>
-												<th>下单日期</th>
+												<th>出库日期</th>
 												<th>下单数量</th>
-												<th>单价</th>
-												<th>运费</th>
-												<th>供应商</th>
-												<th>到货数量</th>
-												<th>备注</th>
 												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${inOrderList}" var="item">
+											<c:forEach items="${outorderList}" var="item">
 												<tr class="">
 												<td>${item.orderNumber}</td>
 													<td>${item.materialName}</td>
 													<td>${item.orderDate}</td>
 													<td>${item.orderNum}</td>
-													<td>${item.price}</td>
-													<td>${item.shipment}</td>
-													<td>${item.supplier}</td>
-													<td>${item.inNum}</td>
-													<td>${item.remark}</td>
 															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
 													</a> <a href="${basePath}/materiel/delete?id=${item.id}" style="padding-left: 10px">
@@ -138,26 +128,6 @@
 							<div class="form-group">
 								<label> 下单数量：</label> <input id="orderNum"
 									name="orderNum" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 单价：</label> <input id="price"
-									name="price" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 运费：</label> <input id="shipment"
-									name="shipment" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 供应商：</label> <input id="supplier"
-									name="supplier" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 到货数量：</label> <input id="inNum"
-									name="inNum" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 备注：</label> <input id="remark"
-									name="remark" class="form-control">
 							</div>
 						</div>
 
@@ -203,7 +173,7 @@
 				
 				$.ajax({
 					type : "GET",
-					url : basePath + '/inorder/getOneById?id='+id,
+					url : basePath + '/outorder/getOneById?id='+id,
 					async: false, 
 					success : function(returnValue) {
 						$('#materialId').val(returnValue.materialId);
@@ -211,32 +181,22 @@
 						$('#materialName').val(returnValue.materialName);
 						$('#orderDate').val(returnValue.orderDate);
 						$('#orderNum').val(returnValue.orderNum);
-						$('#price').val(returnValue.price);
-						$('#shipment').val(returnValue.shipment);
-						$('#supplier').val(returnValue.supplier);
-						$('#inNum').val(returnValue.inNum);
-						$('#remark').val(returnValue.remark);
 					}
 			    });	     
 			});
 		});
 
 		$('#saveChanges').click(function() {
-			url = basePath + '/inorder/add';
+			url = basePath + '/outorder/add';
 			
 			if(add==false){
-				url = basePath + '/inorder/update';
+				url = basePath + '/outorder/update';
 			}
 			var materialId = $('#materialId').val();
 			var materialName = $('#materialName').val();
 			var orderDate = $('#orderDate').val();
 			var orderNum = $('#orderNum').val();
 			var orderNumber = $('#orderNumber').val();
-			var price = $('#price').val();
-			var shipment = $('#shipment').val();
-			var supplier = $('#supplier').val();
-			var inNum = $('#inNum').val();
-			var remark = $('#remark').val();
 			
 			$.ajax({
 				type : "POST",
@@ -248,11 +208,6 @@
 					orderDate : orderDate,
 					orderNum : orderNum,
 					orderNumber : orderNumber,
-					price:price,
-					shipment : shipment,
-					supplier : supplier,
-					inNum:inNum,
-					remark:remark
 				},
 				async: true, 
 				success : function(returnValue) {

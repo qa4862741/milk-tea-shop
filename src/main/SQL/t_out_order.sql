@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2015-11-25 21:28:27
+Date: 2015-11-26 21:19:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,6 +25,7 @@ CREATE TABLE `t_out_order` (
   `orderNum` decimal(10,0) DEFAULT NULL,
   `materialId` int(11) DEFAULT NULL,
   `materialName` varchar(255) DEFAULT NULL,
+  `orderNumber` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
