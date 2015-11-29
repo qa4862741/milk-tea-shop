@@ -125,6 +125,16 @@
 								<label> 编号：</label> <input id="orderNumber" name="orderNumber"
 									class="form-control">
 							</div>
+							
+							<div class="form-group">
+								<label> 物料：</label> 									
+									<select class="form-control"  id="materials">
+									<c:forEach items="${materialList}" var="item">
+										<option value="${item.id}#${item.name}">${item.name}</option>
+									</c:forEach>
+								</select> 
+							</div>
+							
 							<div class="form-group">
 								<label> 下单数量：</label> <input id="orderNum"
 									name="orderNum" class="form-control">
@@ -176,9 +186,10 @@
 					url : basePath + '/outorder/getOneById?id='+id,
 					async: false, 
 					success : function(returnValue) {
+						setSelect('materials',returnValue.materialId+"#"+returnValue.materialName);
+						$('#materialId').val(returnValue.materialId);
 						$('#materialId').val(returnValue.materialId);
 						$('#orderNumber').val(returnValue.orderNumber);
-						$('#materialName').val(returnValue.materialName);
 						$('#orderDate').val(returnValue.orderDate);
 						$('#orderNum').val(returnValue.orderNum);
 					}
@@ -186,14 +197,26 @@
 			});
 		});
 
+		function setSelect(id,selected){
+			var options = $('#'+id).children();
+			for(var i=0;i<options.length;i++){
+				var option = options[i];
+				if($(option).val()==selected){
+					$(option).attr("selected", true);
+				}else{
+					$(option).removeAttr("selected");
+				}
+			}
+		}
+		
 		$('#saveChanges').click(function() {
 			url = basePath + '/outorder/add';
 			
 			if(add==false){
 				url = basePath + '/outorder/update';
 			}
-			var materialId = $('#materialId').val();
-			var materialName = $('#materialName').val();
+			var materialId= $('#materials').val().split('#')[0];
+			var materialName = $('#materials').val().split('#')[1];
 			var orderDate = $('#orderDate').val();
 			var orderNum = $('#orderNum').val();
 			var orderNumber = $('#orderNumber').val();

@@ -25,6 +25,7 @@ public class InOrderController extends BaseController{
 
 	@Resource
 	private InOrderService inOrderService;
+	@Resource
 	private MaterielService materialService;
 	
 	@RequestMapping("list")
@@ -32,7 +33,8 @@ public class InOrderController extends BaseController{
 		List<InOrder> inOrderList = inOrderService.getAll(inOrder);
 		model.addAttribute("inOrderList", inOrderList);
 		
-		
+		List<Materiel> materialList=materialService.getAll(new Materiel());
+		model.addAttribute("materialList",materialList);
 	}
 
 	@RequestMapping("add")

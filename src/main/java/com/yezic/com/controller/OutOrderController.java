@@ -28,10 +28,16 @@ public class OutOrderController extends BaseController{
 	@Resource
 	private OutOrderService outorderService;
 	
+	@Resource
+	private MaterielService materialService;
+	
 	@RequestMapping("list")
 	public void list(OutOrder outorder, Model model) {
 		List<OutOrder> outorderList = outorderService.getAll(outorder);
 		model.addAttribute("outorderList", outorderList);
+		
+		List<Materiel> materialList=materialService.getAll(new Materiel());
+		model.addAttribute("materialList",materialList);
 	}
 
 	@RequestMapping("add")
