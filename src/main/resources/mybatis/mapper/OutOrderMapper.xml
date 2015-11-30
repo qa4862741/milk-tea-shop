@@ -19,9 +19,9 @@
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="OutOrder" >
-		insert into <include refid="Base_Table" />
+		insert into <include refid="Base_Table" /> (<include refid="Base_Column_List" />)
 		values (#{id,jdbcType=INTEGER},#{materialId,jdbcType=INTEGER}
-		,#{materialName,jdbcType=VARCHAR},#{orderDate,jdbcType=TIMESTAMP}
+		,#{materialName,jdbcType=VARCHAR},now()
 		,#{orderNum,jdbcType=DECIMAL},#{orderNumber,jdbcType=VARCHAR}
       )
 	</insert>

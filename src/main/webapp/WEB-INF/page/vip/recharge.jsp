@@ -151,7 +151,7 @@
 				url : url,
 				data : {
 					id : id,
-					name : name,
+					name : name ,
 					tel : tel,
 					discount : discount,
 					integral : integral,

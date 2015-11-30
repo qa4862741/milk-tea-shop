@@ -367,7 +367,32 @@
 													class="input-group-addon btn-danger">元</span> 
 											</div>
 										</div>
-									</div>
+                                            
+                                      <div id="printDiv">
+                                                                                结账单<br>
+                                                                                叶子C奶茶店<br>
+                                        NO：882015112900009<br>
+                                        <table>
+                                            <tbody id="printTable">
+                                                <tr>
+                                                    <td>奶茶产品</td>
+                                                    <td>数量 </td>
+                                                    <td>金额</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>水蜜桃优格</td>
+                                                    <td>1</td>
+                                                    <td>￥16</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>石榴 </td>
+                                                    <td>1</td>
+                                                    <td>￥16</td>
+                                                </tr>
+							                </tbody>
+                                                
+                                        </table>
+                                      </div>
 								</form>
 							</div>
 						</section>
@@ -415,6 +440,8 @@
 
     <script src="<c:url value="/resources/js/bootbox.js"/>"
 		type="text/javascript"></script>
+		
+	<script language=javascript src=<c:url value="/resources/js/print.js"/>></script>
 		
 	<script type="text/javascript">
 	    var delId = 0;
@@ -624,6 +651,33 @@
 			     
 			      return ;
 			}
+			
+			$('#printTable').children('tr').remove();
+			var head = '<tr><td>奶茶产品</td><td>数量 </td><td>金额</td></tr>';
+			$('#printTable').append(head);
+			
+			var trHeads = $('#salesBody').find('.salesTrHead');
+			var trTails = $('#salesBody').find('.salesTrTail');
+			for(var i=0;i<trHeads.length;i++){
+	           var trHead = trHeads[i];
+	           var trTail = trTails[i];
+	           
+	           var name = $(trHead).find('.salesTrName').html();
+	           
+	           var unitPrice = $(trTail).find('.salesTrUnitPrice').html();
+	           
+	           var count = $(trTail).find('.salesTrCount').html();
+	           
+	           var element = ' <tr><td>'+name+'</td><td>'+count+'</td> <td>'+unitPrice+'</td></tr>';
+	           $('#printTable').append(element);
+	          
+	        }
+			
+		    var shouldPay = $('#shouldPay').val();
+	        $('#printDiv').append('总金额：'+shouldPay);
+	        $('#printDiv').css("display","none");
+	        
+	        
 			var money = 0.0;
 			$('.payMoney').each(function() {
 				var text = $(this).text();
@@ -635,6 +689,8 @@
 			$('#actualPay').val(money);
 			
 			$('#exchange').val(0);
+			
+			doPrint('printDiv');
 			
 		});
 
