@@ -90,7 +90,7 @@
 													<td>${item.orderNum}</td>
 															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
-													</a> <a href="${basePath}/materiel/delete?id=${item.id}" style="padding-left: 10px">
+													</a> <a href="${basePath}/outorder/delete?id=${item.id}" style="padding-left: 10px">
 															<button class="btn btn btn-primary">删除</button>
 													</a> 
 													</td>

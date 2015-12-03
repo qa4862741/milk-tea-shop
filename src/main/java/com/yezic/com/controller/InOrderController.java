@@ -1,5 +1,6 @@
 package com.yezic.com.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -42,6 +43,7 @@ public class InOrderController extends BaseController{
 	public Object add(InOrder inOrder) {
 		try {
 			inOrderService.insert(inOrder);
+			this.updateMaterialNumber(inOrder.getMaterialId(),inOrder.getInNum());
 		} catch (Exception e) {
 			logger.error("添加出现异常！" + e.getMessage(), e);
 			return new SimpleReturnVo(ResponseCode.FAIL, "添加出现异常！");
@@ -64,6 +66,8 @@ public class InOrderController extends BaseController{
 	@RequestMapping("delete")
 	public String delete(int id) {
 		try {
+			InOrder inOrder=inOrderService.getOneById(id);
+			this.updateMaterialNumber(inOrder.getMaterialId(),inOrder.getInNum().multiply(new BigDecimal(-1)));
 			inOrderService.delete(id);
 		} catch (Exception e) {
 			logger.error("删除出现异常！" + e.getMessage(), e);
@@ -74,10 +78,19 @@ public class InOrderController extends BaseController{
 	@RequestMapping("update")
 	public String update(InOrder inOrder) {
 		try {
+			InOrder oldOrder=inOrderService.getOneById(inOrder.getId());
+			BigDecimal number= inOrder.getInNum().subtract(oldOrder.getInNum());
+			this.updateMaterialNumber(inOrder.getMaterialId(),number);
 			inOrderService.update(inOrder);
 		} catch (Exception e) {
 			logger.error("删除出现异常！" + e.getMessage(), e);
 		}
 		return "redirect:/inorder/list";
+	}
+	
+	private void updateMaterialNumber(int materialId,BigDecimal number){
+		Materiel material=materialService.getOneById(materialId);
+		material.setNumber(material.getNumber().add(number));
+		materialService.update(material);
 	}
 }

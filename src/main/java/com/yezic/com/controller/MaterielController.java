@@ -1,5 +1,6 @@
 package com.yezic.com.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -34,6 +35,7 @@ public class MaterielController extends BaseController{
 	@ResponseBody
 	public Object add(Materiel materiel) {
 		try {
+			materiel.setNumber(new BigDecimal(0.0));
 			materielServiceService.insert(materiel);
 		} catch (Exception e) {
 			logger.error("添加出现异常！" + e.getMessage(), e);
