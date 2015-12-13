@@ -22,7 +22,7 @@ function fnFormatDetails(oTable, nTr) {
 				    orderItemTr+=  '<td width="45px"></td>';
 				    orderItemTr+=  '<td width="100px">'+orderItem.goodsName+'</td>';
 				    orderItemTr+=  '<td width="100px">'+orderItem.unit+'</td>';
-				    orderItemTr+=  '<td width="100px">'+orderItem.unitPrice+'</td>';
+				    orderItemTr+=  '<td width="100px">'+'￥'+orderItem.unitPrice+'</td>';
 				    orderItemTr+=  '<td width="100px">'+orderItem.count+'</td>';
 				    orderItemTr+=  '<td>'+orderItem.taste+'</td>';
 				    orderItemTr+=  '<td>'+orderItem.addition+'</td>';

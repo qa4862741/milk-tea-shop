@@ -29,6 +29,13 @@ public class MilkTeaUnitController extends BaseController{
 		List<MilkTeaUnit> milkTeaUnitList = milkTeaUnitService.getAll(milkTeaUnit);
 		model.addAttribute("milkTeaUnitList", milkTeaUnitList);
 	}
+	
+	@RequestMapping("getAll")
+	@ResponseBody
+	public Object getAll() {
+		List<MilkTeaUnit> milkTeaUnitList = milkTeaUnitService.getAll(new MilkTeaUnit());
+		return milkTeaUnitList;
+	}
 
 	@RequestMapping("add")
 	@ResponseBody

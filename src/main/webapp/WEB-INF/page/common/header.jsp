@@ -211,7 +211,7 @@
 				</a>
 					<ul class="sub">
 						<li><a href="${basePath}/vip/list" class="clickItem" id="vipList">会员管理</a></li>
-						<li><a href="${basePath}/vip/recharge" class="clickItem" id="viprecharge">会员充值</a></li>
+						<%-- <li><a href="${basePath}/vip/recharge" class="clickItem" id="viprecharge">会员充值</a></li> --%>
 					</ul></li>
 					
 					<li class="sub-menu"><a href="javascript:;" class="managers"> <i
@@ -251,30 +251,15 @@
 					
 					<li class="sub-menu">
 					  <a href="javascript:;"  class="managers"> 
-					     <i class="fa fa-bar-chart-o"></i> <span>物料管理 </span>
+					     <i class="fa fa-asterisk"></i> <span>物料管理 </span>
 				      </a>
 				      <ul class="sub">
-					    <li><a href="${basePath}/materiel/list" class="clickItem"  id="materiel">物料管理</a></li>
+					    <li><a href="${basePath}/materiel/list" class="clickItem"  id="materielList">物料列表</a></li>
+					    <li><a href="${basePath}/inorder/list" class="clickItem"  id="inorderList">物料入库</a></li>
+					    <li><a href="${basePath}/outorder/list" class="clickItem"  id="outorderList">物料出库</a></li>
 					  </ul>
 					</li>
-					
-					<li class="sub-menu">
-					  <a href="javascript:;"  class="managers"> 
-					     <i class="fa fa-bar-chart-o"></i> <span>物料入库</span>
-				      </a>
-				      <ul class="sub">
-					    <li><a href="${basePath}/inorder/list" class="clickItem"  id="inorder">物料入库</a></li>
-					  </ul>
-					</li>
-					
-					<li class="sub-menu">
-					  <a href="javascript:;"  class="managers"> 
-					     <i class="fa fa-bar-chart-o"></i> <span>物料出库</span>
-				      </a>
-				      <ul class="sub">
-					    <li><a href="${basePath}/outorder/list" class="clickItem"  id="inorder">物料出库</a></li>
-					  </ul>
-					</li>
+
 					
 			</ul>
 		</div>

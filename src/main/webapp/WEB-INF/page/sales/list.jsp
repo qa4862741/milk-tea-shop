@@ -59,6 +59,7 @@
 												<th>销售时间</th>
 												<th>订单项数量</th>
 												<th>订单总金额</th>
+												<th>付款方式</th>
 												<th>会员</th>
 												<th>收银员</th>
 												<th>门店</th>
@@ -73,6 +74,7 @@
 															pattern="yyyy-MM-dd HH:mm:ss" /></td>
 													<td>${item.count}</td>
 													<td>￥${item.amount}</td>
+													<td>${item.paymentway}</td>
 													<td>${item.vipName}</td>
 													<td>${item.salesMan}</td>
 													<td>${item.storeName}</td>

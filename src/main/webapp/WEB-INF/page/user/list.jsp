@@ -528,7 +528,10 @@
 
 
 	<script type="text/javascript">
-		var add = true;
+	    $('#'+activeId).parent().addClass('active');
+	    $('#'+activeId).parent().parent().parent().find('.managers').addClass('active'); 
+		
+	    var add = true;
 		var id;
 		jQuery(document).ready(function() {
 			EditableTable.init();

@@ -270,7 +270,7 @@
 				</header>
 				<div class="panel-body">
 					<ul id="filters" class="media-filter">
-						<li><a href="#" data-filter="*"> All</a></li>
+						<li><a href="#" data-filter="*">全部</a></li>
 						<c:forEach items="${milkClas}" var="item">
 							<li><a href="#" data-filter=".${item.id}">${item.name}</a></li>
 						</c:forEach>
@@ -454,6 +454,8 @@
 	    $('#deleteOrder').click(function(){
 	    	$('#salesBody').children('tr').remove();
 	    	$('#doCashier').attr('data-toggle','');
+	    	$('#sumCash').html('￥0')
+	    	$('#sumCount').html('0')
 	    });
 		
 	    $('#actualPay').bind("input",function(){
@@ -463,6 +465,38 @@
 				
 			$('#exchange').val(actualPay-shouldPay);
 		 });
+	    
+	    function getAdditions(){
+	    	 var result = "";
+	    	 $.ajax({
+					type : "GET",
+					url : basePath + '/materialaddition/getAll',
+					async : false,
+					
+					success : function(returnValue) {
+						for(var i=0;i<returnValue.length;i++){
+							result = result +  "<option value='"+returnValue[i].name+"'>"+returnValue[i].name+"</option>"
+						}
+					}
+				});
+	    	 return result;
+	    }
+	    
+	    function getUnits(){
+	    	var result = "";
+	    	 $.ajax({
+					type : "GET",
+					url : basePath + '/milkunit/getAll',
+					async : false,
+					
+					success : function(returnValue) {
+						for(var i=0;i<returnValue.length;i++){
+							result = result +  "<option value='"+returnValue[i].name+"'>"+returnValue[i].name+"</option>"
+						}
+					}
+				});
+	    	 return result;
+	    }
 	    
 	    function addMilkTea(id){
 	    	
@@ -491,7 +525,9 @@
                         +"</div>";
                         
                         delId++;
-						
+                        var additions = getAdditions();
+                        var units = getUnits();
+                        
 						var html = 
 						    "<tr class='salesTrHead'>"
 						   +    "<td rowspan='2' class='salesTrImage' style='text-align:center;vertical-align:middle'><img class='img' src='"+returnValue.scaledImagePath+"' alt='' /></td>"
@@ -500,9 +536,7 @@
 				           +    "<td  class='salesTrTaste'>"+returnValue.taste+"</td>"
 				           +    "<td>"
 				           +       "<select class='salesTrAddition'>"
-						   +          "<option value='1'>冰块</option>"
-						   +          "<option value='2'>砂糖</option>"
-						   +          "<option value='3'>珍珠</option>"
+				           +           additions
 					       +       "</select>"
 						   +    "</td>"
 			               +"</tr>"
@@ -511,9 +545,7 @@
 			               +    "<td class='salesTrCount' style='text-align:center;vertical-align:middle'>1</td>"
 			               +    "<td style='vertical-align:middle'>"
 				           +       "<select class='salesTrUnit'>"
-						   +          "<option value='1'>大杯</option>"
-						   +          "<option value='2'>中杯</option>"
-						   +          "<option value='3'>小杯</option>"
+                           +           units
 					       +       "</select>"
 			               +    "</td>"
 			               +    "<td class='payMoney' style='vertical-align:middle'>￥"+returnValue.salePrice+"</td>" 
@@ -653,6 +685,7 @@
 			}
 			
 			$('#printTable').children('tr').remove();
+			$('#sumPayAmount').remove();
 			var head = '<tr><td>奶茶产品</td><td>数量 </td><td>金额</td></tr>';
 			$('#printTable').append(head);
 			
@@ -674,7 +707,7 @@
 	        }
 			
 		    var shouldPay = $('#shouldPay').val();
-	        $('#printDiv').append('总金额：'+shouldPay);
+	        $('#printDiv').append('<div id="sumPayAmount">总金额：￥'+shouldPay+'</div>');
 	        $('#printDiv').css("display","none");
 	        
 	        
@@ -775,6 +808,10 @@
 				}
 			});
             
+            $('#salesBody').children('tr').remove();
+            $('#sumCash').html('￥0')
+	    	$('#sumCount').html('0')
+	    	
 			$('#cashierModal').modal('hide');
 			$('#cashierModal').modal('remove');
 		});

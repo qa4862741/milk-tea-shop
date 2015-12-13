@@ -116,20 +116,46 @@
 							aria-hidden="true">&times;</button>
 						<h4 class="modal-title">添加物料</h4>
 					</div>
-
+					
 					<div class="modal-body row">
-						<div class="col-md-5">
-							<div class="form-group">
-								<label> 名称：</label> <input id="name" name="name"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 单位：</label> <input id="unit"
-									name="unit" class="form-control">
-							</div>
+						<div class="col-md-12">
+							<section class="panel">
+								<div class="panel-body">
+									<form class="form-horizontal bucket-form" id="addOrUpdateUserForm" method="get">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">名称:</label>
+											<div class="col-lg-9">
+											    <input id="vipId" name="vipId" type="hidden">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success">@</span> <input
+														type="text" id="name" class="form-control" placeholder="请输入名称">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">单位:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success"><i class="fa fa-envelope"></i></span> <input
+														type="text" id="unit" class="form-control" placeholder="请输入单位">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">数量:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="number" class="form-control" placeholder="请输入数量">
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</section>
 						</div>
-
-					</div>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -140,7 +166,8 @@
 			</div>
 		</div>
 		<!-- modal -->
-
+		
+		
 
 	</section>
 	<%@ include file="/WEB-INF/page/common/footer.jsp"%>
@@ -162,6 +189,9 @@
 		
 		$('#addMilkButton').click(function(){
 			$('#name').val('');
+			$('#unit').val('');
+			$('#number').val('');
+			add = true;
 		});
 		
 		$('.updateContent').each(function(){
@@ -189,14 +219,15 @@
 			}
 			var name = $('#name').val();
 			var unit = $('#unit').val();
-			
+			var number = $('#number').val();
 			$.ajax({
 				type : "POST",
 				url : url,
 				data : {
 					id : id,
 					name : name,
-					unit:unit
+					unit:unit,
+					number:number
 				},
 				async: true, 
 				success : function(returnValue) {

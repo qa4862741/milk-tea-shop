@@ -35,7 +35,7 @@
                         <header class="panel-heading">
                                                           奶茶销售月度报表
                         <span class="tools pull-right">
-                            <a href="javascript:;" cl你你你你你你你你你你你你你您那边ass="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
                             <a href="javascript:;" class="fa fa-cog"></a>
                             <a href="javascript:;" class="fa fa-times"></a>
                          </span>

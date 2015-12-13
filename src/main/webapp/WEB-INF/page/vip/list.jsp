@@ -92,6 +92,8 @@
                                                     <td>￥${item.recharge}</td>
 															<td><a href="#addMilkTeaModal" data-toggle="modal" idattr="${item.id}" class="updateContent">
 															<button class="btn btn-success">修改</button>
+													</a><a href="#rechargeModal" data-toggle="modal" idattr="${item.id}" class="rechargeUpdate" style="padding-left: 10px">
+															<button class="btn btn-success">充值</button>
 													</a> <a href="${basePath}/vip/delete?id=${item.id}" style="padding-left: 10px">
 															<button class="btn btn btn-primary">删除</button>
 													</a> 
@@ -113,36 +115,71 @@
 		<!-- Modal -->
 		<div class="modal fade" id="addMilkTeaModal" tabindex="-1"
 			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" >
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 						<h4 class="modal-title">添加会员</h4>
 					</div>
-
+					
 					<div class="modal-body row">
-						<div class="col-md-5">
-							<div class="form-group">
-								<label> 姓名：</label> <input id="name" name="name"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 联系方式：</label> <input id="tel"
-									name="tel" class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 余额：</label> <input id="recharge" name="recharge"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 折扣：</label> <input id="discount" name="discount"
-									class="form-control">
-							</div>
-							<div class="form-group">
-								<label> 积分：</label> <input id="integral" name="integral"
-									class="form-control">
-							</div>
+						<div class="col-md-12">
+							<section class="panel">
+								<div class="panel-body">
+									<form class="form-horizontal bucket-form" id="addVipForm" method="get">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">用户姓名:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success">@</span> <input
+														type="text" id="name" class="form-control" placeholder="请输入用户名">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">联系方式:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success"><i class="fa fa-envelope"></i></span> <input
+														type="text" id="tel" class="form-control" placeholder="请输入联系方式">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">充值金额:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="recharge" class="form-control" placeholder="请输入充值金额">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">折扣:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="discount" class="form-control" placeholder="请输入折扣">
+												</div>
+											</div>
+										</div>
+
+                                        <div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">积分:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="integral" class="form-control" placeholder="请输入折扣">
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</section>
 						</div>
 
 					</div>
@@ -150,6 +187,98 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						<button type="button" class="btn btn-primary" id="saveChanges">保存</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- modal -->
+		
+		<!-- Modal -->
+		<div class="modal fade" id="rechargeModal" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">会员充值</h4>
+					</div>
+					
+					<div class="modal-body row">
+						<div class="col-md-12">
+							<section class="panel">
+								<div class="panel-body">
+									<form class="form-horizontal bucket-form" id="addOrUpdateUserForm" method="get">
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">用户姓名:</label>
+											<div class="col-lg-9">
+											    <input id="vipId" name="vipId" type="hidden">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success">@</span> <input
+														type="text" id="rechargeName" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">联系方式:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-success"><i class="fa fa-envelope"></i></span> <input
+														type="text" id="rechargeTel" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">充值金额:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="rechargeAmount" class="form-control" placeholder="请输入充值金额">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">余额:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="rechargeRemainAmount" class="form-control">
+														<input type="hidden" id="rechargeRemainAmountHidden" class="form-control">
+												</div>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">折扣:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="rechargeDiscount" class="form-control">
+												</div>
+											</div>
+										</div>
+
+                                        <div class="form-group">
+											<label class="col-sm-3 control-label col-lg-3">积分:</label>
+											<div class="col-lg-9">
+												<div class="input-group m-bot15">
+													<span class="input-group-addon btn-danger"><i class="fa fa-user"></i></span> <input
+														type="text" id="rechargeIntegral" class="form-control">
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</section>
+						</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" id="saveChangesRecharge">保存</button>
 					</div>
 
 				</div>
@@ -170,19 +299,20 @@
 	<script src="<c:url value="/resources/js/ajaxfileupload.js"/>"
 		type="text/javascript"></script>
 	<script type="text/javascript">
-	    var add = true;
-	    var id;
+	    var add = 1;
+	    var id = 0;
 		jQuery(document).ready(function() {
 			EditableTable.init();
 		});
 		
 		$('#addMilkButton').click(function(){
-			$('#name').val('');
+			clearForm($('#addVipForm'));
+			add = 1;
 		});
 		
-		$('.updateContent').each(function(){
+		$('.rechargeUpdate').each(function(){
 			$(this).click(function(){
-				add = false;
+				add = 3;
 				id = $(this).attr('idattr');
 				
 				$.ajax({
@@ -190,23 +320,62 @@
 					url : basePath + '/vip/getOneById?id='+id,
 					async: false, 
 					success : function(returnValue) {
-						$('#name').val(returnValue.name);
+						$('#vipId').val(returnValue.id);
+						$('#rechargeName').val(returnValue.name);
+						$('#rechargeTel').val(returnValue.tel);
+						$('#rechargeRemainAmount').val(returnValue.recharge);
+						$('#rechargeRemainAmountHidden').val(returnValue.recharge);
+						$('#rechargeDiscount').val(returnValue.discount);
+						$('#rechargeIntegral').val(returnValue.integral);
 					}
 			    });	     
 			});
 		});
-
-		$('#saveChanges').click(function() {
-			url = basePath + '/vip/add';
+		
+		$('.updateContent').each(function(){
+			$(this).click(function(){
+				add = 2;
+				id = $(this).attr('idattr');
+				
+				$.ajax({
+					type : "GET",
+					url : basePath + '/vip/getOneById?id='+id,
+					async: false, 
+					success : function(returnValue) {
+						$('#vipId').val(returnValue.id);
+						$('#name').val(returnValue.name);
+						$('#tel').val(returnValue.tel);
+						$('#recharge').val(returnValue.recharge);
+						$('#discount').val(returnValue.discount);
+						$('#integral').val(returnValue.integral);
+					}
+			    });	     
+			});
+		});
+		
+		function update(){
+           url = basePath + '/vip/add';
 			
-			if(add==false){
-				url = basePath + '/vip/update';
-			}
 			var name = $('#name').val();
 			var tel = $('#tel').val();
 			var discount = $('#discount').val();
 			var integral = $('#integral').val();
 			var recharge = $('#recharge').val();
+			
+			if(add==2){
+				id = $('#vipId').val();
+				url = basePath + '/vip/update';
+			}
+			
+			if(add==3){
+				id = $('#vipId').val();
+				url = basePath + '/vip/update';
+				name = $('#rechargeName').val();
+				tel = $('#rechargeTel').val();
+				recharge = $('#rechargeRemainAmount').val();
+				discont = $('#rechargeDiscount').val();
+				integral = $('#rechargeIntegral').val();
+			}
 			
 			$.ajax({
 				type : "POST",
@@ -225,7 +394,48 @@
 				}
 		    });	     
 			$('#addMilkTeaModal').modal('hide');
+		}
+
+		$('#saveChangesRecharge').click(function() {
+			update();
 		});
+		
+		$('#saveChanges').click(function() {
+			update();
+		});
+		
+		
+		$('#rechargeAmount').bind("input",function(){
+			var rechargeAmount = $('#rechargeAmount').val();
+			var rechargeRemainAmountHidden = $('#rechargeRemainAmountHidden').val();
+			if(rechargeAmount!=''&&rechargeAmount!=null){
+				$('#rechargeRemainAmount').val(parseFloat(rechargeRemainAmountHidden)+parseFloat(rechargeAmount));
+			}else{
+				$('#rechargeRemainAmount').val(parseFloat(rechargeRemainAmountHidden));
+			}
+			
+		 });
+		
+		function clearForm(form) {
+			  // iterate over all of the inputs for the form
+			  // element that was passed in
+			  $(':input', form).each(function() {
+			    var type = this.type;
+			    var tag = this.tagName.toLowerCase(); // normalize case
+			    // it's ok to reset the value attr of text inputs,
+			    // password inputs, and textareas
+			    if (type == 'text' || type == 'password' || tag == 'textarea')
+			      this.value = "";
+			    // checkboxes and radios need to have their checked state cleared
+			    // but should *not* have their 'value' changed
+			    else if (type == 'checkbox' || type == 'radio')
+			      this.checked = false;
+			    // select elements need to have their 'selectedIndex' property set to -1
+			    // (this works for both single and multiple select elements)
+			    else if (tag == 'select')
+			      this.selectedIndex = 0;
+			  });
+			};
 
 	</script>
 </body>

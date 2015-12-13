@@ -80,7 +80,7 @@ public class Order {
 	/**
 	 * 付款方式
 	 */
-	private String pamentway;
+	private String paymentway;
 
 	private List<OrderItem> orderItems;
 
@@ -220,13 +220,15 @@ public class Order {
 		this.actulPay = actulPay;
 	}
 
-	public String getPamentway() {
-		return pamentway;
+	public String getPaymentway() {
+		return paymentway;
 	}
 
-	public void setPamentway(String pamentway) {
-		this.pamentway = pamentway;
+	public void setPaymentway(String paymentway) {
+		this.paymentway = paymentway;
 	}
+
+
 	
 	
 }

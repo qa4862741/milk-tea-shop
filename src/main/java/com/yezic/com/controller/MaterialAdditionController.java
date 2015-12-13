@@ -29,6 +29,13 @@ public class MaterialAdditionController extends BaseController {
 		List<MaterialAddition> materialAdditionList = materialAdditionService.getAll(materialAddition);
 		model.addAttribute("materialAdditionList", materialAdditionList);
 	}
+	
+	@RequestMapping("getAll")
+	@ResponseBody
+	public Object getAll() {
+		List<MaterialAddition> materialAdditionList = materialAdditionService.getAll(new MaterialAddition());
+		return materialAdditionList;
+	}
 
 	@RequestMapping("add")
 	@ResponseBody

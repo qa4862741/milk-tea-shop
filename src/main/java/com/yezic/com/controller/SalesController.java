@@ -1,8 +1,11 @@
 package com.yezic.com.controller;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
@@ -62,14 +65,44 @@ public class SalesController extends BaseController {
 		model.addAttribute("milkTeaTastes", milkTeaTastes);
 	}
 	
+	/**
+	 * 生成流水号
+	 * 
+	 * @throws Exception
+	 */
+	public synchronized String generateOrderNo() throws Exception {
+		Thread.sleep(100);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"yyMMddhhmmss");
+		String timestr = simpleDateFormat.format(new Date());
+		String asnNoPrefix = "88" + timestr;
+
+		int max = 999;
+		int min = 0;
+		Random random = new Random();
+		int num = random.nextInt(max) % (max - min + 1) + min;
+
+		DecimalFormat decimalFormat = new DecimalFormat("000");
+		asnNoPrefix += decimalFormat.format(num);
+
+		max = 99;
+		min = 0;
+		random = new Random();
+		num = random.nextInt(max) % (max - min + 1) + min;
+
+		decimalFormat = new DecimalFormat("00");
+		asnNoPrefix += decimalFormat.format(num);
+		return asnNoPrefix;
+	}
+	
 	@RequestMapping(value="doCashier",method =RequestMethod.POST)
-	public void cashier(String content,String orderNumber,String amount,String exchange,String actualPay,String paymentway,ServletRequest request){
+	public void cashier(String content,String orderNumber,String amount,String exchange,String actualPay,String paymentway,ServletRequest request) throws Exception{
 		Order order = new Order();
-		order.setOrderNumber(orderNumber);
+		order.setOrderNumber(generateOrderNo());
 		order.setAmount(new BigDecimal(amount));
 		order.setExchange(new BigDecimal(exchange));
 		order.setActulPay(new BigDecimal(actualPay));
-		order.setPamentway(paymentway);
+		order.setPaymentway(paymentway);
 		order.setCreateTime(new Date());
 		JSONArray  orderItems = JSONArray.fromObject(content);
 		for (Object object : orderItems) {

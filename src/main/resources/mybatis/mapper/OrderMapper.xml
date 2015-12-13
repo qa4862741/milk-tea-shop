@@ -15,6 +15,7 @@
 		<result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="storeId" jdbcType="INTEGER" property="storeId" />
 		<result column="storeName" jdbcType="VARCHAR" property="storeName" />
+		<result column="paymentway" jdbcType="VARCHAR" property="paymentway" />
 	</resultMap>
 	
 	<sql id="Base_Table">
@@ -22,7 +23,7 @@
 	</sql>
 	
 	<sql id="Base_Column_List">
-		id, orderNumber ,status,customer,vipId,vipName, employeeId,salesMan,count, amount,createTime,storeId,storeName
+		id, orderNumber ,status,customer,vipId,vipName, employeeId,salesMan,count, amount,createTime,storeId,storeName,paymentway
 	</sql>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Order" >
@@ -30,7 +31,7 @@
 		values (#{id,jdbcType=INTEGER},#{orderNumber,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},
 		 #{customer,jdbcType=VARCHAR},#{vipId,jdbcType=INTEGER},#{vipName,jdbcType=VARCHAR},#{employeeId,jdbcType=INTEGER},
          #{salesMan,jdbcType=VARCHAR},#{count,jdbcType=INTEGER},#{amount,jdbcType=DECIMAL},#{createTime,jdbcType=TIMESTAMP},
-         #{storeId,jdbcType=INTEGER},#{storeName,jdbcType=VARCHAR}
+         #{storeId,jdbcType=INTEGER},#{storeName,jdbcType=VARCHAR},#{paymentway,jdbcType=VARCHAR}
       )
 	</insert>
 	

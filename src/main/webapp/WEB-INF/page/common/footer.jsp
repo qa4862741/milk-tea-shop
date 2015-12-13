@@ -24,6 +24,12 @@
 <script src="<c:url value="/resources/js/dynamic_table_init.js"/>"></script>
 
 <script type="text/javascript">
+    $('.managers').each(function(){
+    	$(this).click(function(){
+    		$(this).addClass('active');
+    	});
+    });
+    
     $('#'+activeId).parent().addClass('active');
     $('#'+activeId).parent().parent().parent().find('.managers').addClass('active'); 
 </script>

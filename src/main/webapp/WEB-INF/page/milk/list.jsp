@@ -489,7 +489,19 @@
 
 
 	</section>
-	<%@ include file="/WEB-INF/page/common/footer.jsp"%>
+	<!--Core js-->
+<script src="<c:url value="/resources/js/jquery.js"/>"></script>
+<script src="<c:url value="/resources/bs3/js/bootstrap.min.js"/>"></script>
+<script class="include" type="text/javascript" src="<c:url value="/resources/js/jquery.dcjqaccordion.2.7.js"/>"></script>
+
+
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="<c:url value="/resources/js/advanced-datatable/js/jquery.dataTables.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/data-tables/DT_bootstrap.js"/>"></script>
+
+<!--dynamic table initialization -->
+<script src="<c:url value="/resources/js/dynamic_table_init.js"/>"></script>
+
 	<script src="<c:url value="/resources/js/table-editable.js"/>"></script>
 	<script
 		src="<c:url value="/resources/js/bootstrap-fileupload/fileinput.js"/>"
@@ -505,16 +517,16 @@
 	<script src="<c:url value="/resources/js/jnotify/jNotify.jquery.js"/>"
 		type="text/javascript"></script>
 		
-	
-
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
 <!--common script init for all pages-->
 <script src="<c:url value="/resources/js/scripts.js"/>"></script>
 <!--this page script-->
-<script src="<c:url value="/resources/js/validation-init.js"/>"></script>
 
 	<script type="text/javascript">
+    
+    $('#'+activeId).parent().addClass('active');
+    $('#'+activeId).parent().parent().parent().find('.managers').addClass('active'); 
+    
 	 $('#nameNotify').css("display","none");
 	 $("#addMilkImage").fileinput({
         maxFileCount : 1,
